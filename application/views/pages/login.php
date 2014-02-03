@@ -1,9 +1,10 @@
 <div class="container">
 
-  <form class="form-signin" role="form">
+  <?php echo validation_errors(); ?>
+  <?php echo form_open('login/view', $attributes); ?>
     <h2 class="form-signin-heading">Please sign in</h2>
-    <input type="email" class="form-control" placeholder="Email address" required autofocus>
-    <input type="password" class="form-control" placeholder="Password" required>
+    <input type="text" class="form-control" name='username' placeholder="User name" required autofocus>
+    <input type="password" class="form-control" name='password' placeholder="Password" required>
     <label class="checkbox">
       <input type="checkbox" value="remember-me"> Remember me
     </label>
