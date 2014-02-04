@@ -14,9 +14,7 @@ class Login extends CI_Controller {
     $this->load->library('form_validation');
 
     $this->form_validation->set_rules('username', 'Username',
-      'trim|required|callback_username_check|xss_clean');
-    $this->form_validation->set_rules('password', 'Password',
-      'trim|required|callback_password_check|md5');
+      'trim|required|callback_username_and_password_check|xss_clean');
 
     $data['description'] = 'Login to SimpleWorkOrder';
     $data['author'] = 'SimpleWorkOrder';
@@ -34,24 +32,14 @@ class Login extends CI_Controller {
     }
   }
 
-  public function username_check($str)
+  public function username_and_password_check()
   {
-    if($this->users_model->get_username($str)) {
+    if($this->users_model->get_username_and_password()) {
       return TRUE;
     }
     else {
-      $this->form_validation->set_message('username_check', 'Not a valid username');
-      return FALSE;
-    }
-  }
-
-  public function password_check($str)
-  {
-    if($this->users_model->get_password($str)) {
-      return TRUE;
-    }
-    else {
-      $this->form_validation->set_message('password_check', 'Incorrect password');
+      $this->form_validation->set_message('username_and_password_check',
+                                          'Invalid username or password');
       return FALSE;
     }
   }

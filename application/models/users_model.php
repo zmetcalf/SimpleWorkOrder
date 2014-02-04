@@ -7,17 +7,23 @@ class Users_model extends CI_Model {
     $this->load->helper('security');
   }
 
-  public function get_username($str)
+  public function get_username()
   {
-    $query = $this->db->get_where('users', array('user_name' => $str));
+    $query = $this->db->get_where('users', array('user_name' =>
+                                  $this->input->post('username')));
     return $query->result_array();
   }
 
-  public function get_password($str)
+  public function get_username_and_password()
   {
-    // TODO - This needs to check against a particular user
-    $query = $this->db->get_where('users', array('password' => do_hash($str, 'md5')));
-    return $query->result_array();
+    $query = $this->db->get_where('users', array('user_name' =>
+                                  $this->input->post('username')));
+    foreach($query->result_array() as $row) {
+      if($row['password'] == do_hash($this->input->post('password'), 'md5')) {
+        return TRUE;
+      }
+    }
+    return FALSE;
   }
 
   public function set_user()
