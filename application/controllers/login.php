@@ -2,6 +2,12 @@
 
 class Login extends CI_Controller {
 
+  public function __construct()
+  {
+    parent::__construct();
+    $this->load->model('users_model');
+  }
+
   public function view()
   {
     $this->load->helper('form');
@@ -19,5 +25,27 @@ class Login extends CI_Controller {
     $this->load->view('templates/header', $data);
     $this->load->view('pages/login', $data);
     $this->load->view('templates/footer');
+  }
+
+  public function username_check($str)
+  {
+    if($this->users_model->get_username($str)) {
+      return TRUE;
+    }
+    else {
+      $this->form_validation->set_message('username_check', 'Not a valid username');
+      return FALSE;
+    }
+  }
+
+  public function password_check($str)
+  {
+    if($this->users_model->get_password($str)) {
+      return TRUE;
+    }
+    else {
+      $this->form_validation->set_message('password_check', 'Incorrect password');
+      return FALSE;
+    }
   }
 }
