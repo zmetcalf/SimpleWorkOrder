@@ -1,7 +1,7 @@
 <div class="container">
 
   <?php echo validation_errors(); ?>
-  <?php echo form_open('login/view', $attributes); ?>
+  <?php echo form_open('login', $attributes); ?>
     <h2 class="form-signin-heading">Please sign in</h2>
     <input type="text" class="form-control" name='username' placeholder="User name" required autofocus>
     <input type="password" class="form-control" name='password' placeholder="Password" required>

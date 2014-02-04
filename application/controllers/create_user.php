@@ -14,7 +14,17 @@ class Create_user extends CI_Controller {
     $this->load->library('form_validation');
 
     $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
-    $this->form_validation->set_rules('password', 'Password', 'trim|required|matches[passconf]|md5');
+    $this->form_validation->set_rules('password', 'Password', 'trim|required|md5');
+
+    if($this->form_validation->run() == FALSE)
+    {
+      $this->load->view('pages/create_user');
+    }
+    else
+    {
+      $this->users_model->set_user();
+      $this->load->view('pages/success');
+    }
 
   }
 

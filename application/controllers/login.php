@@ -8,13 +8,15 @@ class Login extends CI_Controller {
     $this->load->model('users_model');
   }
 
-  public function view()
+  public function index()
   {
     $this->load->helper('form');
     $this->load->library('form_validation');
 
-    $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
-    $this->form_validation->set_rules('password', 'Password', 'trim|required|matches[passconf]|md5');
+    $this->form_validation->set_rules('username', 'Username',
+      'trim|required|callback_username_check|xss_clean');
+    $this->form_validation->set_rules('password', 'Password',
+      'trim|required|callback_password_check|md5');
 
     $data['description'] = 'Login to SimpleWorkOrder';
     $data['author'] = 'SimpleWorkOrder';
@@ -22,9 +24,14 @@ class Login extends CI_Controller {
     $data['stylesheet'] = 'signin';
     $data['attributes'] = array('class' => 'form-signin', 'role' => 'form');
 
-    $this->load->view('templates/header', $data);
-    $this->load->view('pages/login', $data);
-    $this->load->view('templates/footer');
+    if($this->form_validation->run() == FALSE) {
+      $this->load->view('templates/header', $data);
+      $this->load->view('pages/login', $data);
+      $this->load->view('templates/footer');
+    }
+    else {
+      $this->load->view('pages/success');
+    }
   }
 
   public function username_check($str)
