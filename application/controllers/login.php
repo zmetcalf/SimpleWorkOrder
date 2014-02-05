@@ -10,6 +10,11 @@ class Login extends CI_Controller {
 
   public function index()
   {
+    if($this->session->userdata('logged_in') == TRUE) {
+      $this->load->helper('url');
+      redirect('/dashboard');
+    }
+
     $this->load->helper('form');
     $this->load->library('form_validation');
 
@@ -33,9 +38,9 @@ class Login extends CI_Controller {
         'logged_in' => TRUE
       );
 
-      $this->load->library('session');
       $this->session->set_userdata($session_data);
-      $this->load->view('pages/success');
+      $this->load->helper('url');
+      redirect('/dashboard');
     }
   }
 
