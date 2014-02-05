@@ -41,7 +41,7 @@
 $route['login'] = "login";
 $route['logout'] = "logout";
 $route['create-user'] = "create_user/view";
-$route['default_controller'] = "dashboard/view";
+$route['default_controller'] = "pages/view";
 $route['404_override'] = '';
 
 
