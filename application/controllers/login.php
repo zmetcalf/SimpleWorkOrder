@@ -28,6 +28,13 @@ class Login extends CI_Controller {
       $this->load->view('templates/footer');
     }
     else {
+      $session_data = array(
+        'username' => $this->input->post('username'),
+        'logged_in' => TRUE
+      );
+
+      $this->load->library('session');
+      $this->session->set_userdata($session_data);
       $this->load->view('pages/success');
     }
   }

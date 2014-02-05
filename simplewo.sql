@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 02, 2014 at 11:14 AM
+-- Generation Time: Feb 04, 2014 at 04:45 PM
 -- Server version: 5.5.35-MariaDB-log
 -- PHP Version: 5.5.8
 
@@ -19,6 +19,22 @@ SET time_zone = "+00:00";
 --
 -- Database: `simplewo`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ci_sessions`
+--
+
+CREATE TABLE IF NOT EXISTS `ci_sessions` (
+  `session_id` varchar(40) NOT NULL DEFAULT '0',
+  `ip_address` varchar(45) NOT NULL DEFAULT '0',
+  `user_agent` varchar(120) NOT NULL,
+  `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
+  `user_data` text NOT NULL,
+  PRIMARY KEY (`session_id`),
+  KEY `last_activity_idx` (`last_activity`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -85,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `specialty` varchar(128) DEFAULT NULL COMMENT 'electrician, plumber, etc. May turn into a table',
   `active` varchar(20) NOT NULL,
   PRIMARY KEY (`UID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 

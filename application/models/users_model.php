@@ -18,12 +18,15 @@ class Users_model extends CI_Model {
   {
     $query = $this->db->get_where('users', array('user_name' =>
                                   $this->input->post('username')));
-    foreach($query->result_array() as $row) {
-      if($row['password'] == do_hash($this->input->post('password'), 'md5')) {
-        return TRUE;
-      }
+    if(!$query->result_array()) {
+      return FALSE;
     }
-    return FALSE;
+    else if($query->result_array()[0]['password'] == do_hash($this->input->post('password'), 'md5')) {
+      return TRUE;
+    }
+    else {
+      return FALSE;
+    }
   }
 
   public function set_user()
