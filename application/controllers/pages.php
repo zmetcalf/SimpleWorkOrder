@@ -5,6 +5,7 @@ class Pages extends CI_Controller {
   public function view()
   {
     $data['stylesheet'] = 'cover';
+    $data['additional_header_el'] = '';
     $data['title'] = 'Welcome to SimpleWorkOrder';
     $data['description'] = 'Welcome to SimpleWorkOrder';
     $data['author'] = 'SimpleWorkOrder';

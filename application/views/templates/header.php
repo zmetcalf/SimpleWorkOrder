@@ -15,7 +15,13 @@
 
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url(); ?>static/css/<?php echo $stylesheet ?>.css" rel="stylesheet">
-
+    <?php
+      if($additional_header_el) {
+        foreach($additional_header_el as $el) {
+          echo $el;
+        }
+      }
+    ?>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>

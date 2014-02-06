@@ -25,6 +25,7 @@ class Login extends CI_Controller {
     $data['author'] = 'SimpleWorkOrder';
     $data['title'] = 'Login | SimpleWorkOrder';
     $data['stylesheet'] = 'signin';
+    $data['additional_header_el'] = '';
     $data['attributes'] = array('class' => 'form-signin', 'role' => 'form');
 
     if($this->form_validation->run() == FALSE) {
