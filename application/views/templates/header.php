@@ -16,8 +16,8 @@
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url(); ?>static/css/<?php echo $stylesheet ?>.css" rel="stylesheet">
     <?php
-      if($additional_header_el) {
-        foreach($additional_header_el as $el) {
+      if($additional_css_el) {
+        foreach($additional_css_el as $el) {
           echo $el;
         }
       }
