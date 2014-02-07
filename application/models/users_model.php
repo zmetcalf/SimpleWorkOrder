@@ -31,12 +31,11 @@ class Users_model extends CI_Model {
 
   public function set_user()
   {
-    // This will be expanded later - used now for testing
     $data = array(
       'user_name' => $this->input->post('username'),
       'password' => $this->input->post('password'),
-      'user_type' => 'admin',
-      'email' => 'sample@email.com',
+      'user_type' => $this->input->post('user-type'),
+      'email' => $this->input->post('email'),
       'active' => 'active'
     );
     $this->db->insert('users', $data);

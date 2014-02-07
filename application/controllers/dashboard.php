@@ -5,7 +5,6 @@ class Dashboard extends CI_Controller {
   public function __construct()
   {
     parent::__construct();
-    $this->load->model('users_model');
 
     $this->data['additional_css_el'] = '';
     $this->data['additional_js_el'] = '';
@@ -24,25 +23,6 @@ class Dashboard extends CI_Controller {
     }
     $this->generate_data($page);
     $this->load_page($page);
-  }
-
-  public function create_user()
-  {
-    $this->load->helper('form');
-    $this->load->library('form_validation');
-
-    $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
-    $this->form_validation->set_rules('password', 'Password', 'trim|required|md5');
-
-    if($this->form_validation->run() == FALSE)
-    {
-      $this->load->view('dashboard/create_user');
-    }
-    else
-    {
-      $this->users_model->set_user();
-      $this->load->view('pages/success');
-    }
   }
 
   public function add_map_data()
@@ -73,7 +53,8 @@ class Dashboard extends CI_Controller {
     $this->load->view('dashboard/main-nav', $this->data);
     $this->load->view('dashboard/sidebar');
     if($page =='create-user') {
-      $this->create_user();
+      $this->load->library('../controllers/admin/create_user');
+      $this->create_user->create_user();
     }
     else {
       $this->load->view('dashboard/map');
