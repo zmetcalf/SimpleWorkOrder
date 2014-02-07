@@ -35,6 +35,9 @@ class Dashboard extends CI_Controller {
         '<script src="' . base_url() . 'static/js/admin/create-user.js"></script>'
       );
     }
+    else if($page == 'create-client') {
+
+    }
     else {
       $this->data['additional_css_el'] = array(
         '<link rel="stylesheet" href="' . base_url() . 'static/css/lib/leaflet.css" />',
@@ -55,6 +58,10 @@ class Dashboard extends CI_Controller {
     if($page =='create-user') {
       $this->load->library('../controllers/admin/create_user');
       $this->create_user->create_user();
+    }
+    else if($page == 'create-client') {
+      $this->load->library('../controllers/admin/create_client');
+      $this->create_client->create_client();
     }
     else {
       $this->load->view('dashboard/map');
