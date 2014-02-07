@@ -25,25 +25,25 @@ class Dashboard extends CI_Controller {
     $this->load_page($page);
   }
 
-  public function add_map_data()
-  {
-    $this->data['additional_css_el'] = array(
-      '<link rel="stylesheet" href="' . base_url() . 'static/css/lib/leaflet.css" />',
-      '<link rel="stylesheet" href="' . base_url() . 'static/css/map.css" />',
-    );
-    $this->data['additional_js_el'] = array(
-      '<script src="' . base_url() . 'static/js/lib/leaflet.js"></script>',
-      '<script src="' . base_url() . 'static/js/map.js"></script>'
-    );
-  }
-
   public function generate_data($page)
   {
-    if($page =='create-user') {
-
+    if($page == 'create-user') {
+      $this->data['additional_css_el'] = array(
+        '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/create-user.css" />'
+      );
+      $this->data['additional_js_el'] = array(
+        '<script src="' . base_url() . 'static/js/admin/create-user.js"></script>'
+      );
     }
     else {
-      $this->add_map_data();
+      $this->data['additional_css_el'] = array(
+        '<link rel="stylesheet" href="' . base_url() . 'static/css/lib/leaflet.css" />',
+        '<link rel="stylesheet" href="' . base_url() . 'static/css/map.css" />'
+      );
+      $this->data['additional_js_el'] = array(
+        '<script src="' . base_url() . 'static/js/lib/leaflet.js"></script>',
+        '<script src="' . base_url() . 'static/js/map.js"></script>'
+      );
     }
   }
 

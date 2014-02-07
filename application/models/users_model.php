@@ -36,6 +36,13 @@ class Users_model extends CI_Model {
       'password' => $this->input->post('password'),
       'user_type' => $this->input->post('user-type'),
       'email' => $this->input->post('email'),
+      'specialty' => $this->input->post('specialty'),
+      'street_address' => $this->input->post('street-address'),
+      'city' => $this->input->post('city'),
+      'state' => $this->input->post('state'),
+      'zip_code' => $this->input->post('zip-code'),
+      'primary_phone' => $this->input->post('primary-phone'),
+      'secondary_phone' => $this->input->post('secondary-phone'),
       'active' => 'active'
     );
     $this->db->insert('users', $data);
