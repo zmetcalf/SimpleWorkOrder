@@ -40,8 +40,7 @@
 
 $route['login'] = "login";
 $route['logout'] = "logout";
-$route['dashboard'] = 'dashboard/view';
-$route['create-user'] = "create_user/view";
+$route['dashboard/(:any)'] = 'dashboard/index/$1';
 $route['default_controller'] = "pages/view";
 $route['404_override'] = '';
 

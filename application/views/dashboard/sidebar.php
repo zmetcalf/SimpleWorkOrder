@@ -1,20 +1,18 @@
 <div class="col-sm-3 col-md-2 sidebar">
   <ul class="nav nav-sidebar">
-    <li class="active"><a href="#">Overview</a></li>
-    <li><a href="#">Reports</a></li>
-    <li><a href="#">Analytics</a></li>
-    <li><a href="#">Export</a></li>
+    <li class="active"><a href="<?php echo base_url() ?>dashboard">Dashboard</a></li>
+    <li><a href="#">New Work Order</a></li>
+    <li><a href="#">New Client</a></li>
+    <li><a href="<?php echo base_url() ?>dashboard/create-user">New User</a></li>
   </ul>
   <ul class="nav nav-sidebar">
-    <li><a href="">Nav item</a></li>
-    <li><a href="">Nav item again</a></li>
-    <li><a href="">One more nav</a></li>
-    <li><a href="">Another nav item</a></li>
-    <li><a href="">More navigation</a></li>
+    <li><a href="">Unassigned WO's</a></li>
+    <li><a href="">Assigned WO's</a></li>
+    <li><a href="">Stale Assigned WO's</a></li>
   </ul>
   <ul class="nav nav-sidebar">
-    <li><a href="">Nav item again</a></li>
-    <li><a href="">One more nav</a></li>
-    <li><a href="">Another nav item</a></li>
+    <li><a href="">Client Lookup</a></li>
+    <li><a href="">Volunteer Lookup</a></li>
+    <li><a href="">Work Order Lookup</a></li>
   </ul>
 </div>
