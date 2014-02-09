@@ -42,6 +42,11 @@
     <input type="tel" class="form-control" placeholder="Secondary Phone Number"
            name="secondary-phone" value="<?php echo set_value('secondary-phone'); ?>"/>
   </div>
+  <div class="form-group">
+    <label for="additional-info">Additional Information</label>
+    <textarea class="form-control" rows="5" placeholder="Driving instructions, caregiver, etc..."
+           name="additional-info" value="<?php echo set_value('additional-info'); ?>"></textarea>
+  </div>
 
   <input type="submit" class="btn btn-primary" name="submit" value="Create user" />
   </form>

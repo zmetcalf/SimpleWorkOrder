@@ -22,7 +22,7 @@ class Create_client extends CI_Controller {
     $this->form_validation->set_rules('primary-phone', 'Primary Phone', 'trim|required|xss_clean');
     $this->form_validation->set_rules('secondary-phone', 'Secondary Phone', 'trim|required|xss_clean');
 
-    $this->form_validation->set_rules('additional-info', 'Additional Info', 'trim|xss_clean');
+    $this->form_validation->set_rules('additional-info', 'Additional Info', 'xss_clean');
 
     if($this->form_validation->run() == FALSE)
     {
