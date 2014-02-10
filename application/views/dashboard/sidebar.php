@@ -1,7 +1,7 @@
 <div class="col-sm-3 col-md-2 sidebar">
   <ul class="nav nav-sidebar">
     <li class="active"><a href="<?php echo base_url() ?>dashboard">Dashboard</a></li>
-    <li><a href="#">New Work Order</a></li>
+    <li><a href="<?php echo base_url() ?>dashboard/create-wo">New Work Order</a></li>
     <li><a href="<?php echo base_url() ?>dashboard/create-client">New Client</a></li>
     <li><a href="<?php echo base_url() ?>dashboard/create-user">New User</a></li>
   </ul>

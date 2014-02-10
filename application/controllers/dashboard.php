@@ -35,6 +35,9 @@ class Dashboard extends CI_Controller {
         '<script src="' . base_url() . 'static/js/admin/create-user.js"></script>'
       );
     }
+    else if($page == 'create-wo') {
+
+    }
     else if($page == 'create-client') {
 
     }
@@ -58,6 +61,10 @@ class Dashboard extends CI_Controller {
     if($page =='create-user') {
       $this->load->library('../controllers/admin/create_user');
       $this->create_user->create_user();
+    }
+    else if($page == 'create-wo') {
+      $this->load->library('../controllers/admin/create_wo');
+      $this->create_wo->create_wo();
     }
     else if($page == 'create-client') {
       $this->load->library('../controllers/admin/create_client');
