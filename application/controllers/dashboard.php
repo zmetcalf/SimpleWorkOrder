@@ -36,7 +36,9 @@ class Dashboard extends CI_Controller {
       );
     }
     else if($page == 'create-wo') {
-
+      $this->data['additional_js_el'] = array(
+        '<script src="' . base_url() . 'static/js/admin/ajax/find-user.js"></script>'
+      );
     }
     else if($page == 'create-client') {
 
@@ -65,6 +67,7 @@ class Dashboard extends CI_Controller {
     else if($page == 'create-wo') {
       $this->load->library('../controllers/admin/create_wo');
       $this->create_wo->create_wo();
+      $this->load->view('dashboard/admin/subforms/find_client');
     }
     else if($page == 'create-client') {
       $this->load->library('../controllers/admin/create_client');

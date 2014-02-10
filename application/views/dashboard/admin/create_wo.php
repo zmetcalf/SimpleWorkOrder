@@ -3,6 +3,12 @@
   <?php echo form_open('dashboard/create-wo') ?>
   <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
   <div class="form-group">
+    <button class="btn btn-primary" type="button" data-toggle='modal' data-target='#find-client'>
+      Find Client
+    </button>
+    <div class='client-requesting' name='client-requesting'></div>
+  </div>
+  <div class="form-group">
     <label for="job-type">Job Type</label>
       <select class="form-control" name="job-type">
       <option>General</option>

@@ -25,6 +25,10 @@ class Client_model extends CI_Model {
     $this->db->insert('client', $data);
   }
 
+  public function get_search_by_name($first_name = '', $last_name = '') {
+
+  }
+
   private function set_geocode($data) {
     $this->load->library(array('Geocoding'));
     $connection = new Connection('74075466f76545c5b41ca1bc498e9adf');
