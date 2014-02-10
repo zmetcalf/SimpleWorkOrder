@@ -27,16 +27,13 @@ class Client_model extends CI_Model {
   }
 
   private function set_geocode($data) {
-    // Untested - may not work at all...
-    // Need to rewrite Connection.php to use cURL
     $this->load->library(array('Geocoding'));
     $connection = new Connection('74075466f76545c5b41ca1bc498e9adf');
-    $address = $data['street-address'] . ',' . $data['city'] . ',' . $data['state'] .
+    $address = $data['street_address'] . ',' . $data['city'] . ',' . $data['state'] .
                 ',' . 'USA';
     $results = cm_find($connection, $address, 10, 0);
     $result = $results->results[0];
-    $data['geo_lat'] = $result->properties_to_string();
-    $data['geo_lon'] = $result->centroid->to_string();
+    $data['geocode'] = $result->centroid->to_string();
     return $data;
   }
 }

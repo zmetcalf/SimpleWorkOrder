@@ -2,10 +2,10 @@
 
 /**
  * Connection class to establish connection with Cloudmade's services server.
- * 
+ *
  * @package Connection
  * @author Artem Shybovych
- * 
+ *
  */
 
 /**
@@ -29,7 +29,7 @@
  * API Client object is initialized by user credentials
  * (apikey/private key) as well as target (i.e. cloudmade)
  * host, port, etc.
- * 
+ *
  * @param string $apikey API key used for connection
  * @param string $host Host of CloudMade's services
  * @param int $port HTTP port to be used for connection
@@ -37,17 +37,17 @@
 
 class Connection {
     var $apikey, $host, $port;
-    
+
     /**
      * Constructor
-	 * 
+	 *
 	 * @param String $_apikey Your API key.
 	 * @see http://developers.cloudmade.com/
-	 * 
+	 *
 	 * @param String $_host Host. Should be "cloudmade.com" if you wanna use Cloudmade services.
 	 * @param int $_port Port. As usual, it is 80.
      */
-    
+
     function Connection($_apikey, $_host = "cloudmade.com", $_port = 80) {
         if (!isset($_apikey)) {
             echo new Exception('API key is not specified');
@@ -60,9 +60,9 @@ class Connection {
 
 	/**
 	 * Call CloudMade's service and return raw data
-	 * 
+	 *
 	 * @return String - response of the service to the request
-	 * 
+	 *
 	 * @param string $uri: Tail part of full-blown request URL.
 	 * @tutorial '/api/action/thingy?get=True'
      * @param string $subdomain Subdomain, from which request should be
@@ -70,25 +70,29 @@ class Connection {
 	 */
     function call_service($uri, $subdomain = null) {
         $domain = $this->host;
-        
+
         if (isset($subdomain))
             $domain = $subdomain . '.' . $this->host;
-        
+
         if (isset($port))
             $domain = $domain . ':' . $this->port;
 
 		$uri = '/' . $this->apikey . $uri;
 		$uri = 'http://' . $domain . $uri;
-		
-		$request = new HttpRequest($uri, HttpRequest::METH_GET);
-		
+
+		//$request = new HttpRequest($uri, HttpRequest::METH_GET);
+		$c_uri = curl_init($uri);
+    curl_setopt($c_uri,CURLOPT_RETURNTRANSFER,TRUE);
+
 		try {
-            $request->send();
-            
-            return $request->getResponseBody();
+            //$request->send();
+            $request = curl_exec($c_uri);
+
+            //return $request->getResponseBody();
+            return $request;
         } catch(Exception $e) {
             echo $e;
-            
+
             return null;
         }
     }
@@ -99,11 +103,11 @@ class Connection {
      *  This function is subject to change. Currently it simply
      * constructs a connection. It will be expanded to a more functional
      * version later.
-     * 
+     *
      * @param string $apikey API key used for connection
      * @param string $host Host of CloudMade's services
      * @param int $port HTTP port to be used for connection
-     * 
+     *
      * @return Constructed connection object
 	 */
     function get_connection($_apikey, $_host = "cloudmade.com", $_port = 80) {
