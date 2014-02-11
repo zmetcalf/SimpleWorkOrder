@@ -6,6 +6,8 @@
     <button class="btn btn-primary" type="button" data-toggle='modal' data-target='#find-client'>
       Find Client
     </button>
+  </div>
+  <div class="form-group">
     <div class='client-requesting' name='client-requesting'></div>
   </div>
   <div class="form-group">

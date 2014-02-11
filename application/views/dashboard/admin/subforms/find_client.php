@@ -9,23 +9,22 @@
         <div class="form-inline" role="form" id="search-form">
           <div class="form-group">
             <label for="last-name">Last Name</label>
-            <input type="text" class="form-control" placeholder="Last Name" name="last-name"/>
+            <input type="text" class="form-control search-text" placeholder="Last Name" name="last-name"/>
           </div>
           <div class="form-group">
             <label for="first-name">First Name</label>
-            <input type="text" class="form-control" placeholder="First Name" name="first-name"/>
+            <input type="text" class="form-control search-text" placeholder="First Name" name="first-name"/>
           </div>
           <div class="form-group">
             <button type="button" class="btn btn-primary" id="search-clients">Search</button>
           </div>
         </div>
       </div>
-      <div class="search-results">
-
-      </div>
+      <div class="search-results"></div>
+      <div class="find-client-error"></div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Select Client</button>
+        <button type="button" class="btn btn-primary" id="select-client">Select Client</button>
       </div>
     </div>
   </div>

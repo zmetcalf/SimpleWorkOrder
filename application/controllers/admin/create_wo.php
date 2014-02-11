@@ -13,6 +13,7 @@ class Create_wo extends CI_Controller {
     $this->load->helper('form');
     $this->load->library('form_validation');
 
+    $this->form_validation->set_rules('uid', 'Client', 'required|xss_clean');
     $this->form_validation->set_rules('job-type', 'Job Type', 'trim|required|xss_clean');
 
     $this->form_validation->set_rules('additional-info', 'Additional Info', 'xss_clean');

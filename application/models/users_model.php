@@ -14,6 +14,12 @@ class Users_model extends CI_Model {
     return $query->result_array();
   }
 
+  public function get_UID($username) {
+    $query = $this->db->get_where('users', array('user_name' => $username));
+    $row = $query->row_array();
+    return $row['UID'];
+  }
+
   public function get_username_and_password()
   {
     $query = $this->db->get_where('users', array('user_name' =>

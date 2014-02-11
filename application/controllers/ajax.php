@@ -1,0 +1,17 @@
+<?php
+
+class Ajax extends CI_controller
+{
+  public function index($segment, $ajax_class='')
+  {
+    if($segment=='admin' and $ajax_class=='search') {
+      $this->load->library('../controllers/admin/ajax/ajax_client');
+      $this->ajax_client->search_client(trim($this->input->post('first-name')),
+              trim($this->input->post('last-name')));
+    }
+    else if($segment=='admin' and $ajax_class=='get-client') {
+      $this->load->library('../controllers/admin/ajax/ajax_client');
+      $this->ajax_client->get_client($this->input->post('UID'));
+    }
+  }
+}

@@ -36,8 +36,11 @@ class Dashboard extends CI_Controller {
       );
     }
     else if($page == 'create-wo') {
+      $this->data['additional_css_el'] = array(
+        '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/create-wo.css" />'
+      );
       $this->data['additional_js_el'] = array(
-        '<script src="' . base_url() . 'static/js/admin/ajax/find-user.js"></script>'
+        '<script src="' . base_url() . 'static/js/admin/ajax/find-client.js"></script>'
       );
     }
     else if($page == 'create-client') {

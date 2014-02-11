@@ -6,14 +6,25 @@ class Ajax_client extends CI_controller
     parent::__construct();
   }
 
-  public function search_client() {
+  public function search_client($first_name='', $last_name='') {
     $this->load->model('client_model');
-    $result = get_search_by_name(trim($__POST['first-name']), trim($__POST['last-name']));
-    if(!$result) {
-      echo "No results found.";
+    $data['result'] = $this->client_model->get_search_by_name($first_name, $last_name);
+    if(!$data['result']) {
+      echo "<div class='alert alert-danger'>No results found.</div>";
     }
     else {
-      echo $result;
+      $this->load->view('dashboard/admin/subforms/client_results', $data);
+    }
+  }
+
+  public function get_client($UID) {
+    $this->load->model('client_model');
+    $data['result'] = $this->client_model->get_client($UID);
+    if(!$data['result']) {
+      echo "<div class='alert alert-danger'>Application Error</div>";
+    }
+    else {
+      $this->load->view('dashboard/admin/subforms/client_info', $data);
     }
   }
 }
