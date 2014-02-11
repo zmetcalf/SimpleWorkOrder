@@ -13,5 +13,9 @@ class Ajax extends CI_controller
       $this->load->library('../controllers/admin/ajax/ajax_client');
       $this->ajax_client->get_client($this->input->post('UID'));
     }
+    else if($segment=='admin' and $ajax_class=='get-open-wo') {
+      $this->load->library('../controllers/admin/ajax/ajax_wo');
+      echo $this->ajax_wo->get_open_wo();
+    }
   }
 }

@@ -15,14 +15,14 @@ class Dashboard extends CI_Controller {
     $this->data['menu_title'] = 'SimpleWorkOrder';
   }
 
-  public function index($page = 'map')
+  public function index($page = 'map', $record = '')
   {
     if($this->session->userdata('logged_in') == FALSE) {
       $this->load->helper('url');
       redirect('/login');
     }
     $this->generate_data($page);
-    $this->load_page($page);
+    $this->load_page($page, $record);
   }
 
   public function generate_data($page)
@@ -48,17 +48,17 @@ class Dashboard extends CI_Controller {
     }
     else {
       $this->data['additional_css_el'] = array(
-        '<link rel="stylesheet" href="' . base_url() . 'static/css/lib/leaflet.css" />',
+        '<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.css" />',
         '<link rel="stylesheet" href="' . base_url() . 'static/css/map.css" />'
       );
       $this->data['additional_js_el'] = array(
-        '<script src="' . base_url() . 'static/js/lib/leaflet.js"></script>',
+        '<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.js"></script>',
         '<script src="' . base_url() . 'static/js/map.js"></script>'
       );
     }
   }
 
-  public function load_page($page)
+  public function load_page($page, $record)
   {
     $this->load->view('templates/header', $this->data);
     $this->load->view('dashboard/main-nav', $this->data);

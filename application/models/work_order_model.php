@@ -7,6 +7,15 @@ class Work_order_model extends CI_Model {
     $this->load->helper(array('date', 'security'));
   }
 
+  public function get_open_wo() {
+    $this->db->select('*');
+    $this->db->from('work_order');
+    $this->db->join('client', 'client.UID = work_order.client_requesting');
+    $this->db->where(array('completed_by' => NULL));
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+
   public function set_work_order($user)
   {
     $this->load->model('users_model');
@@ -15,7 +24,7 @@ class Work_order_model extends CI_Model {
       'modified_by' => $this->users_model->get_UID($user),
       'client_requesting' => $this->input->post('uid'),
       'job_type' => $this->input->post('job-type'),
-      'created_on' => mdate("Year: %Y Month: %m Day: %d - %h:%i %a"),
+      'created_on' => mdate("%Y-%m-%d %H:%i:%s.%u"),
       'additional_info' => $this->input->post('additional-info')
     );
 

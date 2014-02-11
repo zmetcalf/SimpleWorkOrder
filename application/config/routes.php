@@ -42,6 +42,7 @@ $route['login'] = "login";
 $route['logout'] = "logout";
 $route['ajax/(:any)/(:any)'] = 'ajax/index/$1/$2';
 $route['dashboard/(:any)'] = 'dashboard/index/$1';
+$route['dashboard/(:any)/(:any)'] = 'dashboard/index/$1/$2';
 $route['default_controller'] = "pages/view";
 $route['404_override'] = '';
 
