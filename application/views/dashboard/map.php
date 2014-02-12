@@ -2,3 +2,7 @@
   <h1 class="page-header">Dashboard</h1>
     <div id='map'></div>
 </div>
+<div style="display:none"><!-- This is for ajax requests -->
+  <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
+    value="<?php echo $this->security->get_csrf_hash(); ?>">
+</div>

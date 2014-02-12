@@ -17,6 +17,7 @@ class Dashboard extends CI_Controller {
 
   public function index($page = 'map', $record = '')
   {
+    $this->session->all_userdata(); // Attempt to expire a session before the next line
     if($this->session->userdata('logged_in') == FALSE) {
       $this->load->helper('url');
       redirect('/login');
@@ -52,7 +53,10 @@ class Dashboard extends CI_Controller {
         '<link rel="stylesheet" href="' . base_url() . 'static/css/map.css" />'
       );
       $this->data['additional_js_el'] = array(
+        '<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>',
+        '<script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>',
         '<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.js"></script>',
+        '<script src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>',
         '<script src="' . base_url() . 'static/js/map.js"></script>'
       );
     }
