@@ -19,8 +19,8 @@ $.post('ajax/admin/get-open-wo',
   }
 )
   .done(function(json_string) {
-    _.each(json_string, function(json) {
-      map_points.add(json);
+    _.each(json_string, function(json_el) {
+      map_points.add(json_el);
     });
   })
   .fail(function() {

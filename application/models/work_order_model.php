@@ -7,6 +7,16 @@ class Work_order_model extends CI_Model {
     $this->load->helper(array('date', 'security'));
   }
 
+  public function get_wo($UID) {
+    $this->db->select('*');
+    $this->db->from('work_order');
+    $this->db->join('client', 'client.UID = work_order.client_requesting');
+    $this->db->join('users', 'users.UID = work_order.assigned_to');
+    $this->db->where(array('UID' => $UID));
+    $query = $this->db->get();
+    return $query->row_array();
+  }
+
   public function get_open_wo() {
     $this->db->select('*');
     $this->db->from('work_order');

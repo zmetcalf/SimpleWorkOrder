@@ -47,6 +47,9 @@ class Dashboard extends CI_Controller {
     else if($page == 'create-client') {
 
     }
+    else if($page == 'view-wo') {
+
+    }
     else {
       $this->data['additional_css_el'] = array(
         '<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.css" />',
@@ -79,6 +82,10 @@ class Dashboard extends CI_Controller {
     else if($page == 'create-client') {
       $this->load->library('../controllers/admin/create_client');
       $this->create_client->create_client();
+    }
+    else if($page == 'view-wo') {
+      $this->load->library('../controllers/admin/view_wo');
+      $this->view_wo->view_wo($record);
     }
     else {
       $this->load->view('dashboard/map');
