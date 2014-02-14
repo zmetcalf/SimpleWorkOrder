@@ -11,8 +11,7 @@ class Work_order_model extends CI_Model {
     $this->db->select('*');
     $this->db->from('work_order');
     $this->db->join('client', 'client.UID = work_order.client_requesting');
-    $this->db->join('users', 'users.UID = work_order.assigned_to');
-    $this->db->where(array('UID' => $UID));
+    $this->db->where(array('work_order.UID' => $UID));
     $query = $this->db->get();
     return $query->row_array();
   }
@@ -39,5 +38,19 @@ class Work_order_model extends CI_Model {
     );
 
     $this->db->insert('work_order', $data);
+  }
+
+  public function set_assigned_to($wo, $user)
+  {
+    $this->load->model('users_model');
+    $user_uid = $this->users_model->get_UID($user);
+    $this->db->get_where('work_order', array('UID' => $wo));
+    $this->db->update('work_order', array('assigned_to', $user_uid));
+  }
+
+  public function unset_assigned_to($wo)
+  {
+    $this->db->get_where('work_order', array('UID' => $wo));
+    $this->db->update('work_order', array('assigned_to', NULL));
   }
 }

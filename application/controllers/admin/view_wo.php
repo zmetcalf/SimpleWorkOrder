@@ -11,13 +11,20 @@ class View_wo extends CI_Controller {
   public function view_wo($record)
   {
     $this->load->helper('form');
-    $data = $this->work_order_model->get_wo($record);
-    $this->load->view('dashboard/admin/view_wo', $data);
 
-    /*{  // To be removed - have to figure out how this should work
+    if($this->input->post('assign') == 'Sign Me Up') {
       $user = $this->session->userdata('username');
-      $this->work_order_model->set_work_order($user);
+      $this->work_order_model->set_assigned_to($record, $user);
       $this->load->view('pages/success');
-    }*/
+    }
+    else if($this->input->post('unassign')) {
+      $this->work_order_model->unset_assigned_to($record);
+      $this->load->view('pages/success');
+    }
+    else { // TODO add error handling if wo not found
+      $data['result'] = $this->work_order_model->get_wo($record);
+      $data['record'] = $record;
+      $this->load->view('dashboard/admin/view_wo', $data);
+    }
   }
 }
