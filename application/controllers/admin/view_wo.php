@@ -11,9 +11,9 @@ class View_wo extends CI_Controller {
   public function view_wo($record)
   {
     $this->load->helper('form');
+    $user = $this->session->userdata('username');
 
-    if($this->input->post('assign') == 'Sign Me Up') {
-      $user = $this->session->userdata('username');
+    if($this->input->post('assign') == 'Sign Me Up!') {
       $this->work_order_model->set_assigned_to($record, $user);
       $this->load->view('pages/success');
     }

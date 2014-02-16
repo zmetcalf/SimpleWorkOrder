@@ -11,7 +11,13 @@ class Users_model extends CI_Model {
   {
     $query = $this->db->get_where('users', array('user_name' =>
                                   $this->input->post('username')));
-    return $query->result_array();
+    return $query->row_array();
+  }
+
+  public function get_user_type($username)
+  {
+    $query = $this->db->get_where('users', array('user_name' => $username));
+    return $query->row_array()['user_type'];
   }
 
   public function get_UID($username) {
@@ -24,10 +30,10 @@ class Users_model extends CI_Model {
   {
     $query = $this->db->get_where('users', array('user_name' =>
                                   $this->input->post('username')));
-    if(!$query->result_array()) {
+    if(!$query->row_array()) {
       return FALSE;
     }
-    else if($query->result_array()[0]['password'] == do_hash($this->input->post('password'), 'md5')) {
+    else if($query->row_array()['password'] == do_hash($this->input->post('password'), 'md5')) {
       return TRUE;
     }
     else {

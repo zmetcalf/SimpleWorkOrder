@@ -13,6 +13,7 @@ class Dashboard extends CI_Controller {
     $this->data['author'] = 'SimpleWorkOrder';
     $this->data['title'] = 'Dashboard | SimpleWorkOrder';
     $this->data['menu_title'] = 'SimpleWorkOrder';
+    $this->data['slug'] = '';
   }
 
   public function index($page = 'map', $record = '')
@@ -29,6 +30,7 @@ class Dashboard extends CI_Controller {
   public function generate_data($page)
   {
     if($page == 'create-user') {
+      $this->data['slug'] = 'create-user';
       $this->data['additional_css_el'] = array(
         '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/create-user.css" />'
       );
@@ -37,6 +39,7 @@ class Dashboard extends CI_Controller {
       );
     }
     else if($page == 'create-wo') {
+      $this->data['slug'] = 'create-wo';
       $this->data['additional_css_el'] = array(
         '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/create-wo.css" />'
       );
@@ -45,12 +48,13 @@ class Dashboard extends CI_Controller {
       );
     }
     else if($page == 'create-client') {
-
+      $this->data['slug'] = 'create-client';
     }
     else if($page == 'view-wo') {
 
     }
     else {
+      $this->data['slug'] = 'dashboard';
       $this->data['additional_css_el'] = array(
         '<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.css" />',
         '<link rel="stylesheet" href="' . base_url() . 'static/css/map.css" />'
@@ -69,7 +73,9 @@ class Dashboard extends CI_Controller {
   {
     $this->load->view('templates/header', $this->data);
     $this->load->view('dashboard/main-nav', $this->data);
-    $this->load->view('dashboard/sidebar');
+    if($this->session->userdata('user_type') == 'Administrator') {
+      $this->load->view('dashboard/sidebar');
+    }
     if($page =='create-user') {
       $this->load->library('../controllers/admin/create_user');
       $this->create_user->create_user();
