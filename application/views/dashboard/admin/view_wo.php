@@ -12,8 +12,8 @@
   </div>
   <div class="well col-sm-3 col-sm-offset-1 col-md-5 col-md-offset-1">
     <p>Job Type: <?php echo $result['job_type']; ?></p>
-    <p>Job Information: <?php echo $result['additional_info']; ?></p>
-    <p>Created on: <?php $this->load->helper('date'); echo unix_to_human(mysql_to_unix($result['created_on'])); ?></p>
+    <p>Job Information: <?php echo $result['wo_additional_info']; ?></p>
+    <p>Created on: <?php $this->load->helper('date'); echo unix_to_human(mysql_to_unix($result['wo_created_on'])); ?></p>
   </div>
   </div>
   <?php if($assigned_to_user): ?>

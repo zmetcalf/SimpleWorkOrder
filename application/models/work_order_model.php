@@ -8,7 +8,10 @@ class Work_order_model extends CI_Model {
   }
 
   public function get_wo($UID) {
-    $this->db->select('*');
+    $this->db->select('client.*', FALSE);
+    $this->db->select('work_order.job_type, work_order.additional_info as ' .
+                      'wo_additional_info, work_order.UID as wo_uid,' .
+                      'work_order.created_on as wo_created_on', FALSE);
     $this->db->from('work_order');
     $this->db->join('client', 'client.UID = work_order.client_requesting');
     $this->db->where(array('work_order.UID' => $UID));
@@ -17,10 +20,12 @@ class Work_order_model extends CI_Model {
   }
 
   public function get_open_wo() {
-    $this->db->select('*');
+    $this->db->select('client.*', FALSE);
+    $this->db->select('work_order.job_type, work_order.additional_info as ' .
+                      'wo_additional_info, work_order.UID as wo_uid', FALSE);
     $this->db->from('work_order');
     $this->db->join('client', 'client.UID = work_order.client_requesting');
-    $this->db->where(array('completed_by' => NULL));
+    $this->db->where(array('assigned_to' => NULL));
     $query = $this->db->get();
     return $query->result_array();
   }

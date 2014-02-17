@@ -8,9 +8,22 @@ L.tileLayer('http://{s}.tile.cloudmade.com/74075466f76545c5b41ca1bc498e9adf/997/
 var map_points = new Backbone.Collection();
 
 map_points.on('add', function(marker) {
-  var geocode = marker.attributes.geocode = marker.attributes.geocode.split(",");
-  var pointer = marker.attributes.map_marker = L.marker([geocode[0], geocode[1]]).addTo(map);
-  pointer.bindPopup('<b>' + marker.attributes.job_type + '</b>');
+  var view = {
+    limitLength: function() {
+      return function(text, render) {
+        return render(text).substr(0, 30) + '...';
+      };
+    },
+    wo_url: 'dashboard/view-wo/' + marker.get('wo_uid'),
+    job_type: marker.get('job_type'),
+    additional_info: marker.get('wo_additional_info')
+  };
+
+  var pop_up = Mustache.render('<b><a href="{{wo_url}}">{{job_type}}</a></b><br />{{#additional_info}}{{#limitLength}}{{additional_info}}{{/limitLength}}{{/additional_info}}', view);
+
+  var geocode = marker.get('geocode').split(",");
+  var pointer = L.marker([geocode[0], geocode[1]]).addTo(map);
+  pointer.bindPopup(pop_up);
 });
 
 $.post('ajax/admin/get-open-wo',
