@@ -25,6 +25,11 @@ class Work_order_model extends CI_Model {
     return $query->result_array();
   }
 
+  public function get_assigned_to($UID) {
+    $query = $this->db->get_where('work_order', array('UID' => $UID));
+    return $query->row_array()['assigned_to'];
+  }
+
   public function set_work_order($user)
   {
     $this->load->model('users_model');
