@@ -18,6 +18,11 @@
            name="street-address" value="<?php echo set_value('street-address'); ?>"/>
   </div>
   <div class="form-group">
+    <label for="unit-number">Unit Number</label>
+    <input type="text" class="form-control" placeholder="Unit or Apartment Number`"
+           name="unit-number" value="<?php echo set_value('unit-number'); ?>"/>
+  </div>
+  <div class="form-group">
     <label for="city">City</label>
     <input type="text" class="form-control" placeholder="City"
            name="city" value="<?php echo set_value('city'); ?>"/>

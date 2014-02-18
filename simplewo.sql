@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS `client` (
   `last_name` varchar(128) NOT NULL,
   `first_name` varchar(128) NOT NULL,
   `street_address` varchar(128) NOT NULL,
+  `unit_number` varchar(128) DEFAULT NULL,
   `city` varchar(128) NOT NULL,
   `state` varchar(20) NOT NULL,
   `zip_code` varchar(128) NOT NULL,

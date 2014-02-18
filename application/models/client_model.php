@@ -13,6 +13,7 @@ class Client_model extends CI_Model {
       'last_name' => $this->input->post('last-name'),
       'first_name' => $this->input->post('first-name'),
       'street_address' => $this->input->post('street-address'),
+      'unit_number' => $this->input->post('unit-number'),
       'city' => $this->input->post('city'),
       'state' => $this->input->post('state'),
       'zip_code' => $this->input->post('zip-code'),
