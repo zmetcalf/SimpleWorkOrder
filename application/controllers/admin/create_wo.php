@@ -10,6 +10,10 @@ class Create_wo extends CI_Controller {
 
   public function create_wo()
   {
+    if(!($this->session->userdata('user_type') == 'Administrator')) {
+      $this->load->helper('url');
+      redirect('/dashboard');
+    }
     $this->load->helper('form');
     $this->load->library('form_validation');
 

@@ -35,6 +35,18 @@ class Work_order_model extends CI_Model {
     return $query->row_array()['assigned_to'];
   }
 
+  public function get_wo_assigned($UID) {
+    // Used by sidebar to load work orders assigned to volunteer
+    $this->db->select('client.*', FALSE);
+    $this->db->select('work_order.job_type, work_order.additional_info as ' .
+                      'wo_additional_info, work_order.UID as wo_uid', FALSE);
+    $this->db->from('work_order');
+    $this->db->join('client', 'client.UID = work_order.client_requesting');
+    $this->db->where(array('assigned_to' => $UID));
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+
   public function set_work_order($user)
   {
     $this->load->model('users_model');

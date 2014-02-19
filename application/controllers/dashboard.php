@@ -53,6 +53,9 @@ class Dashboard extends CI_Controller {
     else if($page == 'view-wo') {
 
     }
+    else if($page == 'assigned-wo') {
+
+    }
     else {
       $this->data['slug'] = 'dashboard';
       $this->data['additional_css_el'] = array(
@@ -73,9 +76,14 @@ class Dashboard extends CI_Controller {
   {
     $this->load->view('templates/header', $this->data);
     $this->load->view('dashboard/main-nav', $this->data);
+
     if($this->session->userdata('user_type') == 'Administrator') {
       $this->load->view('dashboard/sidebar');
     }
+    else if($this->session->userdata('user_type') == 'Volunteer') {
+      $this->get_volunteer_sidebar();
+    }
+
     if($page =='create-user') {
       $this->load->library('../controllers/admin/create_user');
       $this->create_user->create_user();
@@ -93,10 +101,22 @@ class Dashboard extends CI_Controller {
       $this->load->library('../controllers/admin/view_wo');
       $this->view_wo->view_wo($record);
     }
+    else if($page == 'assigned-wo') {
+      $this->load->library('../controllers/user/assigned_wo');
+      $this->assigned_wo->assigned_wo();
+    }
     else {
       $this->load->view('dashboard/map');
     }
     $this->load->view('dashboard/footer');
     $this->load->view('templates/footer', $this->data);
+  }
+
+  private function get_volunteer_sidebar() {
+    $this->load->model(array('users_model', 'work_order_model'));
+    $data['sidebar_result'] = $this->work_order_model->get_wo_assigned(
+                              $this->users_model->get_UID(
+                              $this->session->userdata('username')));
+    $this->load->view('dashboard/sidebar-volunteer', $data);
   }
 }
