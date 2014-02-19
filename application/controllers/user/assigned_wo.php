@@ -13,6 +13,6 @@ class Assigned_wo extends CI_Controller {
     $data['result'] = $this->work_order_model->get_wo_assigned(
                       $this->users_model->get_UID(
                       $this->session->userdata('username')));
-      $this->load->view('dashboard/user/assigned_wo', $data);
+    $this->load->view('dashboard/user/assigned_wo', $data);
   }
 }

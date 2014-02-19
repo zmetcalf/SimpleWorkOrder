@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `work_order` (
   `additional_info` varchar(8000) DEFAULT NULL,
   `job_type` varchar(128) NOT NULL,
   `created_on` datetime NOT NULL,
-  `modified_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`UID`),
   KEY `created_by` (`created_by`),
   KEY `modified_by` (`modified_by`),

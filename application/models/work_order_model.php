@@ -42,7 +42,7 @@ class Work_order_model extends CI_Model {
                       'wo_additional_info, work_order.UID as wo_uid', FALSE);
     $this->db->from('work_order');
     $this->db->join('client', 'client.UID = work_order.client_requesting');
-    $this->db->where(array('assigned_to' => $UID));
+    $this->db->where(array('assigned_to' => $UID, 'completed_by' => NULL));
     $query = $this->db->get();
     return $query->result_array();
   }
@@ -69,6 +69,15 @@ class Work_order_model extends CI_Model {
     $this->db->from('work_order');
     $this->db->where('UID',$wo);
     $this->db->update('work_order', array('assigned_to' => $user_uid));
+  }
+
+  public function set_completed($wo, $user)
+  {
+    $this->load->model('users_model');
+    $user_uid = $this->users_model->get_UID($user);
+    $this->db->from('work_order');
+    $this->db->where('UID',$wo);
+    $this->db->update('work_order', array('completed_by' => $user_uid));
   }
 
   public function unset_assigned_to($wo)

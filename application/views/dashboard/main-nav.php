@@ -12,11 +12,9 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="<?php echo base_url(); ?>dashboard">Dashboard</a></li>
-        <?php
-          if($this->session->userdata('user_type') == 'Volunteer') {
-            echo '<li><a href="' . base_url() . 'dashboard/assigned-wo">Assigned Work Orders</a></li>';
-          }
-        ?>
+        <?php if($this->session->userdata('user_type') == 'Volunteer'): ?>
+        <li><a href="<?php echo base_url(); ?>dashboard/assigned-wo">Assigned Work Orders</a></li>
+        <?php endif ?>
         <li><a href="#">Settings</a></li>
         <li><a href="#">Profile</a></li>
         <li><a href="#">Help</a></li>

@@ -19,6 +19,7 @@
   </div>
   <?php if($assigned_to_user): ?>
     <input type="submit" class="btn btn-default" name="unassign" value="Unregister me" />
+    <input type="submit" class="btn btn-primary" name="completed" value="Completed Job" />
   <?php else: ?>
     <input type="submit" class="btn btn-primary" name="assign" value="Sign Me Up!" />
   <?php endif; ?>

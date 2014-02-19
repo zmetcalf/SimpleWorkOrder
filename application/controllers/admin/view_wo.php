@@ -20,13 +20,18 @@ class View_wo extends CI_Controller {
     else {
       $data['assigned_to_user'] = FALSE;
     }
-    if($this->input->post('assign') == 'Sign Me Up!') {
+    if($this->input->post('assign')) {
       $this->work_order_model->set_assigned_to($record,
         $this->session->userdata('username'));
       $this->load->view('pages/success');
     }
     else if($this->input->post('unassign')) {
       $this->work_order_model->unset_assigned_to($record);
+      $this->load->view('pages/success');
+    }
+    else if($this->input->post('completed')) {
+      $this->work_order_model->set_completed($record,
+        $this->session->userdata('username'));
       $this->load->view('pages/success');
     }
     else { // TODO add error handling if wo not found
