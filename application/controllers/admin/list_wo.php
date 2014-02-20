@@ -15,6 +15,13 @@ class List_wo extends CI_Controller {
     $this->load->view('dashboard/admin/view_wo_list', $data);
   }
 
+  public function list_stale_unassigned_wo()
+  {
+    $data['page_title'] = "Stale Unassigned Work Orders";
+    $data['result'] = $this->work_order_model->get_all_stale_open_wo();
+    $this->load->view('dashboard/admin/view_wo_list', $data);
+  }
+
   public function list_assigned_wo()
   {
     $data['page_title'] = "Assigned Work Orders";

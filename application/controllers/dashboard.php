@@ -54,16 +54,19 @@ class Dashboard extends CI_Controller {
 
     }
     else if($page == 'assigned-wo') {
-
+      $this->data['slug'] = 'assigned-wo';
     }
     else if($page == 'list-unassigned-wo') {
-
+      $this->data['slug'] = 'list-unassigned-wo';
+    }
+    else if($page == 'list-stale-unassigned-wo') {
+      $this->data['slug'] = 'list-stale-unassigned-wo';
     }
     else if($page == 'list-assigned-wo') {
-
+      $this->data['slug'] = 'list-assigned-wo';
     }
     else if($page == 'list-stale-assigned-wo') {
-
+      $this->data['slug'] = 'list-stale-assigned-wo';
     }
     else {
       $this->data['slug'] = 'dashboard';
@@ -117,6 +120,10 @@ class Dashboard extends CI_Controller {
     else if($page == 'list-unassigned-wo') {
       $this->load->library('../controllers/admin/list_wo');
       $this->list_wo->list_unassigned_wo();
+    }
+    else if($page == 'list-stale-unassigned-wo') {
+      $this->load->library('../controllers/admin/list_wo');
+      $this->list_wo->list_stale_unassigned_wo();
     }
     else if($page == 'list-assigned-wo') {
       $this->load->library('../controllers/admin/list_wo');
