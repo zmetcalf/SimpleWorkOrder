@@ -8,6 +8,7 @@ class Work_order_model extends CI_Model {
   }
 
   public function get_wo($UID) {
+    // Used by view_wo go get info related to a work order
     $this->db->select('client.*', FALSE);
     $this->db->select('work_order.job_type, work_order.additional_info as ' .
                       'wo_additional_info, work_order.UID as wo_uid,' .
@@ -20,6 +21,7 @@ class Work_order_model extends CI_Model {
   }
 
   public function get_open_wo() {
+    // Used by map to get all open work orders that are not assigned
     $this->db->select('client.*', FALSE);
     $this->db->select('work_order.job_type, work_order.additional_info as ' .
                       'wo_additional_info, work_order.UID as wo_uid', FALSE);
@@ -30,13 +32,40 @@ class Work_order_model extends CI_Model {
     return $query->result_array();
   }
 
+  public function get_all_assigned_wo() {
+    // Used by map to get all open work orders that are assigned
+    $this->db->select('client.*', FALSE);
+    $this->db->select('work_order.job_type, work_order.additional_info as ' .
+                      'wo_additional_info, work_order.UID as wo_uid', FALSE);
+    $this->db->from('work_order');
+    $this->db->join('client', 'client.UID = work_order.client_requesting');
+    $this->db->where('assigned_to IS NOT NULL and completed_by IS NULL');
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+
+  public function get_all_stale_assigned_wo() {
+    // Used by map to get all open work orders that are assigned but older than 30 days
+    $this->db->select('client.*', FALSE);
+    $this->db->select('work_order.job_type, work_order.additional_info as ' .
+                      'wo_additional_info, work_order.UID as wo_uid', FALSE);
+    $this->db->from('work_order');
+    $this->db->join('client', 'client.UID = work_order.client_requesting');
+    $where_string = 'assigned_to IS NOT NULL and completed_by IS NULL and created_on < '
+                    . mdate("%Y-%m-%d", (time() - 30 * 24 * 60 * 60));
+    $this->db->where($where_string);
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+
   public function get_assigned_to($UID) {
+    // Returns who is assigned to a particular work order
     $query = $this->db->get_where('work_order', array('UID' => $UID));
     return $query->row_array()['assigned_to'];
   }
 
   public function get_wo_assigned($UID) {
-    // Used by sidebar to load work orders assigned to volunteer
+    // Used by sidebar to load work orders assigned to a certain volunteer
     $this->db->select('client.*', FALSE);
     $this->db->select('work_order.job_type, work_order.additional_info as ' .
                       'wo_additional_info, work_order.UID as wo_uid', FALSE);

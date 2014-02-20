@@ -56,6 +56,15 @@ class Dashboard extends CI_Controller {
     else if($page == 'assigned-wo') {
 
     }
+    else if($page == 'list-unassigned-wo') {
+
+    }
+    else if($page == 'list-assigned-wo') {
+
+    }
+    else if($page == 'list-stale-assigned-wo') {
+
+    }
     else {
       $this->data['slug'] = 'dashboard';
       $this->data['additional_css_el'] = array(
@@ -104,6 +113,18 @@ class Dashboard extends CI_Controller {
     else if($page == 'assigned-wo') {
       $this->load->library('../controllers/user/assigned_wo');
       $this->assigned_wo->assigned_wo();
+    }
+    else if($page == 'list-unassigned-wo') {
+      $this->load->library('../controllers/admin/list_wo');
+      $this->list_wo->list_unassigned_wo();
+    }
+    else if($page == 'list-assigned-wo') {
+      $this->load->library('../controllers/admin/list_wo');
+      $this->list_wo->list_assigned_wo();
+    }
+    else if($page == 'list-stale-assigned-wo') {
+      $this->load->library('../controllers/admin/list_wo');
+      $this->list_wo->list_stale_assigned_wo();
     }
     else {
       $this->load->view('dashboard/map');
