@@ -32,7 +32,7 @@ class Dashboard extends CI_Controller {
     if($page == 'create-user') {
       $this->data['slug'] = 'create-user';
       $this->data['additional_css_el'] = array(
-        '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/create-user.css" />'
+        '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/create-user.css">'
       );
       $this->data['additional_js_el'] = array(
         '<script src="' . base_url() . 'static/js/admin/create-user.js"></script>'
@@ -41,7 +41,7 @@ class Dashboard extends CI_Controller {
     else if($page == 'create-wo') {
       $this->data['slug'] = 'create-wo';
       $this->data['additional_css_el'] = array(
-        '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/create-wo.css" />'
+        '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/create-wo.css">'
       );
       $this->data['additional_js_el'] = array(
         '<script src="' . base_url() . 'static/js/admin/ajax/find-client.js"></script>'
@@ -54,7 +54,7 @@ class Dashboard extends CI_Controller {
 
     }
     else if($page == 'assigned-wo') {
-      $this->data['slug'] = 'assigned-wo';
+
     }
     else if($page == 'list-unassigned-wo') {
       $this->data['slug'] = 'list-unassigned-wo';
@@ -71,8 +71,8 @@ class Dashboard extends CI_Controller {
     else {
       $this->data['slug'] = 'dashboard';
       $this->data['additional_css_el'] = array(
-        '<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.css" />',
-        '<link rel="stylesheet" href="' . base_url() . 'static/css/map.css" />'
+        '<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.css">',
+        '<link rel="stylesheet" href="' . base_url() . 'static/css/map.css">'
       );
       $this->data['additional_js_el'] = array(
         '<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>',

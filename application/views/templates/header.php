@@ -11,7 +11,7 @@
     <title><?php echo $title ?></title>
 
     <!-- Bootstrap core CSS -->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url(); ?>static/css/<?php echo $stylesheet ?>.css" rel="stylesheet">
