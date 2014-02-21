@@ -15,9 +15,8 @@
         <?php if($this->session->userdata('user_type') == 'Volunteer'): ?>
         <li><a href="<?php echo base_url(); ?>dashboard/assigned-wo">Assigned Work Orders</a></li>
         <?php endif ?>
-        <li><a href="#">Settings</a></li>
-        <li><a href="#">Profile</a></li>
-        <li><a href="#">Help</a></li>
+        <li><a href="<?php echo base_url(); ?>dashboard/settings">Settings</a></li>
+        <li><a href="<?php echo base_url(); ?>page/help" target="_href">Help</a></li>
         <li><a href='<?php echo base_url(); ?>logout'>Log out</a></li>
       </ul>
       <!--

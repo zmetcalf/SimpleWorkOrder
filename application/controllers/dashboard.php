@@ -29,8 +29,9 @@ class Dashboard extends CI_Controller {
 
   public function generate_data($page)
   {
+    $this->data['slug'] = $page;
+
     if($page == 'create-user') {
-      $this->data['slug'] = 'create-user';
       $this->data['additional_css_el'] = array(
         '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/create-user.css">'
       );
@@ -39,7 +40,6 @@ class Dashboard extends CI_Controller {
       );
     }
     else if($page == 'create-wo') {
-      $this->data['slug'] = 'create-wo';
       $this->data['additional_css_el'] = array(
         '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/create-wo.css">'
       );
@@ -48,7 +48,7 @@ class Dashboard extends CI_Controller {
       );
     }
     else if($page == 'create-client') {
-      $this->data['slug'] = 'create-client';
+
     }
     else if($page == 'view-wo') {
 
@@ -57,16 +57,16 @@ class Dashboard extends CI_Controller {
 
     }
     else if($page == 'list-unassigned-wo') {
-      $this->data['slug'] = 'list-unassigned-wo';
+
     }
     else if($page == 'list-stale-unassigned-wo') {
-      $this->data['slug'] = 'list-stale-unassigned-wo';
+
     }
     else if($page == 'list-assigned-wo') {
-      $this->data['slug'] = 'list-assigned-wo';
+
     }
     else if($page == 'list-stale-assigned-wo') {
-      $this->data['slug'] = 'list-stale-assigned-wo';
+
     }
     else {
       $this->data['slug'] = 'dashboard';

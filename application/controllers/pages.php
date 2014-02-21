@@ -2,17 +2,27 @@
 
 class Pages extends CI_Controller {
 
-  public function view()
+  public function __construct()
   {
-    $data['stylesheet'] = 'cover';
-    $data['additional_css_el'] = '';
-    $data['additional_js_el'] = '';
-    $data['title'] = 'Welcome to SimpleWorkOrder';
-    $data['description'] = 'Welcome to SimpleWorkOrder';
-    $data['author'] = 'SimpleWorkOrder';
+    parent::__construct();
 
-    $this->load->view('templates/header', $data);
-    $this->load->view('pages/home');
-    $this->load->view('templates/footer', $data);
+    $this->data['stylesheet'] = 'cover';
+    $this->data['additional_css_el'] = '';
+    $this->data['additional_js_el'] = '';
+    $this->data['title'] = 'Home';
+    $this->data['description'] = 'Welcome to SimpleWorkOrder';
+    $this->data['author'] = 'SimpleWorkOrder';
+  }
+  public function view($pages = 'home')
+  {
+    $this->data['title'] = ucfirst($pages) . ' | SimpleWorkOrder';
+    $this->data['lead'] = 'Volunteering is a great experience!';
+    $pages = 'home'; // Remove later when other pages are added
+
+    $this->load->view('templates/header', $this->data);
+    $this->load->view('pages/templates/home_header', $this->data);
+    $this->load->view('pages/' . $pages, $this->data);
+    $this->load->view('pages/templates/home_footer');
+    $this->load->view('templates/footer', $this->data);
   }
 }
