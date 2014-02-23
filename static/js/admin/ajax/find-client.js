@@ -1,4 +1,4 @@
-$('#search-clients').click(function() {
+$('#lookup').click(function() {
   searchClients();
 });
 
@@ -27,7 +27,7 @@ function searchClients() {
   ).done(function (results) {
     $('.search-results').html(results);
   }).fail(function () {
-    $('.find-client-error').html('<div class="alert alert-danger">Server Error</div>');
+    $('.lookup-error').html('<div class="alert alert-danger">Server Error</div>');
   });
 }
 
@@ -41,7 +41,7 @@ function getClientByID(id) {
   }).done(function(results) {
     return $('.client-requesting').html(results);
   }).fail(function() {
-    $('.find-client-error').html('<div class="alert alert-danger">Server Error</div>');
+    $('.lookup-error').html('<div class="alert alert-danger">Server Error</div>');
   });
 }
 

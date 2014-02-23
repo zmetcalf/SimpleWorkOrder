@@ -68,6 +68,9 @@ class Dashboard extends CI_Controller {
     else if($page == 'list-stale-assigned-wo') {
 
     }
+    else if($page == 'lookup') {
+
+    }
     else {
       $this->data['slug'] = 'dashboard';
       $this->data['additional_css_el'] = array(
@@ -132,6 +135,10 @@ class Dashboard extends CI_Controller {
     else if($page == 'list-stale-assigned-wo') {
       $this->load->library('../controllers/admin/list_wo');
       $this->list_wo->list_stale_assigned_wo();
+    }
+    else if($page == 'lookup') {
+      $this->load->library('../controllers/admin/lookup');
+      $this->lookup->lookup();
     }
     else {
       $this->load->view('dashboard/map');

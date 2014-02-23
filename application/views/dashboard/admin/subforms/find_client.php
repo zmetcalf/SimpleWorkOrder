@@ -16,12 +16,12 @@
             <input type="text" class="form-control search-text" placeholder="First Name" name="first-name"/>
           </div>
           <div class="form-group">
-            <button type="button" class="btn btn-primary" id="search-clients">Search</button>
+            <button type="button" class="btn btn-primary" id="lookup">Search</button>
           </div>
         </div>
       </div>
       <div class="search-results"></div>
-      <div class="find-client-error"></div>
+      <div class="lookup-error"></div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" id="select-client">Select Client</button>
