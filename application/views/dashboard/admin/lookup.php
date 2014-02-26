@@ -8,21 +8,38 @@
         <option>Work Order</option>
       </select>
     </div>
-    <div class="form-group">
+    <div class="form-group person-group">
       <label for="last-name">Last Name</label>
       <input type="text" class="form-control search-text" placeholder="Last Name" name="last-name"/>
     </div>
-    <div class="form-group">
+    <div class="form-group person-group">
       <label for="first-name">First Name</label>
       <input type="text" class="form-control search-text" placeholder="First Name" name="first-name"/>
+    </div>
+    <div class="form-group user-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control search-text" placeholder="Username" name="username"/>
+    </div>
+    <div class="form-group user-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control search-text" placeholder="Email" name="email"/>
+    </div>
+    <div class="form-group wo-group">
+      <label for="job-type">Job Type</label>
+      <select class="form-control" name="job-type">
+        <option>General</option>
+        <option>Electricrical</option>
+        <option>Plumbing</option>
+        <option>HVAC</option>
+      </select>
     </div>
     <div class="form-group">
       <button type="button" class="btn btn-primary" id="lookup">Search</button>
     </div>
   <div class="search-results"></div>
   <div class="lookup-error"></div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary" id="select-client">Select Client</button>
+  <div style="display:none"><!-- This is for ajax requests -->
+    <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
+      value="<?php echo $this->security->get_csrf_hash(); ?>">
   </div>
 </div>
