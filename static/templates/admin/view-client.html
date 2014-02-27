@@ -1,0 +1,24 @@
+<form role='form' id='select-form'>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Select</th>
+        <th>Last Name</th>
+        <th>First Name</th>
+        <th>Street Address</th>
+        <th>City</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#result}}
+      <tr>
+          <td><input type="radio" name="optionsRadios" value="{{UID}}"></td>
+          <td>{{last_name}}</td>
+          <td>{{first_name}}</td>
+          <td>{{street_address}}</td>
+          <td>{{city}}</td>
+      </tr>
+      {{/result}}
+    </tbody>
+  </table>
+</form>

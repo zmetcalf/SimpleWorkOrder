@@ -1,17 +1,13 @@
 function searchClients() {
   clearServerError();
-  $.post(
+  return $.post(
     "../ajax/admin/search/",
     {
       'csrf_test_name': $('input[name="csrf_test_name"]').val(),
       'last-name': $('input[name="last-name"]').val(),
       'first-name': $('input[name="first-name"]').val()
     }
-  ).done(function (results) {
-    $('.search-results').html(results);
-  }).fail(function () {
-    $('.lookup-error').html('<div class="alert alert-danger">Server Error</div>');
-  });
+  ).promise();
 }
 
 function getClientByID(id) {
