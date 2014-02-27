@@ -14,9 +14,9 @@ To install SimpleWorkOrder:
 - Change application/config/database.php to match your database's settings
 - Change the encryption key in application/config/config.php - line 227
 - Also, I have include a sql file to setup the database - simplewo.sql.
-- If you are using this in a production environment, I would ask that you obtain a key at CloudMade.com and replace the key in static/js/map.js and application/models/client_model.php (line 53).
 - In the source code's current state, your server must have RewriteEngine On and use .htaccess files. I included some sample .htaccess files. If you would like to go back to a more traditional CodeIgniter setup with index.php, you will have to make the changes backwards to achieve this.
 - Additional installation topics and modifying the code can be helped by reviewing the [CodeIgniter User Guide](http://ellislab.com/codeigniter/user-guide/).
 
+SimpleWorkOrder uses CodeIgniter, Bootstrap, LeafletJS, OpenStreetMap, CloudMade.com geocoding, jQuery, Backbone.js, Underscore.js, and mustache.js.
 
-SimpleWorkOrder uses CodeIgniter, Bootstrap, LeafletJS, CloudMade.com maps and geocoding, jQuery, Backbone.js, Underscore.js, and mustache.js.
+Unless you live in a country that works hard at updating OpenStreetMap (Germany or UK), there will probably be some outdated map tiles.

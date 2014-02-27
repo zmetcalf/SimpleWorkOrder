@@ -1,10 +1,10 @@
 $('#lookup').click(function() {
-  searchClients();
+  lookup();
 });
 
 $("input").keypress(function(event) {
     if (event.which == 13 && $('.search-text').is(':focus')) {
-      searchClients();
+      lookup();
     }
 });
 

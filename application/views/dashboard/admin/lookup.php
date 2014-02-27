@@ -1,5 +1,6 @@
-<div class="col-sm-4 col-sm-offset-3 col-md-4 col-md-offset-2 main">
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
   <h1 class="page-header">Record Lookup</h1>
+    <div class="col-sm-3 col-md-5">
     <div class="form-group">
       <label for="search-for">Search for:</label>
       <select class="form-control lookup-type">
@@ -36,8 +37,12 @@
     <div class="form-group">
       <button type="button" class="btn btn-primary" id="lookup">Search</button>
     </div>
-  <div class="search-results"></div>
-  <div class="lookup-error"></div>
+  </div>
+
+  <div class="col-sm-3 col-sm-offset-1 col-md-5 col-md-offset-1">
+    <div class="search-results"></div>
+    <div class="lookup-error"></div>
+  </div>
   <div style="display:none"><!-- This is for ajax requests -->
     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
       value="<?php echo $this->security->get_csrf_hash(); ?>">
