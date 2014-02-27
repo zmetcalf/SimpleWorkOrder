@@ -44,6 +44,7 @@ class Dashboard extends CI_Controller {
         '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/create-wo.css">'
       );
       $this->data['additional_js_el'] = array(
+        '<script src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>',
         '<script src="' . base_url() . 'static/js/admin/ajax/search.js"></script>',
         '<script src="' . base_url() . 'static/js/admin/create-wo.js"></script>'
       );

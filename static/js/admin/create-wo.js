@@ -1,10 +1,10 @@
 $('#lookup').click(function() {
-  searchClients();
+  renderClients();
 });
 
 $("input").keypress(function(event) {
     if (event.which == 13 && $('.search-text').is(':focus')) {
-      searchClients();
+      renderClients();
     }
 });
 
@@ -14,3 +14,19 @@ $('#select-client').click(function() {
     $('#find-client').modal('hide');
   }
 });
+
+function renderClients() {
+  searchClients().done(function(client_list) {
+    if(client_list) {
+      $.post('../static/templates/admin/view-client.html', function(mustache_template) {
+        var view = { 'result': client_list };
+        $('.search-results').html(Mustache.render(mustache_template, view));
+      });
+    } else {
+      $('.search-results').html("<div class='alert alert-danger'>No results found.</div>");
+    }
+  })
+  .fail(function () {
+    $('.lookup-error').html('<div class="alert alert-danger">Server Error</div>');
+  });
+}
