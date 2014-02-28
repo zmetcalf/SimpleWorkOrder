@@ -10,6 +10,16 @@
     </select>
   </div>
   <div class="form-group">
+    <label for="first-name">First Name</label>
+    <input type="text" class="form-control" placeholder="First Name" name="first-name"
+           value="<?php echo set_value('first-name'); ?>" required/>
+  </div>
+  <div class="form-group">
+    <label for="last-name">Last Name</label>
+    <input type="text" class="form-control" placeholder="Last Name" name="last-name"
+           value="<?php echo set_value('last-name'); ?>" required/>
+  </div>
+  <div class="form-group">
     <label for="username">Username</label>
     <input type="text" class="form-control" placeholder="Username" name="username"
            value="<?php echo set_value('username'); ?>" required/>

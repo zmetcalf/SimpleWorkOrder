@@ -7,6 +7,11 @@ class Users_model extends CI_Model {
     $this->load->helper('security');
   }
 
+  public function get_user($UID) {
+    $query = $this->db->get_where('users', array('UID' => $UID));
+    return $query->row_array();
+  }
+
   public function get_username()
   {
     $query = $this->db->get_where('users', array('user_name' =>
@@ -44,6 +49,8 @@ class Users_model extends CI_Model {
   public function set_user()
   {
     $data = array(
+      'first_name' => $this->input->post('first-name'),
+      'last_name' => $this->input->post('last-name'),
       'user_name' => $this->input->post('username'),
       'password' => $this->input->post('password'),
       'user_type' => $this->input->post('user-type'),
@@ -55,9 +62,33 @@ class Users_model extends CI_Model {
       'zip_code' => $this->input->post('zip-code'),
       'primary_phone' => $this->input->post('primary-phone'),
       'secondary_phone' => $this->input->post('secondary-phone'),
-      'active' => 'active'
+      'active' => 'Active'
     );
     $this->db->insert('users', $data);
+  }
+
+  public function search_users($first_name = '', $last_name = '', $username = '',
+                               $email = '') {
+    if($username) {
+      $query = $this->db->get_where('users', array('user_name' => $username));
+    }
+    else if($email) {
+      $query = $this->db->get_where('users', array('email' => $email));
+    }
+    else if($first_name and $last_name) {
+      $query = $this->db->get_where('users', array('first_name' => $first_name,
+                                                    'last_name' => $last_name));
+    }
+    else if($first_name) {
+      $query = $this->db->get_where('users', array('first_name' => $first_name));
+    }
+    else if($last_name) {
+      $query = $this->db->get_where('users', array('last_name' => $last_name));
+    }
+    else {
+      return FALSE;
+    }
+    return $query->result_array();
   }
 
 }

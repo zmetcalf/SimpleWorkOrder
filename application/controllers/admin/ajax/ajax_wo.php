@@ -17,4 +17,11 @@ class Ajax_wo extends CI_controller
         ->set_output(json_encode($result));
     }
   }
+
+  public function search_wos($job_type = '') {
+    $this->load->model('work_order_model');
+    $result = $this->work_order_model->search_wos($job_type);
+    $this->output->set_content_type('application/json')
+      ->set_output(json_encode($result));
+  }
 }

@@ -27,7 +27,7 @@
     </div>
     <div class="form-group wo-group">
       <label for="job-type">Job Type</label>
-      <select class="form-control" name="job-type">
+      <select class="form-control job-type" name="job-type">
         <option>General</option>
         <option>Electricrical</option>
         <option>Plumbing</option>

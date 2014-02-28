@@ -1,10 +1,10 @@
 $('#lookup').click(function() {
-  lookup();
+  renderList(lookup());
 });
 
 $("input").keypress(function(event) {
     if (event.which == 13 && $('.search-text').is(':focus')) {
-      lookup();
+      renderList(lookup());
     }
 });
 
@@ -25,3 +25,42 @@ $('.lookup-type').change(function() {
     $('.wo-group').show();
   }
 });
+
+function lookup() {
+  if($('.lookup-type').val() == 'Client') {
+    return searchClients(); // js/admin/ajax/search.js
+  } else if($('.lookup-type').val() == 'User') {
+    return searchUsers(); // js/admin/ajax/search.js
+  } else if($('.lookup-type').val() == 'Work Order') {
+    return searchWOs(); // js/admin/ajax/search.js
+  } else {
+    $('.lookup-error').html('<div class="alert alert-danger">Page Error</div>');
+    return false;
+  }
+}
+
+function renderList(list_promise) {
+  list_promise.done(function(list) {
+    var template = '';
+
+    if($('.lookup-type').val() == 'Client') {
+      template = 'client-lookup-result-list.html';
+    } else if($('.lookup-type').val() == 'User') {
+      template = 'user-lookup-result-list.html';
+    } else if($('.lookup-type').val() == 'Work Order') {
+      template = 'wo-lookup-result-list.html';
+    }
+
+    if(list) {
+      $.post(('../static/templates/admin/' + template), function(mustache_template) {
+        var view = { 'result': list };
+        $('.search-results').html(Mustache.render(mustache_template, view));
+      });
+    } else {
+      $('.search-results').html("<div class='alert alert-danger'>No results found.</div>");
+    }
+  })
+  .fail(function () {
+    $('.lookup-error').html('<div class="alert alert-danger">Server Error</div>');
+  });
+}

@@ -88,6 +88,8 @@ CREATE TABLE IF NOT EXISTS `notes` (
 
 CREATE TABLE IF NOT EXISTS `users` (
   `UID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(128) NOT NULL,
+  `last_name` varchar(128) NOT NULL,
   `user_name` varchar(20) NOT NULL,
   `password` varchar(128) NOT NULL,
   `user_type` varchar(20) NOT NULL COMMENT 'admin or worker/volunteer',

@@ -129,4 +129,15 @@ class Work_order_model extends CI_Model {
     $this->db->where('UID',$wo);
     $this->db->update('work_order', array('assigned_to' => NULL));
   }
+
+  public function search_wos($job_type = '') {
+    $this->db->select('client.*', FALSE);
+    $this->db->select('work_order.job_type, work_order.additional_info as ' .
+                      'wo_additional_info, work_order.UID as wo_uid', FALSE);
+    $this->db->from('work_order');
+    $this->db->join('client', 'client.UID = work_order.client_requesting');
+    $this->db->where(array('job_type' => $job_type));
+    $query = $this->db->get();
+    return $query->result_array();
+  }
 }

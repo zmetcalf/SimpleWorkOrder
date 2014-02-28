@@ -17,6 +17,8 @@ class Create_user extends CI_Controller {
     $this->load->helper('form');
     $this->load->library('form_validation');
 
+    $this->form_validation->set_rules('first-name', 'First Name', 'trim|required|xss_clean');
+    $this->form_validation->set_rules('last-name', 'Last Name', 'trim|required|xss_clean');
     $this->form_validation->set_rules('user-type', 'User Type', 'trim|required|xss_clean');
     $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[20]|is_unique[users.user_name]|xss_clean');
     $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]|md5');

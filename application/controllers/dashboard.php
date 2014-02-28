@@ -55,6 +55,12 @@ class Dashboard extends CI_Controller {
     else if($page == 'view-wo') {
 
     }
+    else if($page == 'view-user') {
+
+    }
+    else if($page == 'view-client') {
+
+    }
     else if($page == 'assigned-wo') {
 
     }
@@ -75,6 +81,7 @@ class Dashboard extends CI_Controller {
         '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/lookup.css">'
       );
       $this->data['additional_js_el'] = array(
+        '<script src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>',
         '<script src="' . base_url() . 'static/js/admin/ajax/search.js"></script>',
         '<script src="' . base_url() . 'static/js/admin/lookup.js"></script>'
       );
@@ -123,6 +130,14 @@ class Dashboard extends CI_Controller {
     else if($page == 'view-wo') {
       $this->load->library('../controllers/admin/view_wo');
       $this->view_wo->view_wo($record);
+    }
+    else if($page == 'view-user') {
+      $this->load->library('../controllers/admin/view_user');
+      $this->view_user->view_user($record);
+    }
+    else if($page == 'view-client') {
+      $this->load->library('../controllers/admin/view_client');
+      $this->view_client->view_client($record);
     }
     else if($page == 'assigned-wo') {
       $this->load->library('../controllers/user/assigned_wo');
