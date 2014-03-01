@@ -13,5 +13,8 @@ class View_client extends CI_Controller {
     $data['result'] = $this->client_model->get_client($record);
     $data['record'] = $record;
     $this->load->view('dashboard/admin/view_client', $data);
+
+    $this->load->library('../controllers/admin/list_wo');
+    $this->list_wo->list_client_wos($record);
   }
 }

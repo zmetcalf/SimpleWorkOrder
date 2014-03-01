@@ -79,13 +79,50 @@ class Work_order_model extends CI_Model {
   }
 
   public function get_wo_assigned($UID) {
-    // Used by sidebar to load work orders assigned to a certain volunteer
+    // Used by sidebar and user view to load work orders assigned to a certain volunteer
     $this->db->select('client.*', FALSE);
     $this->db->select('work_order.job_type, work_order.additional_info as ' .
                       'wo_additional_info, work_order.UID as wo_uid', FALSE);
     $this->db->from('work_order');
     $this->db->join('client', 'client.UID = work_order.client_requesting');
     $this->db->where(array('assigned_to' => $UID, 'completed_by' => NULL));
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+
+  public function get_wo_assigned_closed($UID) {
+    // Used by user view to load closed work orders
+    $this->db->select('client.*', FALSE);
+    $this->db->select('work_order.job_type, work_order.additional_info as ' .
+                      'wo_additional_info, work_order.UID as wo_uid', FALSE);
+    $this->db->from('work_order');
+    $this->db->join('client', 'client.UID = work_order.client_requesting');
+    $this->db->where(array('assigned_to' => $UID, 'completed_by' => $UID));
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+
+  public function get_all_open_client_wos($UID) {
+    // Used by client view to load open work orders assigned to a certain client
+    $this->db->select('client.*', FALSE);
+    $this->db->select('work_order.job_type, work_order.additional_info as ' .
+                      'wo_additional_info, work_order.UID as wo_uid', FALSE);
+    $this->db->from('work_order');
+    $this->db->join('client', 'client.UID = work_order.client_requesting');
+    $this->db->where(array('client_requesting' => $UID, 'completed_by' => NULL));
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+
+  public function get_all_closed_client_wos($UID) {
+    // Used by client view to load closed work orders assigned to a certain client
+    $this->db->select('client.*', FALSE);
+    $this->db->select('work_order.job_type, work_order.additional_info as ' .
+                      'wo_additional_info, work_order.UID as wo_uid', FALSE);
+    $this->db->from('work_order');
+    $this->db->join('client', 'client.UID = work_order.client_requesting');
+    $where_string = 'completed_by IS NOT NULL AND client_requesting = ' . $UID;
+    $this->db->where($where_string);
     $query = $this->db->get();
     return $query->result_array();
   }
