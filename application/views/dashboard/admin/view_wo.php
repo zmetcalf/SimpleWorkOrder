@@ -17,11 +17,19 @@
       <p>Created on: <?php $this->load->helper('date'); echo unix_to_human(mysql_to_unix($result['wo_created_on'])); ?></p>
     </div>
   </div>
-  <?php if($assigned_to_user): ?>
-    <input type="submit" class="btn btn-default" name="unassign" value="Unregister me" />
-    <input type="submit" class="btn btn-primary" name="completed" value="Completed Job" />
-  <?php else: ?>
-    <input type="submit" class="btn btn-primary" name="assign" value="Sign Me Up!" />
+  <?php if(!$completed): ?>
+    <?php if($assigned_to_user): ?>
+      <input type="submit" class="btn btn-default" name="unassign" value="Unregister me" />
+      <input type="submit" class="btn btn-primary" name="completed" value="Completed Job" />
+    <?php elseif($is_admin): ?>
+      <?php if($assigned_to_another_user): ?>
+        <input type="submit" class="btn btn-default" name="unassign" value="Unregister" />
+      <?php endif; ?>
+      <input type="submit" class="btn btn-primary" name="completed" value="Completed" />
+    <?php endif; ?>
+    <?php if(!$assigned_to_another_user): ?>
+      <input type="submit" class="btn btn-primary" name="assign" value="Sign Me Up!" />
+    <?php endif; ?>
   <?php endif; ?>
   </form>
 </div>

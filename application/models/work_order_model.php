@@ -78,6 +78,12 @@ class Work_order_model extends CI_Model {
     return $query->row_array()['assigned_to'];
   }
 
+  public function get_completed_by($UID) {
+    // Returns who completed a particular work order
+    $query = $this->db->get_where('work_order', array('UID' => $UID));
+    return $query->row_array()['completed_by'];
+  }
+
   public function get_wo_assigned($UID) {
     // Used by sidebar and user view to load work orders assigned to a certain volunteer
     $this->db->select('client.*', FALSE);
