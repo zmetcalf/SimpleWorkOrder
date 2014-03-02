@@ -5,10 +5,18 @@ class Users_model extends CI_Model {
   {
     $this->load->database();
     $this->load->helper('security');
+
+    // safe_select does not select the md5 password
+    $this->safe_select = 'UID, first_name, last_name, user_name, user_type, ' .
+                         'email, street_address, city, state, zip_code, ' .
+                         'primary_phone, secondary_phone, specialty, active';
   }
 
   public function get_user($UID) {
-    $query = $this->db->get_where('users', array('UID' => $UID));
+    $this->db->select($this->safe_select, FALSE);
+    $this->db->from('users');
+    $this->db->where(array('UID' => $UID));
+    $query = $this->db->get();
     return $query->row_array();
   }
 

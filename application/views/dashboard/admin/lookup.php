@@ -29,7 +29,7 @@
       <label for="job-type">Job Type</label>
       <select class="form-control job-type" name="job-type">
         <option>General</option>
-        <option>Electricrical</option>
+        <option>Electrical</option>
         <option>Plumbing</option>
         <option>HVAC</option>
       </select>
