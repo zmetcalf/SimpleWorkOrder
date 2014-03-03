@@ -75,6 +75,27 @@ class Users_model extends CI_Model {
     $this->db->insert('users', $data);
   }
 
+  public function update_contact_info($UID) {
+    $data = array(
+      'email' => $this->input->post('email'),
+      'street_address' => $this->input->post('street-address'),
+      'city' => $this->input->post('city'),
+      'state' => $this->input->post('state'),
+      'zip_code' => $this->input->post('zip-code'),
+      'primary_phone' => $this->input->post('primary-phone'),
+      'secondary_phone' => $this->input->post('secondary-phone'),
+    );
+    $this->db->from('users');
+    $this->db->where('UID',  $UID);
+    $this->db->update('users', $data);
+  }
+
+  public function update_password($UID) {
+    $this->db->from('users');
+    $this->db->where('UID',  $UID);
+    $this->db->update('users', array('password' => $this->input->post('password')));
+  }
+
   public function search_users($first_name = '', $last_name = '', $username = '',
                                $email = '') {
     if($username) {

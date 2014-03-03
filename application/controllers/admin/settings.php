@@ -10,13 +10,15 @@ class Settings extends CI_Controller {
 
   public function settings()
   {
-    $data['user'] = $this->users_model->get_user($this->session->userdata('username'));
+    $data['user'] = $this->users_model->get_user($this->users_model->get_UID(
+                      $this->session->userdata('username')));
 
     $this->load->helper('form');
     $this->load->library('form_validation');
 
-    $this->form_validation->set_rules('password', 'Password', 'trim|min_length[8]|md5');
-    $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|is_unique[users.email]|valid_email');
+    $this->form_validation->set_rules('password', 'Password', 'trim|matches[passconf]|min_length[8]|md5');
+    $this->form_validation->set_rules('passconf', 'Password Confirmation', 'trim');
+    $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
 
     $this->form_validation->set_rules('street-address', 'Street Address', 'trim|xss_clean');
     $this->form_validation->set_rules('city', 'City', 'trim|xss_clean');
@@ -26,10 +28,15 @@ class Settings extends CI_Controller {
     $this->form_validation->set_rules('secondary-phone', 'Secondary Phone', 'trim|xss_clean');
 
     if($this->form_validation->run() == FALSE) {
-      $this->load->view('dashboard/admin/settings');
+      $this->load->view('dashboard/admin/settings', $data);
     }
     else {
-      $this->users_model->update_user();
+      if($this->input->post('password')) {
+        $this->users_model->update_password($this->users_model->get_UID(
+                                            $this->session->userdata('username')));
+      }
+      $this->users_model->update_contact_info($this->users_model->get_UID(
+                                              $this->session->userdata('username')));
       $this->load->view('pages/success');
     }
   }
