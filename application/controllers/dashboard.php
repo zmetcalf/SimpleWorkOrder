@@ -31,7 +31,7 @@ class Dashboard extends CI_Controller {
   {
     $this->data['slug'] = $page;
 
-    if($page == 'create-user') {
+    if($page == 'create-user' or $page == 'modify-user') {
       $this->data['additional_css_el'] = array(
         '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/create-user.css">'
       );
@@ -120,6 +120,10 @@ class Dashboard extends CI_Controller {
     if($page =='create-user') {
       $this->load->library('../controllers/admin/create_user');
       $this->create_user->create_user();
+    }
+    else if($page =='modify-user') {
+      $this->load->library('../controllers/admin/create_user');
+      $this->create_user->modify_user($record);
     }
     else if($page == 'create-wo') {
       $this->load->library('../controllers/admin/create_wo');
