@@ -4,7 +4,7 @@ class Users_model extends CI_Model {
   public function __construct()
   {
     $this->load->database();
-    $this->load->helper('security');
+    $this->load->helper('security', 'string');
 
     // safe_select does not select the md5 password
     $this->safe_select = 'UID, first_name, last_name, user_name, user_type, ' .
@@ -57,22 +57,44 @@ class Users_model extends CI_Model {
   public function set_user()
   {
     $data = array(
-      'first_name' => $this->input->post('first-name'),
-      'last_name' => $this->input->post('last-name'),
-      'user_name' => $this->input->post('username'),
-      'password' => $this->input->post('password'),
-      'user_type' => $this->input->post('user-type'),
+      'first_name' => $this->input->post('first_name'),
+      'last_name' => $this->input->post('last_name'),
+      'user_name' => $this->input->post('user_name'),
+      'password' => random_string('unique'),
+      'user_type' => $this->input->post('user_type'),
       'email' => $this->input->post('email'),
       'specialty' => $this->input->post('specialty'),
-      'street_address' => $this->input->post('street-address'),
+      'street_address' => $this->input->post('street_address'),
       'city' => $this->input->post('city'),
       'state' => $this->input->post('state'),
-      'zip_code' => $this->input->post('zip-code'),
-      'primary_phone' => $this->input->post('primary-phone'),
-      'secondary_phone' => $this->input->post('secondary-phone'),
+      'zip_code' => $this->input->post('zip_code'),
+      'primary_phone' => $this->input->post('primary_phone'),
+      'secondary_phone' => $this->input->post('secondary_phone'),
       'active' => 'Active'
     );
     $this->db->insert('users', $data);
+  }
+
+  public function update_user($UID) {
+    $data = array(
+      'first_name' => $this->input->post('first_name'),
+      'last_name' => $this->input->post('last_name'),
+      'user_name' => $this->input->post('user_name'),
+      'user_type' => $this->input->post('user_type'),
+      'email' => $this->input->post('email'),
+      'specialty' => $this->input->post('specialty'),
+      'street_address' => $this->input->post('street_address'),
+      'city' => $this->input->post('city'),
+      'state' => $this->input->post('state'),
+      'zip_code' => $this->input->post('zip_code'),
+      'primary_phone' => $this->input->post('primary_phone'),
+      'secondary_phone' => $this->input->post('secondary_phone'),
+      'active' => 'Active'
+    );
+
+    $this->db->from('users');
+    $this->db->where('UID',  $UID);
+    $this->db->update('users', $data);
   }
 
   public function update_contact_info($UID) {

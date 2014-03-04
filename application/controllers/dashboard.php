@@ -31,12 +31,12 @@ class Dashboard extends CI_Controller {
   {
     $this->data['slug'] = $page;
 
-    if($page == 'create-user') {
+    if($page == 'create-user' or $page == 'modify-user') {
       $this->data['additional_css_el'] = array(
-        '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/create-user.css">'
+        '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/user.css">'
       );
       $this->data['additional_js_el'] = array(
-        '<script src="' . base_url() . 'static/js/admin/create-user.js"></script>'
+        '<script src="' . base_url() . 'static/js/admin/user.js"></script>'
       );
     }
     else if($page == 'create-wo') {
@@ -118,8 +118,12 @@ class Dashboard extends CI_Controller {
     }
 
     if($page =='create-user') {
-      $this->load->library('../controllers/admin/create_user');
-      $this->create_user->create_user();
+      $this->load->library('../controllers/admin/user');
+      $this->user->create_user();
+    }
+    else if($page =='modify-user') {
+      $this->load->library('../controllers/admin/user');
+      $this->user->modify_user($record);
     }
     else if($page == 'create-wo') {
       $this->load->library('../controllers/admin/create_wo');
@@ -135,8 +139,8 @@ class Dashboard extends CI_Controller {
       $this->view_wo->view_wo($record);
     }
     else if($page == 'view-user') {
-      $this->load->library('../controllers/admin/view_user');
-      $this->view_user->view_user($record);
+      $this->load->library('../controllers/admin/user');
+      $this->user->view_user($record);
     }
     else if($page == 'view-client') {
       $this->load->library('../controllers/admin/view_client');
