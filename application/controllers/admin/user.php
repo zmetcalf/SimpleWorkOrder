@@ -1,6 +1,6 @@
 <?php
 
-class Create_user extends CI_Controller {
+class User extends CI_Controller {
 
   public function __construct()
   {
@@ -18,7 +18,6 @@ class Create_user extends CI_Controller {
   public function create_user()
   {
     $this->set_rules();
-    // TODO Create method that checks this for modify user
     $this->form_validation->set_rules('user_name', 'Username',
       'trim|required|min_length[5]|max_length[20]|is_unique[users.user_name]|xss_clean');
     $this->form_validation->set_rules('email', 'Email',
@@ -34,7 +33,7 @@ class Create_user extends CI_Controller {
       }
       $this->data['page_header'] = 'Create User';
       $this->data['submit_button'] = 'Create User';
-      $this->load->view('dashboard/admin/create_user', $this->data);
+      $this->load->view('dashboard/admin/change_user', $this->data);
     }
     else
     {
@@ -45,6 +44,11 @@ class Create_user extends CI_Controller {
 
   public function modify_user($record) {
     $this->set_rules();
+    // TODO Create method that checks this for modify user
+    $this->form_validation->set_rules('user_name', 'Username',
+      'trim|required|min_length[5]|max_length[20]|xss_clean');
+    $this->form_validation->set_rules('email', 'Email',
+      'trim|required|xss_clean|valid_email');
 
     $this->data = $this->users_model->get_user($record);
     if($this->input->post()) {
@@ -56,13 +60,22 @@ class Create_user extends CI_Controller {
 
     if($this->form_validation->run() == FALSE)
     {
-      $this->load->view('dashboard/admin/create_user', $this->data);
+      $this->load->view('dashboard/admin/change_user', $this->data);
     }
     else
     {
       $this->users_model->update_user($record);
       $this->load->view('pages/success');
     }
+  }
+
+  public function view_user($record) {
+    $data['result'] = $this->users_model->get_user($record);
+    $data['record'] = $record;
+    $this->load->view('dashboard/admin/view_user', $data);
+
+    $this->load->library('../controllers/admin/list_wo');
+    $this->list_wo->list_assigned_to_user($record);
   }
 
   private function set_rules() {
