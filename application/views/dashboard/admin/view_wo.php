@@ -5,7 +5,11 @@
     <div class="well col-sm-3 col-md-5">
       <p><?php echo $result['last_name'] . ', ' . $result['first_name']; ?></p>
       <p><?php echo $result['street_address']; ?></p>
-      <p><?php echo $result['unit_number']; ?></p>
+      <?php
+        if($result['unit_number']) {
+              echo '<p>Unit Number: ' . $result['unit_number'] . '</p>';
+        }
+      ?>
       <p><?php echo $result['city'] . ", " . $result['state'] . " " . $result['zip_code']; ?></p>
       <p>Primary Phone: <?php echo $result['primary_phone']; ?></p>
       <p>Secondary Phone: <?php echo $result['secondary_phone']; ?></p>

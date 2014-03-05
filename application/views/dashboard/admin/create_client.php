@@ -53,6 +53,6 @@
            name="additional-info" value="<?php echo set_value('additional-info'); ?>"></textarea>
   </div>
 
-  <input type="submit" class="btn btn-primary" name="submit" value="Create user" />
+  <input type="submit" class="btn btn-primary" name="submit" value="Create Client" />
   </form>
 </div>

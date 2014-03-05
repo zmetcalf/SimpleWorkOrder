@@ -17,6 +17,6 @@ To install SimpleWorkOrder:
 - In the source code's current state, your server must have RewriteEngine On and use .htaccess files. I included some sample .htaccess files. If you would like to go back to a more traditional CodeIgniter setup with index.php, you will have to make the changes backwards to achieve this.
 - Additional installation topics and modifying the code can be helped by reviewing the [CodeIgniter User Guide](http://ellislab.com/codeigniter/user-guide/).
 
-SimpleWorkOrder uses CodeIgniter, Bootstrap, LeafletJS, OpenStreetMap, CloudMade.com geocoding, jQuery, Backbone.js, Underscore.js, and mustache.js.
+SimpleWorkOrder uses CodeIgniter, Bootstrap, LeafletJS, OpenStreetMap for tiles and geocoding, jQuery, Backbone.js, Underscore.js, and mustache.js.
 
 Unless you live in a country that works hard at updating OpenStreetMap (Germany or UK), there will probably be some outdated map tiles.
