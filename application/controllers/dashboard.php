@@ -52,6 +52,9 @@ class Dashboard extends CI_Controller {
     else if($page == 'create-client') {
 
     }
+    else if($page == 'modify-client') {
+
+    }
     else if($page == 'view-wo') {
 
     }
@@ -133,6 +136,10 @@ class Dashboard extends CI_Controller {
     else if($page == 'create-client') {
       $this->load->library('../controllers/admin/create_client');
       $this->create_client->create_client();
+    }
+    else if($page == 'modify-client') {
+      $this->load->library('../controllers/admin/create_client');
+      $this->create_client->modify_client($record);
     }
     else if($page == 'view-wo') {
       $this->load->library('../controllers/admin/view_wo');

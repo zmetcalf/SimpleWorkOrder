@@ -10,16 +10,16 @@ class Client_model extends CI_Model {
   public function set_client()
   {
     $data = array(
-      'last_name' => $this->input->post('last-name'),
-      'first_name' => $this->input->post('first-name'),
-      'street_address' => $this->input->post('street-address'),
-      'unit_number' => $this->input->post('unit-number'),
+      'last_name' => $this->input->post('last_name'),
+      'first_name' => $this->input->post('first_name'),
+      'street_address' => $this->input->post('street_address'),
+      'unit_number' => $this->input->post('unit_number'),
       'city' => $this->input->post('city'),
       'state' => $this->input->post('state'),
-      'zip_code' => $this->input->post('zip-code'),
-      'primary_phone' => $this->input->post('primary-phone'),
-      'secondary_phone' => $this->input->post('secondary-phone'),
-      'additional_info' => $this->input->post('additional-info')
+      'zip_code' => $this->input->post('zip_code'),
+      'primary_phone' => $this->input->post('primary_phone'),
+      'secondary_phone' => $this->input->post('secondary_phone'),
+      'additional_info' => $this->input->post('additional_info')
     );
     $data = $this->set_geocode($data);
 
@@ -56,5 +56,24 @@ class Client_model extends CI_Model {
     $data['geocode'] = $xml->place['lat'] . ',' .
                        $xml->place['lon'];
     return $data;
+  }
+
+  public function update_client($UID) {
+    $data = array(
+      'first_name' => $this->input->post('first_name'),
+      'last_name' => $this->input->post('last_name'),
+      'street_address' => $this->input->post('street_address'),
+      'unit_number' => $this->input->post('unit_number'),
+      'city' => $this->input->post('city'),
+      'state' => $this->input->post('state'),
+      'zip_code' => $this->input->post('zip_code'),
+      'primary_phone' => $this->input->post('primary_phone'),
+      'secondary_phone' => $this->input->post('secondary_phone'),
+      'additional_info' => $this->input->post('additional_info')
+    );
+
+    $this->db->from('client');
+    $this->db->where('UID',  $UID);
+    $this->db->update('client', $data);
   }
 }
