@@ -8,6 +8,8 @@
       <p><?php echo $result['city'] . ", " . $result['state'] . " " . $result['zip_code']; ?></p>
       <p>Primary Phone: <?php echo $result['primary_phone']; ?></p>
       <p>Secondary Phone: <?php echo $result['secondary_phone']; ?></p>
+      <a href="<?php echo base_url() . 'dashboard/modify-client/' . $result['UID']; ?>"
+        class="btn btn-primary">Modify Client</a>
       <div id="hidden-uid" name="uid"  style="display:none"><?php echo $result['UID'] ?></div>
       <input type="text" id="hidden-uid" class="form-control" name="uid"
         value="<?php echo $result['UID'] ?>"  style="display:none"/>

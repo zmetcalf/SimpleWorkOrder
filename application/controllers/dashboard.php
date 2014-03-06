@@ -52,6 +52,9 @@ class Dashboard extends CI_Controller {
     else if($page == 'create-client') {
 
     }
+    else if($page == 'modify-client') {
+
+    }
     else if($page == 'view-wo') {
 
     }
@@ -131,8 +134,12 @@ class Dashboard extends CI_Controller {
       $this->load->view('dashboard/admin/subforms/find_client');
     }
     else if($page == 'create-client') {
-      $this->load->library('../controllers/admin/create_client');
-      $this->create_client->create_client();
+      $this->load->library('../controllers/admin/client');
+      $this->client->create_client();
+    }
+    else if($page == 'modify-client') {
+      $this->load->library('../controllers/admin/client');
+      $this->client->modify_client($record);
     }
     else if($page == 'view-wo') {
       $this->load->library('../controllers/admin/view_wo');
@@ -143,8 +150,8 @@ class Dashboard extends CI_Controller {
       $this->user->view_user($record);
     }
     else if($page == 'view-client') {
-      $this->load->library('../controllers/admin/view_client');
-      $this->view_client->view_client($record);
+      $this->load->library('../controllers/admin/client');
+      $this->client->view_client($record);
     }
     else if($page == 'assigned-wo') {
       $this->load->library('../controllers/user/assigned_wo');
