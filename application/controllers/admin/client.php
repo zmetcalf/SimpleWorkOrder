@@ -1,6 +1,6 @@
 <?php
 
-class Create_client extends CI_Controller {
+class Client extends CI_Controller {
 
   public function __construct()
   {
@@ -19,7 +19,6 @@ class Create_client extends CI_Controller {
 
     $this->set_rules();
 
-
     if($this->form_validation->run() == FALSE)
     {
       if($this->input->post()) {
@@ -30,7 +29,7 @@ class Create_client extends CI_Controller {
       }
       $this->data['page_header'] = 'Create Client';
       $this->data['submit_button'] = 'Create Client';
-      $this->load->view('dashboard/admin/create_client', $this->data);
+      $this->load->view('dashboard/admin/change_client', $this->data);
     }
     else
     {
@@ -55,13 +54,22 @@ class Create_client extends CI_Controller {
       $this->data['page_header'] = 'Modify Client';
       $this->data['submit_button'] = 'Modify Client';
       $this->data['record'] = $record;
-      $this->load->view('dashboard/admin/create_client', $this->data);
+      $this->load->view('dashboard/admin/change_client', $this->data);
     }
     else
     {
       $this->client_model->update_client($record);
       $this->load->view('pages/success');
     }
+  }
+
+  public function view_client($record) {
+    $data['result'] = $this->client_model->get_client($record);
+    $data['record'] = $record;
+    $this->load->view('dashboard/admin/view_client', $data);
+
+    $this->load->library('../controllers/admin/list_wo');
+    $this->list_wo->list_client_wos($record);
   }
 
   private function set_rules() {

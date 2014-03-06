@@ -12,10 +12,11 @@ class Geocode {
     try {
       $request = curl_exec($c_uri);
       curl_close($c_uri);
-      return $request;
+      $xml = new SimpleXMLElement($request);
+      return $xml->place['lat'] . ',' . $xml->place['lon'];
+      // TODO Add error handling for no coordinates.
     } catch(Exception $e) {
       echo $e;
-
       return null;
     }
   }

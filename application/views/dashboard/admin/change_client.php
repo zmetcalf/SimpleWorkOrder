@@ -27,7 +27,7 @@
   <div class="form-group">
     <label for="unit_number">Unit Number</label>
     <input type="text" class="form-control" placeholder="Unit or Apartment Number`"
-           name="unit_number" value="<?php echo $unit_number; ?>" required/>
+           name="unit_number" value="<?php echo $unit_number; ?>"/>
   </div>
   <div class="form-group">
     <label for="city">City</label>

@@ -50,11 +50,8 @@ class Client_model extends CI_Model {
 
   private function set_geocode($data) {
     $this->load->library(array('Geocode'));
-    $address = $data['street_address'] . ', ' . $data['city'] . ', ' . $data['state'] .
-               ', ' . $data['zip_code'];
-    $xml = new SimpleXMLElement($this->geocode->get_geocode_info($address));
-    $data['geocode'] = $xml->place['lat'] . ',' .
-                       $xml->place['lon'];
+    $address = $data['street_address'] . ' ' . $data['city'] . ' ' . $data['state'];
+    $data['geocode'] = $this->geocode->get_geocode_info($address);
     return $data;
   }
 
@@ -71,6 +68,8 @@ class Client_model extends CI_Model {
       'secondary_phone' => $this->input->post('secondary_phone'),
       'additional_info' => $this->input->post('additional_info')
     );
+
+    $data = $this->set_geocode($data);
 
     $this->db->from('client');
     $this->db->where('UID',  $UID);
