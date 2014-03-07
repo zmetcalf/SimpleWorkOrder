@@ -10,7 +10,14 @@
           echo form_open('dashboard/modify-user/' . $record);
         }
       ?>
-      <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
+      <?php
+        echo validation_errors('<div class="alert alert-danger">', '</div>');
+        if($password) {
+          echo '<div class="alert alert-success">' . $first_name . ' ' .
+               $last_name . "'s new password is " . $password . ".</div>";
+        }
+      ?>
+
       <div class="form-group">
         <label for="user-type">User Type</label>
         <select class="form-control user_type" name="user_type">
@@ -49,6 +56,12 @@
         </select>
       </div>
       <input type="submit" class="btn btn-primary" name="submit" value="<?php echo $submit_button; ?>" />
+      <?php
+        if($page_header == 'Modify User') {
+           echo '<a href="' . base_url() . 'dashboard/reset-password/' . $record .
+                '" class="btn btn-danger">Reset Password</a>' ;
+        }
+      ?>
     </div>
 
     <div class="col-sm-3 col-md-5">

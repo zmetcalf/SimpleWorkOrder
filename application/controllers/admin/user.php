@@ -43,11 +43,11 @@ class User extends CI_Controller {
       $password = $this->users_model->reset_password($this->users_model->get_UID(
                                           $this->input->post('user_name')));
       $this->email_password($this->input->post('email'), $password);
-      $this->load->view('pages/success');
+      $this->modify_user($this->users_model->get_UID($this->input->post('user_name')), $password);
     }
   }
 
-  public function modify_user($record) {
+  public function modify_user($record, $password = '') {
     $this->set_rules();
     // TODO Create method that checks this for modify user
     $this->form_validation->set_rules('user_name', 'Username',
@@ -62,8 +62,9 @@ class User extends CI_Controller {
     $this->data['page_header'] = 'Modify User';
     $this->data['submit_button'] = 'Modify User';
     $this->data['record'] = $record;
+    $this->data['password'] = $password;
 
-    if($this->form_validation->run() == FALSE)
+    if($this->form_validation->run() == FALSE or $password)
     {
       $this->load->view('dashboard/admin/change_user', $this->data);
     }
@@ -81,6 +82,12 @@ class User extends CI_Controller {
 
     $this->load->library('../controllers/admin/list_wo');
     $this->list_wo->list_assigned_to_user($record);
+  }
+
+  public function reset_password($UID) {
+    $password = $this->users_model->reset_password($UID);
+    $this->email_password($this->users_model->get_email($UID), $password);
+    $this->modify_user($UID, $password);
   }
 
   private function set_rules() {
@@ -104,6 +111,7 @@ class User extends CI_Controller {
       'last_name' => '',
       'user_name' => '',
       'user_type' => '',
+      'password' => '',
       'email' => '',
       'street_address' => '',
       'city' => '',
@@ -117,12 +125,13 @@ class User extends CI_Controller {
   }
 
   private function email_password($email, $password) {
-    $this->load->library('email');
-    $this->email->to($email);
-    $this->email->from('simple@arch', 'SimpleWorkOrder');
-    $this->email->subject('SimpleWorkOrder New Password');
-    $this->email->message('Your password is: ' . $password);
-    $this->email->send();
-    echo $this->email->print_debugger();
+    // TODO This needs fixed!
+    $mail_server = 'example.com';
+    $subject = 'SimpleWorkOrder New Password';
+    $message = 'Your password is: ' . $password;
+    $headers = 'From: webmaster@' . $mail_server . "\r\n" .
+               'Reply-To: webmaster@' . $mail_server . "\r\n" .
+               'X-Mailer: PHP/' . phpversion();
+    mail($email, $subject, $message, $headers);
   }
 }

@@ -30,6 +30,8 @@
       ?>
       <a href="<?php echo base_url() . 'dashboard/modify-user/' . $result['UID']; ?>"
         class="btn btn-primary">Modify User</a>
+      <a href='<?php echo base_url() . 'dashboard/reset-password/' . $result['UID'] ?>'
+                 class="btn btn-danger">Reset Password</a>
       <div id="hidden-uid" name="uid"  style="display:none"><?php echo $result['UID']; ?></div>
       <input type="text" id="hidden-uid" class="form-control" name="uid"
         value="<?php echo $result['UID'] ?>"  style="display:none"/>

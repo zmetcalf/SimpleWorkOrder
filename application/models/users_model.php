@@ -27,6 +27,13 @@ class Users_model extends CI_Model {
     return $query->row_array();
   }
 
+  public function get_email($UID)
+  {
+    $query = $this->db->get_where('users', array('UID' => $UID));
+    $row = $query->row_array();
+    return $row['email'];
+  }
+
   public function get_user_type($username)
   {
     $query = $this->db->get_where('users', array('user_name' => $username));

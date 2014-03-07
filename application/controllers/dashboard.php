@@ -31,7 +31,7 @@ class Dashboard extends CI_Controller {
   {
     $this->data['slug'] = $page;
 
-    if($page == 'create-user' or $page == 'modify-user') {
+    if($page == 'create-user' or $page == 'modify-user' or $page == 'reset-password') {
       $this->data['additional_css_el'] = array(
         '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/user.css">'
       );
@@ -127,6 +127,10 @@ class Dashboard extends CI_Controller {
     else if($page =='modify-user') {
       $this->load->library('../controllers/admin/user');
       $this->user->modify_user($record);
+    }
+    else if($page =='reset-password') {
+      $this->load->library('../controllers/admin/user');
+      $this->user->reset_password($record);
     }
     else if($page == 'create-wo') {
       $this->load->library('../controllers/admin/create_wo');
