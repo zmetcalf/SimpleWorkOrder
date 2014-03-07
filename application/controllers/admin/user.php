@@ -37,17 +37,15 @@ class User extends CI_Controller {
     }
     else
     {
-      $this->users_model->set_user();
-      $this->users_model->activate_user($this->users_model->get_UID(
-                                          $this->input->post('user_name')));
-      $password = $this->users_model->reset_password($this->users_model->get_UID(
-                                          $this->input->post('user_name')));
+      $UID = $this->users_model->set_user();
+      $this->users_model->activate_user($UID);
+      $password = $this->users_model->reset_password($UID);
       $this->email_password($this->input->post('email'), $password);
-      $this->modify_user($this->users_model->get_UID($this->input->post('user_name')), $password);
+      $this->view_user($UID, $password);
     }
   }
 
-  public function modify_user($record, $password = '') {
+  public function modify_user($record) {
     $this->set_rules();
     // TODO Create method that checks this for modify user
     $this->form_validation->set_rules('user_name', 'Username',
@@ -62,7 +60,6 @@ class User extends CI_Controller {
     $this->data['page_header'] = 'Modify User';
     $this->data['submit_button'] = 'Modify User';
     $this->data['record'] = $record;
-    $this->data['password'] = $password;
 
     if($this->form_validation->run() == FALSE or $password)
     {
@@ -75,9 +72,10 @@ class User extends CI_Controller {
     }
   }
 
-  public function view_user($record) {
+  public function view_user($record, $password = '') {
     $data['result'] = $this->users_model->get_user($record);
     $data['record'] = $record;
+    $data['password'] = $password;
     $this->load->view('dashboard/admin/view_user', $data);
 
     $this->load->library('../controllers/admin/list_wo');
@@ -87,7 +85,7 @@ class User extends CI_Controller {
   public function reset_password($UID) {
     $password = $this->users_model->reset_password($UID);
     $this->email_password($this->users_model->get_email($UID), $password);
-    $this->modify_user($UID, $password);
+    $this->view_user($UID, $password);
   }
 
   private function set_rules() {

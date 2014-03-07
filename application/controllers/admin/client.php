@@ -33,8 +33,7 @@ class Client extends CI_Controller {
     }
     else
     {
-      $this->client_model->set_client();
-      $this->load->view('pages/success');
+      $this->view_client($this->client_model->set_client());
     }
   }
 

@@ -2,8 +2,13 @@
   <h1 class="page-header">Settings</h1>
   <div class="row">
     <div class="col-sm-3 col-md-5">
-      <?php echo form_open('dashboard/settings') ?>
-      <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
+      <?php
+        echo form_open('dashboard/settings');
+        echo validation_errors('<div class="alert alert-danger">', '</div>');
+        if($updated) {
+          echo '<div class="alert alert-success">Successfully Update Information.</div>';
+        }
+      ?>
 
       <div class="page-header"><h1><small>Change password:</small></h1></div>
       <div class="form-group">

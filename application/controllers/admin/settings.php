@@ -10,9 +10,6 @@ class Settings extends CI_Controller {
 
   public function settings()
   {
-    $data['user'] = $this->users_model->get_user($this->users_model->get_UID(
-                      $this->session->userdata('username')));
-
     $this->load->helper('form');
     $this->load->library('form_validation');
 
@@ -28,6 +25,9 @@ class Settings extends CI_Controller {
     $this->form_validation->set_rules('secondary-phone', 'Secondary Phone', 'trim|xss_clean');
 
     if($this->form_validation->run() == FALSE) {
+      $data['user'] = $this->users_model->get_user($this->users_model->get_UID(
+                      $this->session->userdata('username')));
+      $data['updated'] = FALSE;
       $this->load->view('dashboard/admin/settings', $data);
     }
     else {
@@ -37,7 +37,10 @@ class Settings extends CI_Controller {
       }
       $this->users_model->update_contact_info($this->users_model->get_UID(
                                               $this->session->userdata('username')));
-      $this->load->view('pages/success');
+      $data['user'] = $this->users_model->get_user($this->users_model->get_UID(
+                      $this->session->userdata('username')));
+      $data['updated'] = TRUE;
+      $this->load->view('dashboard/admin/settings', $data);
     }
   }
 }

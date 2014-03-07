@@ -56,13 +56,13 @@ class Dashboard extends CI_Controller {
 
     }
     else if($page == 'view-wo') {
-
+      // If scripts or styling are added - they will not load when new items are created
     }
     else if($page == 'view-user') {
-
+      // If scripts or styling are added - they will not load when new items are created
     }
     else if($page == 'view-client') {
-
+      // If scripts or styling are added - they will not load when new items are created
     }
     else if($page == 'assigned-wo') {
 

@@ -29,8 +29,8 @@ class Create_wo extends CI_Controller {
     else
     {
       $user = $this->session->userdata('username');
-      $this->work_order_model->set_work_order($user);
-      $this->load->view('pages/success');
+      $this->load->library('../controllers/admin/view_wo');
+      $this->view_wo->view_wo($this->work_order_model->set_work_order($user));
     }
   }
 }

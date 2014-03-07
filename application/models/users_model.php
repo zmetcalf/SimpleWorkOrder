@@ -79,6 +79,7 @@ class Users_model extends CI_Model {
       'active' => 'Pending'
     );
     $this->db->insert('users', $data);
+    return $this->db->insert_id();
   }
 
   public function activate_user($UID) {

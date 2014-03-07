@@ -24,6 +24,7 @@ class Client_model extends CI_Model {
     $data = $this->set_geocode($data);
 
     $this->db->insert('client', $data);
+    return $this->db->insert_id();
   }
 
   public function get_client($UID) {

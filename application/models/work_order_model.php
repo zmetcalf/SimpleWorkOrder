@@ -146,6 +146,7 @@ class Work_order_model extends CI_Model {
     );
 
     $this->db->insert('work_order', $data);
+    return $this->db->insert_id();
   }
 
   public function set_assigned_to($wo, $user)

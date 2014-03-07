@@ -9,13 +9,7 @@
         else if($page_header == 'Modify User') {
           echo form_open('dashboard/modify-user/' . $record);
         }
-      ?>
-      <?php
         echo validation_errors('<div class="alert alert-danger">', '</div>');
-        if($password) {
-          echo '<div class="alert alert-success">' . $first_name . ' ' .
-               $last_name . "'s new password is " . $password . ".</div>";
-        }
       ?>
 
       <div class="form-group">

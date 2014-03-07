@@ -2,6 +2,12 @@
   <h1 class="page-header">View User</h1>
   <div class="row">
     <div class="well col-sm-3 col-md-5">
+      <?php
+        if($password) {
+          echo '<div class="alert alert-success">' . $result['first_name'] . ' ' .
+               $result['last_name'] . "'s new password is " . $password . ".</div>";
+        }
+      ?>
       <p><?php echo $result['active'] . ' - ' . $result['user_type']; ?></p>
       <p><?php echo $result['last_name'] . ', ' . $result['first_name']; ?></p>
       <p>Username: <?php echo $result['user_name'] ?></p>
