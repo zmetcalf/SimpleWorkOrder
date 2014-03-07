@@ -60,7 +60,6 @@ class Users_model extends CI_Model {
       'first_name' => $this->input->post('first_name'),
       'last_name' => $this->input->post('last_name'),
       'user_name' => $this->input->post('user_name'),
-      'password' => random_string('unique'),
       'user_type' => $this->input->post('user_type'),
       'email' => $this->input->post('email'),
       'specialty' => $this->input->post('specialty'),
@@ -70,9 +69,23 @@ class Users_model extends CI_Model {
       'zip_code' => $this->input->post('zip_code'),
       'primary_phone' => $this->input->post('primary_phone'),
       'secondary_phone' => $this->input->post('secondary_phone'),
-      'active' => 'Active'
+      'active' => 'Pending'
     );
     $this->db->insert('users', $data);
+  }
+
+  public function activate_user($UID) {
+    $this->db->from('users');
+    $this->db->where('UID', $UID);
+    $this->db->update('users', array('active' =>'Active'));
+  }
+
+  public function reset_password($UID) {
+    $password = random_string('alnum', 10);
+    $this->db->from('users');
+    $this->db->where('UID', $UID);
+    $this->db->update('users', array('password' => do_hash($password, 'md5')));
+    return $password;
   }
 
   public function update_user($UID) {

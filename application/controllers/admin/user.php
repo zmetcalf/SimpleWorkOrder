@@ -38,6 +38,11 @@ class User extends CI_Controller {
     else
     {
       $this->users_model->set_user();
+      $this->users_model->activate_user($this->users_model->get_UID(
+                                          $this->input->post('user_name')));
+      $password = $this->users_model->reset_password($this->users_model->get_UID(
+                                          $this->input->post('user_name')));
+      $this->email_password($this->input->post('email'), $password);
       $this->load->view('pages/success');
     }
   }
@@ -109,5 +114,15 @@ class User extends CI_Controller {
       'specialty' => '',
       'active' => 'Active',
     );
+  }
+
+  private function email_password($email, $password) {
+    $this->load->library('email');
+    $this->email->to($email);
+    $this->email->from('simple@arch', 'SimpleWorkOrder');
+    $this->email->subject('SimpleWorkOrder New Password');
+    $this->email->message('Your password is: ' . $password);
+    $this->email->send();
+    echo $this->email->print_debugger();
   }
 }
