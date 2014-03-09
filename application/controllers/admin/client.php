@@ -58,7 +58,7 @@ class Client extends CI_Controller {
     else
     {
       $this->client_model->update_client($record);
-      $this->load->view('pages/success');
+      $this->view_client($record);
     }
   }
 
@@ -69,6 +69,7 @@ class Client extends CI_Controller {
 
     $this->load->library('../controllers/admin/list_wo');
     $this->list_wo->list_client_wos($record);
+    $this->load->view('dashboard/admin/subforms/modify_geocode');
   }
 
   private function set_rules() {
