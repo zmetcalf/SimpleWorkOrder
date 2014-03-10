@@ -3,6 +3,7 @@ class Client_model extends CI_Model {
 
   public function __construct()
   {
+    parent::__construct();
     $this->load->database();
     $this->load->helper('security');
   }
@@ -70,7 +71,9 @@ class Client_model extends CI_Model {
       'additional_info' => $this->input->post('additional_info')
     );
 
-    $data = $this->set_geocode($data);
+    if($this->check_address_update($UID, $data)) {
+      $data = $this->set_geocode($data);
+    }
 
     $this->db->from('client');
     $this->db->where('UID', $UID);
@@ -81,5 +84,16 @@ class Client_model extends CI_Model {
     $this->db->from('client');
     $this->db->where('UID', $UID);
     $this->db->update('client', array('geocode' => $centerpoint));
+  }
+
+  private function check_address_update($UID, $client_array) {
+    // Checks only those that are used for geocoding
+    $current_data = $this->get_client($UID);
+    if($current_data['street_address'] == $client_array['street_address'] and
+       $current_data['city'] == $client_array['city'] and
+       $current_data['state'] == $client_array['state']) {
+         return FALSE;
+    }
+    return TRUE;
   }
 }
