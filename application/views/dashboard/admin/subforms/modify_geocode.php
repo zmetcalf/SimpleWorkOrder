@@ -8,21 +8,22 @@
       <div class="modal-body" id="cntr-pnt">
         <p>Please obtain a centerpoint at <a href='http://nominatim.openstreetmap.org/'
           target='_blank'>Nominatim</a>.</p>
-        <div class="form-inline" role="form">
-          <div class="form-group">
-            <label for="lat-lon">Latatude and Longitude</label>
-            <input type="text" class="form-control" placeholder="Latatude" name="latatude"/>
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Longitude" name="longitude"/>
-          </div>
+        <div class="form-group">
+          <label for="latatude">Latatude</label>
+          <input type="text" class="form-control" placeholder="Latatude" name="latatude"/>
+        </div>
+        <div class="form-group">
+          <label for="longitude">Longitude</label>
+          <input type="text" class="form-control" placeholder="Longitude" name="longitude"/>
         </div>
         <h3 class="text-center">---- OR ----</h3>
         <div class="form-group">
-          <label for="center_point">Centerpoint</label>
+          <label for="centerpoint">Centerpoint</label>
           <input type="text" class="form-control" placeholder="Centerpoint" name="centerpoint"/>
         </div>
-        <div class="form-group">
+        <div style="display:none"><!-- This is for ajax requests -->
+          <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
+            value="<?php echo $this->security->get_csrf_hash(); ?>">
         </div>
       </div>
       <div class="centerpoint-errors"></div>

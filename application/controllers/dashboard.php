@@ -49,8 +49,15 @@ class Dashboard extends CI_Controller {
         '<script src="' . base_url() . 'static/js/admin/create-wo.js"></script>'
       );
     }
-    else if($page == 'create-client') {
-
+    else if($page == 'create-client' or $page == 'view-client') {
+      $this->data['slug'] = 'dashboard';
+      $this->data['additional_css_el'] = array(
+        '<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.css">'
+      );
+      $this->data['additional_js_el'] = array(
+        '<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.js"></script>',
+        '<script src="' . base_url() . 'static/js/admin/client.js"></script>'
+      );
     }
     else if($page == 'modify-client') {
 
@@ -59,9 +66,6 @@ class Dashboard extends CI_Controller {
       // If scripts or styling are added - they will not load when new items are created
     }
     else if($page == 'view-user') {
-      // If scripts or styling are added - they will not load when new items are created
-    }
-    else if($page == 'view-client') {
       // If scripts or styling are added - they will not load when new items are created
     }
     else if($page == 'assigned-wo') {

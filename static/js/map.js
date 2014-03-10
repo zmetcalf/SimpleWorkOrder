@@ -34,9 +34,11 @@ $.post('ajax/admin/get-open-wo',
 });
 
 function newPopup(marker) {
-  var geocode = marker.get('geocode').split(",");
-  marker.set('pointer', L.marker([geocode[0], geocode[1]]).addTo(map));
-  marker.get('pointer').bindPopup(generateWO(marker));
+  if(marker.get('geocode')) {
+    var geocode = marker.get('geocode').split(",");
+    marker.set('pointer', L.marker([geocode[0], geocode[1]]).addTo(map));
+    marker.get('pointer').bindPopup(generateWO(marker));
+  }
 }
 
 function addAdditionalWOonPopup(origin_wo, new_wo) {

@@ -73,7 +73,13 @@ class Client_model extends CI_Model {
     $data = $this->set_geocode($data);
 
     $this->db->from('client');
-    $this->db->where('UID',  $UID);
+    $this->db->where('UID', $UID);
     $this->db->update('client', $data);
+  }
+
+  public function update_geocode($UID, $centerpoint) {
+    $this->db->from('client');
+    $this->db->where('UID', $UID);
+    $this->db->update('client', array('geocode' => $centerpoint));
   }
 }

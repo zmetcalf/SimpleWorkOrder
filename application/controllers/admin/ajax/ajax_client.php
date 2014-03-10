@@ -23,4 +23,12 @@ class Ajax_client extends CI_controller
       $this->load->view('dashboard/admin/subforms/client_info', $data);
     }
   }
+
+  public function set_geocode_centerpoint($UID, $centerpoint) {
+
+  }
+
+  public function set_geocode_lat_lon($UID, $lat, $lon) {
+
+  }
 }
