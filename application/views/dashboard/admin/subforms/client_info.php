@@ -5,7 +5,8 @@
         class="alert-link">Fix now!</a>
     </div>
   <?php endif ?>
-  <p><?php echo $result['last_name'] . ', ' . $result['first_name']; ?></p>
+  <p><a href="<?php echo base_url(); ?>dashboard/view-client/<?=$result['UID']?>">
+    <?php echo $result['last_name'] . ', ' . $result['first_name']; ?></a></p>
   <p><?php echo $result['street_address']; ?></p>
   <?php
     if($result['unit_number']) {

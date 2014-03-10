@@ -3,7 +3,8 @@
   <?php echo form_open('dashboard/view-wo/' . $record) ?>
   <div class="row">
     <div class="well col-sm-3 col-md-5">
-      <p><?php echo $result['last_name'] . ', ' . $result['first_name']; ?></p>
+      <p><a href="<?php echo base_url(); ?>dashboard/view-client/<?=$result['UID']?>">
+        <?php echo $result['last_name'] . ', ' . $result['first_name']; ?></a></p>
       <p><?php echo $result['street_address']; ?></p>
       <?php
         if($result['unit_number']) {
