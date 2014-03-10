@@ -49,18 +49,19 @@ class Dashboard extends CI_Controller {
         '<script src="' . base_url() . 'static/js/admin/create-wo.js"></script>'
       );
     }
-    else if($page == 'create-client' or $page == 'view-client') {
-      $this->data['slug'] = 'dashboard';
+    else if($page == 'create-client' or $page == 'view-client' or
+            $page == 'modify-client') {
+      if($page == 'create-client') {
+        $this->data['slug'] = 'create-client';
+      }
       $this->data['additional_css_el'] = array(
         '<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.css">'
       );
       $this->data['additional_js_el'] = array(
         '<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.js"></script>',
+        '<script src="' . base_url() . 'static/js/admin/ajax/update.js"></script>',
         '<script src="' . base_url() . 'static/js/admin/client.js"></script>'
       );
-    }
-    else if($page == 'modify-client') {
-
     }
     else if($page == 'view-wo') {
       // If scripts or styling are added - they will not load when new items are created

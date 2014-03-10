@@ -5,15 +5,15 @@ class Client extends CI_Controller {
   public function __construct()
   {
     parent::__construct();
-    if(!($this->session->userdata('user_type') == 'Administrator')) {
-      $this->load->helper('url');
-      redirect('/dashboard');
-    }
     $this->load->model('client_model');
   }
 
   public function create_client()
   {
+    if(!($this->session->userdata('user_type') == 'Administrator')) {
+      $this->load->helper('url');
+      redirect('/dashboard');
+    }
     $this->load->helper('form');
     $this->load->library('form_validation');
 
@@ -39,6 +39,10 @@ class Client extends CI_Controller {
 
   public function modify_client($record)
   {
+    if(!($this->session->userdata('user_type') == 'Administrator')) {
+      $this->load->helper('url');
+      redirect('/dashboard');
+    }
     $this->load->helper('form');
     $this->load->library('form_validation');
 
@@ -63,6 +67,12 @@ class Client extends CI_Controller {
   }
 
   public function view_client($record) {
+    if($this->session->userdata('user_type') == 'Administrator') {
+      $data['admin'] = TRUE;
+    }
+    else {
+      $data['admin'] = FALSE;
+    }
     $data['result'] = $this->client_model->get_client($record);
     $data['record'] = $record;
     $this->load->view('dashboard/admin/view_client', $data);
