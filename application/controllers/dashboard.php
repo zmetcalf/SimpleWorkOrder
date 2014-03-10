@@ -31,7 +31,8 @@ class Dashboard extends CI_Controller {
   {
     $this->data['slug'] = $page;
 
-    if($page == 'create-user' or $page == 'modify-user' or $page == 'reset-password') {
+    if($page == 'create-user' or $page == 'modify-user' or
+       $page == 'reset-password' or $page == 'view-user') {
       $this->data['additional_css_el'] = array(
         '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/user.css">'
       );
@@ -64,9 +65,6 @@ class Dashboard extends CI_Controller {
       );
     }
     else if($page == 'view-wo') {
-      // If scripts or styling are added - they will not load when new items are created
-    }
-    else if($page == 'view-user') {
       // If scripts or styling are added - they will not load when new items are created
     }
     else if($page == 'assigned-wo') {
