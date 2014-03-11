@@ -171,9 +171,15 @@ class Work_order_model extends CI_Model {
   {
     $this->load->model('users_model');
     $user_uid = $this->users_model->get_UID($user);
+
+    if(!$this->get_assigned_to($wo)) {
+      $data['assigned_to'] = $user_uid;
+    }
+    $data['completed_by'] = $user_uid;
+
     $this->db->from('work_order');
     $this->db->where('UID',$wo);
-    $this->db->update('work_order', array('completed_by' => $user_uid));
+    $this->db->update('work_order', $data);
   }
 
   public function unset_assigned_to($wo)
