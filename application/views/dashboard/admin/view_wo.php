@@ -21,18 +21,35 @@
       <p>Job Information: <?php echo $result['wo_additional_info']; ?></p>
       <p>Created on: <?php $this->load->helper('date'); echo unix_to_human(mysql_to_unix($result['wo_created_on'])); ?></p>
     </div>
+    <?php if ($result['assigned_to']): ?>
+      <div class="well col-sm-3 col-sm-offset-1 col-md-5 col-md-offset-1">
+        <p>Assigned to: <a href="<?php echo base_url(); ?>dashboard/view-user/<?php echo $result['users_uid']; ?>">
+          <?php echo $result['users_first_name'] . ' ' . $result['users_last_name']; ?></a></p>
+        <p>Completed by:
+          <?php if ($result['completed_by']): ?>
+            <?php if ($result['completed_by'] == $result['assigned_to']): ?>
+              <a href="<?php echo base_url(); ?>dashboard/view-user/<?php echo $result['users_uid']; ?>">
+                <?php echo $result['users_first_name'] . ' ' . $result['users_last_name']; ?></a>
+            <?php else: ?>
+              Administrator
+            <?php endif; ?>
+          <?php endif; ?>
+        </p>
+        <p>Created on: <?php $this->load->helper('date'); echo unix_to_human(mysql_to_unix($result['wo_created_on'])); ?></p>
+      </div>
+    <?php endif; ?>
   </div>
-  <?php if(!$completed): ?>
-    <?php if($assigned_to_user): ?>
+  <?php if (!$completed): ?>
+    <?php if ($assigned_to_user): ?>
       <input type="submit" class="btn btn-default" name="unassign" value="Unregister me" />
       <input type="submit" class="btn btn-primary" name="completed" value="Completed Job" />
-    <?php elseif($is_admin): ?>
-      <?php if($assigned_to_another_user): ?>
+    <?php elseif ($is_admin): ?>
+      <?php if ($assigned_to_another_user): ?>
         <input type="submit" class="btn btn-default" name="unassign" value="Unregister" />
       <?php endif; ?>
       <input type="submit" class="btn btn-primary" name="completed" value="Completed" />
     <?php endif; ?>
-    <?php if(!$assigned_to_another_user): ?>
+    <?php if (!$assigned_to_another_user): ?>
       <input type="submit" class="btn btn-primary" name="assign" value="Sign Me Up!" />
     <?php endif; ?>
   <?php endif; ?>

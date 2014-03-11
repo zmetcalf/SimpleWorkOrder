@@ -6,7 +6,7 @@
         <div class="alert alert-danger not-mapped">Client's address is not mapped.</div>
       <?php else: ?>
         <div style="display:none">
-          <input type="hidden" id="centerpoint" value="<?=$result['geocode']?>"/>
+          <input type="hidden" id="centerpoint" value="<?php echo $result['geocode']?>"/>
         </div>
       <?php endif ?>
       <div class="well">
@@ -17,7 +17,7 @@
         <p>Primary Phone: <?php echo $result['primary_phone']; ?></p>
         <p>Secondary Phone: <?php echo $result['secondary_phone']; ?></p>
         <div style="display:none">
-          <input type="hidden" id="UID" value="<?=$result['UID']?>"/>
+          <input type="hidden" id="UID" value="<?php echo $result['UID']?>"/>
         </div>
         <?php if($admin): ?>
           <div class="form-group">

@@ -10,10 +10,18 @@ class Work_order_model extends CI_Model {
 
   public function get_wo($UID) {
     // Used by view_wo go get info related to a work order
+    if ($this->get_assigned_to($UID)) {
+      $this->db->select('users.first_name as users_first_name, ' .
+                        'users.last_name as users_last_name, ' .
+                        'users.UID as users_uid');
+      $this->db->join('users', 'users.UID = work_order.assigned_to');
+    }
+
     $this->db->select('client.*', FALSE);
     $this->db->select('work_order.job_type, work_order.additional_info as ' .
                       'wo_additional_info, work_order.UID as wo_uid,' .
-                      'work_order.created_on as wo_created_on', FALSE);
+                      'work_order.created_on as wo_created_on, ' .
+                      'work_order.assigned_to, work_order.completed_by' , FALSE);
     $this->db->from('work_order');
     $this->db->join('client', 'client.UID = work_order.client_requesting');
     $this->db->where(array('work_order.UID' => $UID));
