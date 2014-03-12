@@ -122,14 +122,12 @@ class User extends CI_Controller {
     );
   }
 
-  private function email_password($email, $password) {
-    // TODO This needs fixed!
-    $mail_server = 'example.com';
-    $subject = 'SimpleWorkOrder New Password';
-    $message = 'Your password is: ' . $password;
-    $headers = 'From: webmaster@' . $mail_server . "\r\n" .
-               'Reply-To: webmaster@' . $mail_server . "\r\n" .
-               'X-Mailer: PHP/' . phpversion();
-    mail($email, $subject, $message, $headers);
+ private function email_password($email, $password) {
+    $this->load->library('email');
+    $this->email->from($this->config->item('smtp_email_address'), 'Admin');
+    $this->email->to($email);
+    $this->email->subject('SimpleWorkOrder New Password');
+    $this->email->message('Your password is: ' . $password);
+    $this->email->send();
   }
 }
