@@ -16,6 +16,9 @@ class View_wo extends CI_Controller {
     $data['is_admin'] = FALSE;
     $data['assigned_to_another_user'] = FALSE;
     $data['completed'] = FALSE;
+    $data['update_status'] = '';
+    $data['result'] = $this->work_order_model->get_wo($record);
+    $data['record'] = $record;
 
     if($this->session->userdata('user_type') == 'Administrator') {
       $data['is_admin'] = TRUE;
@@ -41,21 +44,39 @@ class View_wo extends CI_Controller {
     if($this->input->post('assign')) {
       $this->work_order_model->set_assigned_to($record,
         $this->session->userdata('username'));
-      $this->load->view('pages/success');
+      $this->email_assigned_wo($record);
+      $data['update_status'] = 'assigned';
+      $this->load->view('dashboard/admin/view_wo', $data);
     }
     else if($this->input->post('unassign')) {
       $this->work_order_model->unset_assigned_to($record);
-      $this->load->view('pages/success');
+      $data['update_status'] = 'unassigned';
+      $this->load->view('dashboard/admin/view_wo', $data);
     }
     else if($this->input->post('completed')) {
       $this->work_order_model->set_completed($record,
         $this->session->userdata('username'));
-      $this->load->view('pages/success');
-    }
-    else { // TODO add error handling if wo not found
-      $data['result'] = $this->work_order_model->get_wo($record);
-      $data['record'] = $record;
+      $data['update_status'] = 'completed';
       $this->load->view('dashboard/admin/view_wo', $data);
     }
+    else { // TODO add error handling if wo not found
+      $this->load->view('dashboard/admin/view_wo', $data);
+    }
+  }
+
+  private function email_assigned_wo($UID) {
+    $data = $this->work_order_model->get_wo($UID);
+
+    $this->config->load('email');
+    $this->load->library('email');
+    $this->email->from($this->config->item('smtp_email_address'), 'Admin');
+    $this->email->to($this->users_model->get_email(
+                     $this->work_order_model->get_assigned_to($UID)));
+    $this->email->subject('SimpleWorkOrder - New Work Order Assigned');
+
+    $message = $this->load->view('dashboard/admin/email_templates/assign_wo', $data, TRUE);
+
+    $this->email->message($message);
+    $this->email->send();
   }
 }
