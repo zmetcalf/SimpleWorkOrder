@@ -123,6 +123,7 @@ class User extends CI_Controller {
   }
 
  private function email_password($email, $password) {
+    $this->config->load('email');
     $this->load->library('email');
     $this->email->from($this->config->item('smtp_email_address'), 'Admin');
     $this->email->to($email);
