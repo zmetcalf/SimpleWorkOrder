@@ -189,6 +189,20 @@ class Work_order_model extends CI_Model {
     $this->db->update('work_order', array('assigned_to' => NULL));
   }
 
+  public function update_wo($UID) {
+    $this->load->model('users_model');
+    $data = array(
+      'modified_by' => $this->users_model->get_UID($user),
+      'client_requesting' => $this->input->post('uid'),
+      'job_type' => $this->input->post('job_type'),
+      'additional_info' => $this->input->post('additional_info')
+    );
+
+    $this->db->from('work_order');
+    $this->db->where('UID',  $UID);
+    $this->db->update('work_order', $data);
+  }
+
   public function search_wos($job_type = '') {
     $this->db->select('client.*', FALSE);
     $this->db->select('work_order.job_type, work_order.additional_info as ' .

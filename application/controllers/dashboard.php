@@ -31,8 +31,8 @@ class Dashboard extends CI_Controller {
   {
     $this->data['slug'] = $page;
 
-    if($page == 'create-user' or $page == 'modify-user' or
-       $page == 'reset-password' or $page == 'view-user') {
+    if ($page == 'create-user' OR $page == 'modify-user' OR
+       $page == 'reset-password' OR $page == 'view-user') {
       $this->data['additional_css_el'] = array(
         '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/user.css">'
       );
@@ -40,14 +40,14 @@ class Dashboard extends CI_Controller {
         '<script src="' . base_url() . 'static/js/admin/user.js"></script>'
       );
     }
-    else if($page == 'create-wo') {
+    else if($page == 'create-wo' OR $page == 'modify-wo' OR $page == 'view-wo') {
       $this->data['additional_css_el'] = array(
-        '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/create-wo.css">'
+        '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/work-order.css">'
       );
       $this->data['additional_js_el'] = array(
         '<script src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>',
         '<script src="' . base_url() . 'static/js/admin/ajax/search.js"></script>',
-        '<script src="' . base_url() . 'static/js/admin/create-wo.js"></script>'
+        '<script src="' . base_url() . 'static/js/admin/work-order.js"></script>'
       );
     }
     else if($page == 'create-client' or $page == 'view-client' or
@@ -63,9 +63,6 @@ class Dashboard extends CI_Controller {
         '<script src="' . base_url() . 'static/js/admin/ajax/update.js"></script>',
         '<script src="' . base_url() . 'static/js/admin/client.js"></script>'
       );
-    }
-    else if($page == 'view-wo') {
-      // If scripts or styling are added - they will not load when new items are created
     }
     else if($page == 'assigned-wo') {
 
@@ -136,9 +133,12 @@ class Dashboard extends CI_Controller {
       $this->user->reset_password($record);
     }
     else if($page == 'create-wo') {
-      $this->load->library('../controllers/admin/create_wo');
-      $this->create_wo->create_wo();
-      $this->load->view('dashboard/admin/subforms/find_client');
+      $this->load->library('../controllers/admin/work_order');
+      $this->work_order->create_wo();
+    }
+    else if($page == 'modify-wo') {
+      $this->load->library('../controllers/admin/work_order');
+      $this->work_order->modify_wo($record);
     }
     else if($page == 'create-client') {
       $this->load->library('../controllers/admin/client');
@@ -149,8 +149,8 @@ class Dashboard extends CI_Controller {
       $this->client->modify_client($record);
     }
     else if($page == 'view-wo') {
-      $this->load->library('../controllers/admin/view_wo');
-      $this->view_wo->view_wo($record);
+      $this->load->library('../controllers/admin/work_order');
+      $this->work_order->view_wo($record);
     }
     else if($page == 'view-user') {
       $this->load->library('../controllers/admin/user');

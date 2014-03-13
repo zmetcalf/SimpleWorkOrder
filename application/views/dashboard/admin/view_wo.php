@@ -57,6 +57,8 @@
         <input type="submit" class="btn btn-default" name="unassign" value="Unregister" />
       <?php endif; ?>
       <input type="submit" class="btn btn-primary" name="completed" value="Completed" />
+      <a href="<?php echo base_url() . 'dashboard/modify-wo/' . $record; ?>"
+        class="btn btn-primary">Change Work Order</a>
     <?php endif; ?>
     <?php if (!$assigned_to_another_user): ?>
       <input type="submit" class="btn btn-primary" name="assign" value="Sign Me Up!" />

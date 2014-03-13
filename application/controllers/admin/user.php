@@ -10,7 +10,6 @@ class User extends CI_Controller {
     $this->load->library('form_validation');
 
     if(!($this->session->userdata('user_type') == 'Administrator')) {
-      $this->load->helper('url');
       redirect('/dashboard');
     }
   }

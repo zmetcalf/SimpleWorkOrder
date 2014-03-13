@@ -11,7 +11,6 @@ class Client extends CI_Controller {
   public function create_client()
   {
     if(!($this->session->userdata('user_type') == 'Administrator')) {
-      $this->load->helper('url');
       redirect('/dashboard');
     }
     $this->load->helper('form');
@@ -40,7 +39,6 @@ class Client extends CI_Controller {
   public function modify_client($record)
   {
     if(!($this->session->userdata('user_type') == 'Administrator')) {
-      $this->load->helper('url');
       redirect('/dashboard');
     }
     $this->load->helper('form');

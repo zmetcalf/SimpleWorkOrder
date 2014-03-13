@@ -1,7 +1,7 @@
 function searchClients() {
   clearServerError();
   return $.post(
-    "../ajax/admin/search-clients/",
+         ($('#base-url').val() + "ajax/admin/search-clients/"),
     {
       'csrf_test_name': $('input[name="csrf_test_name"]').val(),
       'last-name': $('input[name="last-name"]').val(),
@@ -38,7 +38,7 @@ function searchWOs() {
 function getClientByID(id) {
   clearServerError();
   $.post(
-    "../ajax/admin/get-client/",
+     ($('#base-url').val() + "ajax/admin/get-client/"),
     {
       'csrf_test_name': $('input[name="csrf_test_name"]').val(),
       'UID': id

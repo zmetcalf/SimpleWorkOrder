@@ -15,12 +15,19 @@ $('#select-client').click(function() {
   }
 });
 
+if($('#client-uid').length) {
+  getClientByID($('#client-uid').val());
+}
+
+$('.job_type').val($('.hidden-job-type').val());
+
 function renderClients() {
   searchClients().done(function(client_list) {
     if(client_list) {
-      $.post('../static/templates/admin/view-client.html', function(mustache_template) {
-        var view = { 'result': client_list };
-        $('.search-results').html(Mustache.render(mustache_template, view));
+      $.post(($('#base-url').val() + "static/templates/admin/view-client.html"),
+        function(mustache_template) {
+          var view = { 'result': client_list };
+          $('.search-results').html(Mustache.render(mustache_template, view));
       });
     } else {
       $('.search-results').html("<div class='alert alert-danger'>No results found.</div>");

@@ -1,6 +1,9 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
   <h1 class="page-header">Record Lookup</h1>
     <div class="col-sm-3 col-md-5">
+    <div style="display:none">
+      <input type="hidden" id="base-url" value="<?php echo base_url(); ?>"/>
+    </div>
     <div class="form-group">
       <label for="search-for">Search for:</label>
       <select class="form-control lookup-type">
