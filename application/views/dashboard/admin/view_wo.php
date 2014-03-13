@@ -2,19 +2,28 @@
   <h1 class="page-header">View Work Order</h1>
   <?php echo form_open('dashboard/view-wo/' . $record) ?>
   <div class="row">
-    <div class="well col-sm-3 col-md-5">
-      <p><a href="<?php echo base_url(); ?>dashboard/view-client/<?=$result['UID']?>">
-        <?php echo $result['last_name'] . ', ' . $result['first_name']; ?></a></p>
-      <p><?php echo $result['street_address']; ?></p>
-      <?php
-        if($result['unit_number']) {
-              echo '<p>Unit Number: ' . $result['unit_number'] . '</p>';
-        }
-      ?>
-      <p><?php echo $result['city'] . ", " . $result['state'] . " " . $result['zip_code']; ?></p>
-      <p>Primary Phone: <?php echo $result['primary_phone']; ?></p>
-      <p>Secondary Phone: <?php echo $result['secondary_phone']; ?></p>
-      <p>Additional Info: <?php echo $result['additional_info']; ?></p>
+    <div class="col-sm-3 col-md-5">
+      <?php if ($update_status == 'assigned'): ?>
+        <div class="alert alert-success">Successfully Signed Up!</div>
+      <?php elseif ($update_status == 'unassigned'): ?>
+        <div class="alert alert-success">Successfully Unregisterd Work Order.</div>
+      <?php elseif ($update_status == 'completed'): ?>
+        <div class="alert alert-success">Successfully Completed Work Order!</div>
+      <?php endif; ?>
+      <div class="well">
+        <p><a href="<?php echo base_url(); ?>dashboard/view-client/<?=$result['UID']?>">
+          <?php echo $result['last_name'] . ', ' . $result['first_name']; ?></a></p>
+        <p><?php echo $result['street_address']; ?></p>
+        <?php
+          if ($result['unit_number']) {
+                echo '<p>Unit Number: ' . $result['unit_number'] . '</p>';
+          }
+        ?>
+        <p><?php echo $result['city'] . ", " . $result['state'] . " " . $result['zip_code']; ?></p>
+        <p>Primary Phone: <?php echo $result['primary_phone']; ?></p>
+        <p>Secondary Phone: <?php echo $result['secondary_phone']; ?></p>
+        <p>Additional Info: <?php echo $result['additional_info']; ?></p>
+      </div>
     </div>
     <div class="well col-sm-3 col-sm-offset-1 col-md-5 col-md-offset-1">
       <p>Job Type: <?php echo $result['job_type']; ?></p>

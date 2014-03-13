@@ -17,19 +17,41 @@ class View_wo extends CI_Controller {
     $data['assigned_to_another_user'] = FALSE;
     $data['completed'] = FALSE;
     $data['update_status'] = '';
-    $data['result'] = $this->work_order_model->get_wo($record);
     $data['record'] = $record;
 
     if($this->session->userdata('user_type') == 'Administrator') {
       $data['is_admin'] = TRUE;
     }
 
+    // Handles buttons in view
+    if($this->input->post('assign')) {
+      $this->work_order_model->set_assigned_to($record,
+        $this->session->userdata('username'));
+      $this->email_assigned_wo($record);
+      $data['update_status'] = 'assigned';
+    }
+    else if($this->input->post('unassign')) {
+      $this->work_order_model->unset_assigned_to($record);
+      $data['update_status'] = 'unassigned';
+    }
+    else if($this->input->post('completed')) {
+      $this->work_order_model->set_completed($record,
+        $this->session->userdata('username'));
+      $data['update_status'] = 'completed';
+    }
+
+    // TODO add error handling if wo not found
+    $data['result'] = $this->work_order_model->get_wo($record);
+
+    // Logic to set what buttons are showing.
+
+    $user_id = $this->users_model->get_UID(
+      $this->session->userdata('username'));
+
     if($this->work_order_model->get_completed_by($record)) {
       $data['completed'] = TRUE;
     }
 
-    $user_id = $this->users_model->get_UID(
-      $this->session->userdata('username'));
     if($this->work_order_model->get_assigned_to($record) === $user_id) {
       $data['assigned_to_user'] = TRUE;
       $data['assigned_to_another_user'] = TRUE;
@@ -41,27 +63,8 @@ class View_wo extends CI_Controller {
         $data['assigned_to_another_user'] = TRUE;
       }
     }
-    if($this->input->post('assign')) {
-      $this->work_order_model->set_assigned_to($record,
-        $this->session->userdata('username'));
-      $this->email_assigned_wo($record);
-      $data['update_status'] = 'assigned';
-      $this->load->view('dashboard/admin/view_wo', $data);
-    }
-    else if($this->input->post('unassign')) {
-      $this->work_order_model->unset_assigned_to($record);
-      $data['update_status'] = 'unassigned';
-      $this->load->view('dashboard/admin/view_wo', $data);
-    }
-    else if($this->input->post('completed')) {
-      $this->work_order_model->set_completed($record,
-        $this->session->userdata('username'));
-      $data['update_status'] = 'completed';
-      $this->load->view('dashboard/admin/view_wo', $data);
-    }
-    else { // TODO add error handling if wo not found
-      $this->load->view('dashboard/admin/view_wo', $data);
-    }
+
+    $this->load->view('dashboard/admin/view_wo',$data);
   }
 
   private function email_assigned_wo($UID) {
