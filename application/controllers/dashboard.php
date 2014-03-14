@@ -2,18 +2,23 @@
 
 class Dashboard extends CI_Controller {
 
+  private $data = array(
+    'additional_css_el' => '',
+    'additional_js_el' => '',
+    'stylesheet' => 'dashboard',
+    'description' => 'Login to SimpleWorkOrder',
+    'author' => 'SimpleWorkOrder',
+    'title' => 'Dashboard | SimpleWorkOrder',
+    'menu_title' => 'SimpleWorkOrder',
+    'slug' => '',
+    'admin' => FALSE,
+    'pending_users' => FALSE
+  );
+
   public function __construct()
   {
     parent::__construct();
-
-    $this->data['additional_css_el'] = '';
-    $this->data['additional_js_el'] = '';
-    $this->data['stylesheet'] = 'dashboard';
-    $this->data['description'] = 'Login to SimpleWorkOrder';
-    $this->data['author'] = 'SimpleWorkOrder';
-    $this->data['title'] = 'Dashboard | SimpleWorkOrder';
-    $this->data['menu_title'] = 'SimpleWorkOrder';
-    $this->data['slug'] = '';
+    $this->load->model('users_model');
   }
 
   public function index($page = 'map', $record = '')
@@ -29,10 +34,22 @@ class Dashboard extends CI_Controller {
 
   public function generate_data($page)
   {
+    // Sidebar
     $this->data['slug'] = $page;
 
+    // Main-menu
+    if($this->session->userdata('user_type') == 'Administrator') {
+      $this->data['admin'] = TRUE;
+    }
+
+    if($this->users_model->get_pending()) {
+      $this->data['pending_users'] = TRUE;
+    }
+
     if ($page == 'create-user' OR $page == 'modify-user' OR
-       $page == 'reset-password' OR $page == 'view-user') {
+        $page == 'reset-password' OR $page == 'view-user' OR
+        $page == 'pending-users' OR $page == 'activate-user') {
+
       $this->data['additional_css_el'] = array(
         '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/user.css">'
       );
@@ -131,6 +148,14 @@ class Dashboard extends CI_Controller {
     else if($page =='reset-password') {
       $this->load->library('../controllers/admin/user');
       $this->user->reset_password($record);
+    }
+    else if($page =='pending-users') {
+      $this->load->library('../controllers/admin/user');
+      $this->user->view_pending();
+    }
+    else if($page =='activate-user') {
+      $this->load->library('../controllers/admin/user');
+      $this->user->activate_user($record);
     }
     else if($page == 'create-wo') {
       $this->load->library('../controllers/admin/work_order');

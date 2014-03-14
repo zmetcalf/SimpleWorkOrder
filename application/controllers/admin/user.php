@@ -71,6 +71,12 @@ class User extends CI_Controller {
   }
 
   public function view_user($record, $password = '') {
+    if($this->session->userdata('user_type') == 'Administrator') {
+      $data['admin'] = TRUE;
+    }
+    else {
+      $data['admin'] = FALSE;
+    }
     $data['result'] = $this->users_model->get_user($record);
     $data['record'] = $record;
     $data['password'] = $password;
@@ -80,9 +86,22 @@ class User extends CI_Controller {
     $this->list_wo->list_assigned_to_user($record);
   }
 
+  public function view_pending() {
+    $data['page_title'] = "Pending Users";
+    $data['result'] = $this->users_model->get_pending();
+    $this->load->view('dashboard/admin/view_user_list', $data);
+  }
+
   public function reset_password($UID) {
     $password = $this->users_model->reset_password($UID);
     $this->email_password($this->users_model->get_email($UID), $password);
+    $this->view_user($UID, $password);
+  }
+
+  public function activate_user($UID) {
+    $this->users_model->activate_user($UID);
+    $password = $this->users_model->reset_password($UID);
+    $this->email_activate($UID, $password);
     $this->view_user($UID, $password);
   }
 
@@ -127,6 +146,23 @@ class User extends CI_Controller {
     $this->email->to($email);
     $this->email->subject('SimpleWorkOrder New Password');
     $this->email->message('Your password is: ' . $password);
+    $this->email->send();
+ }
+
+  private function email_activate($UID, $password) {
+    $data = $this->users_model->get_user($UID);
+    $data['password'] = $password;
+
+    $this->config->load('email');
+    $this->load->library('email');
+    $this->email->from($this->config->item('smtp_email_address'), 'Admin');
+    $this->email->to($data['email']);
+    $this->email->subject('Your volunteer account is active!');
+
+    $message = $this->load->view('dashboard/admin/email_templates/activate_user',
+                                 $data, TRUE);
+
+    $this->email->message($message);
     $this->email->send();
   }
 }

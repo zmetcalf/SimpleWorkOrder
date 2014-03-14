@@ -62,6 +62,11 @@ class Users_model extends CI_Model {
     }
   }
 
+  public function get_pending() {
+    $query = $this->db->get_where('users', array('active' => 'Pending'));
+    return $query->result_array();
+  }
+
   public function set_user()
   {
     $data = array(
