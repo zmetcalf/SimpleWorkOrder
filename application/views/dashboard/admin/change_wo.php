@@ -38,7 +38,7 @@
   <div class="form-group">
     <label for="additional_info">Additional Information</label>
     <textarea class="form-control" rows="5" placeholder="Additional Information"
-           name="additional_info"><?php echo $additional_info; ?></textarea>
+           name="additional_info"><?php echo $wo_additional_info; ?></textarea>
   </div>
 
   <input type="submit" class="btn btn-primary" name="submit" value="<?php echo $submit_button; ?>" />

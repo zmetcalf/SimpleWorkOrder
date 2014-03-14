@@ -1,4 +1,5 @@
     <div class="col-sm-3 col-md-5">
+      <?php if ($admin): ?>
       <div class="panel-group" id="accordion">
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -41,6 +42,7 @@
           </div>
         </div>
       </div>
+      <?php endif; ?>
     </div>
   </div> <!-- End Main -->
 </div> <!-- End Row -->

@@ -20,7 +20,9 @@ class Work_order extends CI_Controller {
     if($this->form_validation->run() == FALSE)
     {
       if($this->input->post()) {
-        $this->data = $this->input->post();
+        $this->data['job_type'] = $this->input->post('job_type');
+        $this->data['wo_additional_info'] = $this->input->post('additional_info');
+        $this->data['UID'] = $this->input->post('uid');
       }
       else {
         $this->generate_clean_data();
@@ -43,9 +45,13 @@ class Work_order extends CI_Controller {
       redirect('/dashboard');
     }
 
+    $this->set_rules();
+
     $this->data = $this->work_order_model->get_wo($record);
     if($this->input->post()) {
-      $this->data = $this->input->post();
+      $this->data['job_type'] = $this->input->post('job_type');
+      $this->data['wo_additional_info'] = $this->input->post('additional_info');
+      $this->data['UID'] = $this->input->post('uid');
     }
     $this->data['page_header'] = 'Modify Work Order';
     $this->data['submit_button'] = 'Modify Work Order';
@@ -59,7 +65,8 @@ class Work_order extends CI_Controller {
     else
     {
       $user = $this->session->userdata('username');
-      $this->view_wo($this->work_order_model->update_work_order($user));
+      $this->work_order_model->update_wo($record, $user);
+      $this->view_wo($record);
     }
   }
 
@@ -146,8 +153,8 @@ class Work_order extends CI_Controller {
   private function generate_clean_data() {
     $this->data = array(
       'UID' => '',
-      'job_type' => '',
-      'additional_info' => ''
+      'job_type' => 'General',
+      'wo_additional_info' => ''
     );
   }
 }

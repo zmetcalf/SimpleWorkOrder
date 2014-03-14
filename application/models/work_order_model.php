@@ -149,9 +149,9 @@ class Work_order_model extends CI_Model {
       'created_by' => $this->users_model->get_UID($user),
       'modified_by' => $this->users_model->get_UID($user),
       'client_requesting' => $this->input->post('uid'),
-      'job_type' => $this->input->post('job-type'),
+      'job_type' => $this->input->post('job_type'),
       'created_on' => mdate("%Y-%m-%d %H:%i:%s"),
-      'additional_info' => $this->input->post('additional-info')
+      'additional_info' => $this->input->post('additional_info')
     );
 
     $this->db->insert('work_order', $data);
@@ -189,7 +189,7 @@ class Work_order_model extends CI_Model {
     $this->db->update('work_order', array('assigned_to' => NULL));
   }
 
-  public function update_wo($UID) {
+  public function update_wo($wo, $user) {
     $this->load->model('users_model');
     $data = array(
       'modified_by' => $this->users_model->get_UID($user),
@@ -199,7 +199,7 @@ class Work_order_model extends CI_Model {
     );
 
     $this->db->from('work_order');
-    $this->db->where('UID',  $UID);
+    $this->db->where('UID',  $wo);
     $this->db->update('work_order', $data);
   }
 

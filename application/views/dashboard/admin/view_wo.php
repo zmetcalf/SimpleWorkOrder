@@ -30,7 +30,7 @@
       <p>Job Information: <?php echo $result['wo_additional_info']; ?></p>
       <p>Created on: <?php $this->load->helper('date'); echo unix_to_human(mysql_to_unix($result['wo_created_on'])); ?></p>
     </div>
-    <?php if ($result['assigned_to']): ?>
+    <?php if ($result['assigned_to'] && $is_admin): ?>
       <div class="well col-sm-3 col-sm-offset-1 col-md-5 col-md-offset-1">
         <p>Assigned to: <a href="<?php echo base_url(); ?>dashboard/view-user/<?php echo $result['users_uid']; ?>">
           <?php echo $result['users_first_name'] . ' ' . $result['users_last_name']; ?></a></p>
