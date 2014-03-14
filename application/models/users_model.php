@@ -77,10 +77,26 @@ class Users_model extends CI_Model {
       'zip_code' => $this->input->post('zip_code'),
       'primary_phone' => $this->input->post('primary_phone'),
       'secondary_phone' => $this->input->post('secondary_phone'),
-      'active' => 'Pending'
+      'active' => 'Active'
     );
     $this->db->insert('users', $data);
     return $this->db->insert_id();
+  }
+
+  public function set_user_signup()
+  {
+    $data = array(
+      'first_name' => $this->input->post('first_name'),
+      'last_name' => $this->input->post('last_name'),
+      'user_name' => $this->input->post('user_name'),
+      'password' => random_string('unique'), // Will reset when activated
+      'user_type' => 'Volunteer',
+      'email' => $this->input->post('email'),
+      'specialty' => $this->input->post('specialty'),
+      'primary_phone' => $this->input->post('primary_phone'),
+      'active' => 'Pending'
+    );
+    $this->db->insert('users', $data);
   }
 
   public function activate_user($UID) {

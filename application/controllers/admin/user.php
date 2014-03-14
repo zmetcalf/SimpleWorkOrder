@@ -37,7 +37,6 @@ class User extends CI_Controller {
     else
     {
       $UID = $this->users_model->set_user();
-      $this->users_model->activate_user($UID);
       $password = $this->users_model->reset_password($UID);
       $this->email_password($this->input->post('email'), $password);
       $this->view_user($UID, $password);
