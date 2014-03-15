@@ -1,7 +1,7 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
   <h1 class="page-header">Settings</h1>
   <div class="row">
-    <div class="col-sm-3 col-md-5">
+    <div class="col-sm-5 col-md-5">
       <?php
         echo form_open('dashboard/settings');
         echo validation_errors('<div class="alert alert-danger">', '</div>');
@@ -24,7 +24,7 @@
       <input type="submit" class="btn btn-primary" name="update-password" value="Change Password" />
     </div>
 
-    <div class="col-sm-3 col-md-5">
+    <div class="col-sm-5 col-md-5">
       <div class="page-header"><h1><small>Change contact info:</small></h1></div>
       <div class="form-group">
         <label for="email">Email</label>

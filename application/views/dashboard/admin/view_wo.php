@@ -2,7 +2,7 @@
   <h1 class="page-header">View Work Order</h1>
   <?php echo form_open('dashboard/view-wo/' . $record) ?>
   <div class="row">
-    <div class="col-sm-3 col-md-5">
+    <div class="col-sm-5 col-md-5">
       <?php if ($update_status == 'assigned'): ?>
         <div class="alert alert-success">Successfully Signed Up!</div>
       <?php elseif ($update_status == 'unassigned'): ?>
@@ -25,13 +25,13 @@
         <p>Additional Info: <?php echo $result['additional_info']; ?></p>
       </div>
     </div>
-    <div class="well col-sm-3 col-sm-offset-1 col-md-5 col-md-offset-1">
+    <div class="well col-sm-5 col-sm-offset-1 col-md-5 col-md-offset-1">
       <p>Job Type: <?php echo $result['job_type']; ?></p>
       <p>Job Information: <?php echo $result['wo_additional_info']; ?></p>
       <p>Created on: <?php $this->load->helper('date'); echo unix_to_human(mysql_to_unix($result['wo_created_on'])); ?></p>
     </div>
     <?php if ($result['assigned_to'] && $is_admin): ?>
-      <div class="well col-sm-3 col-sm-offset-1 col-md-5 col-md-offset-1">
+      <div class="well col-sm-5 col-sm-offset-1 col-md-5 col-md-offset-1">
         <p>Assigned to: <a href="<?php echo base_url(); ?>dashboard/view-user/<?php echo $result['users_uid']; ?>">
           <?php echo $result['users_first_name'] . ' ' . $result['users_last_name']; ?></a></p>
         <p>Completed by:

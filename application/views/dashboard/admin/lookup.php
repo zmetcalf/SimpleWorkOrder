@@ -1,6 +1,6 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
   <h1 class="page-header">Record Lookup</h1>
-    <div class="col-sm-3 col-md-5">
+    <div class="col-sm-5 col-md-5">
     <div style="display:none">
       <input type="hidden" id="base-url" value="<?php echo base_url(); ?>"/>
     </div>
@@ -42,7 +42,7 @@
     </div>
   </div>
 
-  <div class="col-sm-3 col-sm-offset-1 col-md-5 col-md-offset-1">
+  <div class="col-sm-5 col-sm-offset-1 col-md-5 col-md-offset-1">
     <div class="search-results"></div>
     <div class="lookup-error"></div>
   </div>

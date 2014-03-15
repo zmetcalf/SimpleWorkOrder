@@ -1,7 +1,7 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
   <h1 class="page-header">View Client</h1>
   <div class="row">
-    <div class='col-sm-3 col-md-5'>
+    <div class='col-sm-5 col-md-5'>
       <?php if(!$result['geocode']): ?>
         <div class="alert alert-danger not-mapped">Client's address is not mapped.</div>
       <?php else: ?>

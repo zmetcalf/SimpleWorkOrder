@@ -1,7 +1,7 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
   <h1 class="page-header"><?php echo $page_header; ?></h1>
   <div class="row">
-    <div class="col-sm-3 col-md-5">
+    <div class="col-sm-5 col-md-5">
       <?php
         if($page_header == 'Create User') {
           echo form_open('dashboard/create-user');
@@ -58,7 +58,7 @@
       ?>
     </div>
 
-    <div class="col-sm-3 col-md-5">
+    <div class="col-sm-5 col-md-5">
       <br>
       <div class="panel panel-default">
         <div class="panel-heading" data-toggle="collapse" data-target=".additional-info">

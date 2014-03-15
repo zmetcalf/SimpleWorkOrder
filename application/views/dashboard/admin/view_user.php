@@ -1,7 +1,7 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
   <h1 class="page-header">View User</h1>
   <div class="row">
-    <div class="well col-sm-3 col-md-5">
+    <div class="well col-sm-5 col-md-5">
       <?php
         if($password) {
           echo '<div class="alert alert-success">' . $result['first_name'] . ' ' .
