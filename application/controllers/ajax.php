@@ -1,40 +1,56 @@
 <?php
-
 class Ajax extends CI_controller
 {
-  public function index($segment, $ajax_class='')
-  {
+
+  public function __construct() {
+    parent::__construct();
     if(!$this->session->userdata('logged_in')) {
       return FALSE; // Session protects AJAX security
     }
-    if($segment=='admin' and $ajax_class=='search-clients') {
-      $this->load->library('../controllers/admin/ajax/ajax_client');
-      $this->ajax_client->search_client(trim($this->input->post('first-name')),
-              trim($this->input->post('last-name')));
-    }
-    else if($segment=='admin' and $ajax_class=='set-geocode-centerpoint') {
-      $this->load->library('../controllers/admin/ajax/ajax_client');
-      $this->ajax_client->set_geocode_centerpoint($this->input->post('UID'),
+  }
+
+  public function search_client() {
+    $this->load->model('client_model');
+    $result = $this->client_model->get_search_by_name(
+                trim($this->input->post('first-name')),
+                trim($this->input->post('last-name')));
+    $this->output->set_content_type('application/json')
+      ->set_output(json_encode($result));
+  }
+
+  public function get_client() {
+    $this->load->model('client_model');
+    $data['result'] = $this->client_model->get_client($this->input->post('UID'));
+    $this->load->view('dashboard/admin/subforms/client_info', $data);
+  }
+
+  public function set_geocode_centerpoint() {
+    $this->load->model('client_model');
+    $this->client_model->update_geocode($this->input->post('UID'),
               trim($this->input->post('centerpoint')));
-    }
-    else if($segment=='admin' and $ajax_class=='search-users') {
-      $this->load->library('../controllers/admin/ajax/ajax_user');
-      $this->ajax_user->search_users(trim($this->input->post('first-name')),
+  }
+
+  public function get_open_wo() {
+    $this->load->model('work_order_model');
+    $result = $this->work_order_model->get_open_wo();
+    $this->output->set_content_type('application/json')
+      ->set_output(json_encode($result));
+  }
+
+  public function search_wos() {
+    $this->load->model('work_order_model');
+    $result = $this->work_order_model->search_wos($this->input->post('job-type'));
+    $this->output->set_content_type('application/json')
+      ->set_output(json_encode($result));
+  }
+
+  public function search_users() {
+    $this->load->model('users_model');
+    $result = $this->users_model->search_users(trim($this->input->post('first-name')),
               trim($this->input->post('last-name')),
               trim($this->input->post('username')),
               trim($this->input->post('email')));
-    }
-    else if($segment=='admin' and $ajax_class=='search-wos') {
-      $this->load->library('../controllers/admin/ajax/ajax_wo');
-      $this->ajax_wo->search_wos($this->input->post('job-type'));
-    }
-    else if($segment=='admin' and $ajax_class=='get-client') {
-      $this->load->library('../controllers/admin/ajax/ajax_client');
-      $this->ajax_client->get_client($this->input->post('UID'));
-    }
-    else if($segment=='admin' and $ajax_class=='get-open-wo') {
-      $this->load->library('../controllers/admin/ajax/ajax_wo');
-      echo $this->ajax_wo->get_open_wo();
-    }
+    $this->output->set_content_type('application/json')
+      ->set_output(json_encode($result));
   }
 }

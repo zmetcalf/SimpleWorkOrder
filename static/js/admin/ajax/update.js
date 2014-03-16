@@ -1,7 +1,7 @@
 function updateCenterpoint(centerpoint) {
   clearUpdateError();
   return $.post(
-    "../../ajax/admin/set-geocode-centerpoint/",
+    "../../ajax/set_geocode_centerpoint/",
     {
       'csrf_test_name': $('input[name="csrf_test_name"]').val(),
       'UID': $('#UID').val(),

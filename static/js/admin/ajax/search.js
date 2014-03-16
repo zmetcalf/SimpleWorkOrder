@@ -1,7 +1,7 @@
 function searchClients() {
   clearServerError();
   return $.post(
-         ($('#base-url').val() + "ajax/admin/search-clients/"),
+         ($('#base-url').val() + "ajax/search_client/"),
     {
       'csrf_test_name': $('input[name="csrf_test_name"]').val(),
       'last-name': $('input[name="last-name"]').val(),
@@ -13,7 +13,7 @@ function searchClients() {
 function searchUsers() {
   clearServerError();
   return $.post(
-    "../ajax/admin/search-users/",
+    "../ajax/search_users/",
     {
       'csrf_test_name': $('input[name="csrf_test_name"]').val(),
       'last-name': $('input[name="last-name"]').val(),
@@ -27,7 +27,7 @@ function searchUsers() {
 function searchWOs() {
   clearServerError();
   return $.post(
-    "../ajax/admin/search-wos/",
+    "../ajax/search_wos/",
     {
       'csrf_test_name': $('input[name="csrf_test_name"]').val(),
       'job-type': $('.job-type').val()
@@ -38,7 +38,7 @@ function searchWOs() {
 function getClientByID(id) {
   clearServerError();
   $.post(
-     ($('#base-url').val() + "ajax/admin/get-client/"),
+     ($('#base-url').val() + "ajax/get_client/"),
     {
       'csrf_test_name': $('input[name="csrf_test_name"]').val(),
       'UID': id
