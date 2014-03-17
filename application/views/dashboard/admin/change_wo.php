@@ -11,10 +11,10 @@
     </div>
   <?php
     if($page_header == 'Create Work Order') {
-      echo form_open('dashboard/create-wo');
+      echo form_open('dashboard/work_order/create_wo');
     }
     else if($page_header == 'Modify Work Order') {
-      echo form_open('dashboard/modify-wo/' . $record);
+      echo form_open('dashboard/work_order/modify_wo/' . $record);
     }
   ?>
   <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>

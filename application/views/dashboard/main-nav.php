@@ -12,13 +12,13 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <?php if ($admin && $pending_users): ?>
-        <li class="label-danger"><a href="<?php echo base_url(); ?>dashboard/pending-users">Pending Users</a></li>
+        <li class="label-danger"><a href="<?php echo base_url(); ?>dashboard/user/view_pending">Pending Users</a></li>
         <?php endif; ?>
         <li><a href="<?php echo base_url(); ?>dashboard">Dashboard</a></li>
         <?php if (!$admin): ?>
-        <li><a href="<?php echo base_url(); ?>dashboard/assigned-wo">Assigned Work Orders</a></li>
+        <li><a href="<?php echo base_url(); ?>dashboard/list_wo/assigned_wo_user">Assigned Work Orders</a></li>
         <?php endif; ?>
-        <li><a href="<?php echo base_url(); ?>dashboard/settings">Settings</a></li>
+        <li><a href="<?php echo base_url(); ?>dashboard/settings/settings">Settings</a></li>
         <li><a href="<?php echo base_url(); ?>page/help" target="_href">Help</a></li>
         <li><a href='<?php echo base_url(); ?>logout'>Log out</a></li>
       </ul>

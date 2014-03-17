@@ -5,13 +5,13 @@
       $iterator_result = new ArrayIterator($sidebar_result);
       foreach(new LimitIterator($iterator_result, 0, 10) as $result):
     ?>
-      <li><a href="<?php echo base_url() ?>dashboard/view-wo/<?php echo $result['wo_uid'] ?>">
+      <li><a href="<?php echo base_url() ?>dashboard/work_order/view_wo/<?php echo $result['wo_uid'] ?>">
         <?php echo $result['job_type'] ?> - <?php echo $result['last_name'] ?>,
           <?php echo $result['first_name'] ?></a></li>
     <?php endforeach ?>
   </ul>
   <ul class="nav nav-sidebar">
-    <li <?php if($slug == 'assigned-wo') { echo 'class="active"'; } ?>>
-      <a href="<?php echo base_url() ?>dashboard/assigned-wo">All Assigned Work Orders</a></li>
+    <li <?php if($slug == 'assigned_wo_user') { echo 'class="active"'; } ?>>
+      <a href="<?php echo base_url() ?>dashboard/list_wo/assigned_wo_user">All Assigned Work Orders</a></li>
   </ul>
 </div>

@@ -54,7 +54,7 @@ function generateWO(wo) {
         return render(text).substr(0, 30) + '...';
       };
     },
-    wo_url: 'dashboard/view-wo/' + wo.get('wo_uid'),
+    wo_url: 'dashboard/work_order/view_wo/' + wo.get('wo_uid'),
     job_type: wo.get('job_type'),
     additional_info: wo.get('wo_additional_info')
   };

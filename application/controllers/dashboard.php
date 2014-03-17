@@ -21,35 +21,33 @@ class Dashboard extends CI_Controller {
     $this->load->model('users_model');
   }
 
-  public function index($page = 'map', $record = '')
+  public function index($controller = '', $method = '', $record = '')
   {
     $this->session->all_userdata(); // Attempt to expire a session before the next line
     if($this->session->userdata('logged_in') == FALSE) {
       $this->load->helper('url');
       redirect('/login');
     }
-    $this->generate_data($page);
-    $this->load_page($page, $record);
+    $this->generate_data($controller, $method);
+    $this->load_page($controller, $method, $record);
   }
 
-  public function generate_data($page)
+  private function generate_data($controller = '', $method = '')
   {
     // Sidebar
-    $this->data['slug'] = $page;
+    $this->data['slug'] = $method;
 
     // Main-menu
     if($this->session->userdata('user_type') == 'Administrator') {
       $this->data['admin'] = TRUE;
     }
 
+    // Flags if there are pending users
     if($this->users_model->get_pending()) {
       $this->data['pending_users'] = TRUE;
     }
 
-    if ($page == 'create-user' OR $page == 'modify-user' OR
-        $page == 'reset-password' OR $page == 'view-user' OR
-        $page == 'pending-users' OR $page == 'activate-user') {
-
+    if ($controller == 'user') {
       $this->data['additional_css_el'] = array(
         '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/user.css">'
       );
@@ -57,7 +55,7 @@ class Dashboard extends CI_Controller {
         '<script src="' . base_url() . 'static/js/admin/user.js"></script>'
       );
     }
-    else if($page == 'create-wo' OR $page == 'modify-wo' OR $page == 'view-wo') {
+    else if ($controller == 'work_order') {
       $this->data['additional_css_el'] = array(
         '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/work-order.css">'
       );
@@ -67,11 +65,7 @@ class Dashboard extends CI_Controller {
         '<script src="' . base_url() . 'static/js/admin/work-order.js"></script>'
       );
     }
-    else if($page == 'create-client' or $page == 'view-client' or
-            $page == 'modify-client') {
-      if($page == 'create-client') {
-        $this->data['slug'] = 'create-client';
-      }
+    else if ($controller == 'client') {
       $this->data['additional_css_el'] = array(
         '<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.css">'
       );
@@ -81,25 +75,10 @@ class Dashboard extends CI_Controller {
         '<script src="' . base_url() . 'static/js/admin/client.js"></script>'
       );
     }
-    else if($page == 'assigned-wo') {
-
+    else if ($controller == 'list_wo' OR $controller == 'settings') {
+      // No additional javascript css loaded
     }
-    else if($page == 'list-unassigned-wo') {
-
-    }
-    else if($page == 'list-stale-unassigned-wo') {
-
-    }
-    else if($page == 'list-assigned-wo') {
-
-    }
-    else if($page == 'list-stale-assigned-wo') {
-
-    }
-    else if($page == 'settings') {
-
-    }
-    else if($page == 'lookup') {
+    else if ($controller == 'lookup') {
       $this->data['additional_css_el'] = array(
         '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/lookup.css">'
       );
@@ -125,97 +104,26 @@ class Dashboard extends CI_Controller {
     }
   }
 
-  public function load_page($page, $record)
+  private function load_page($controller = '', $method, $record = '')
   {
     $this->load->view('templates/header', $this->data);
     $this->load->view('dashboard/main-nav', $this->data);
 
-    if($this->session->userdata('user_type') == 'Administrator') {
+    if ($this->session->userdata('user_type') == 'Administrator') {
       $this->load->view('dashboard/sidebar');
     }
-    else if($this->session->userdata('user_type') == 'Volunteer') {
+    else if ($this->session->userdata('user_type') == 'Volunteer') {
       $this->get_volunteer_sidebar();
     }
 
-    if($page =='create-user') {
-      $this->load->library('../controllers/admin/user');
-      $this->user->create_user();
-    }
-    else if($page =='modify-user') {
-      $this->load->library('../controllers/admin/user');
-      $this->user->modify_user($record);
-    }
-    else if($page =='reset-password') {
-      $this->load->library('../controllers/admin/user');
-      $this->user->reset_password($record);
-    }
-    else if($page =='pending-users') {
-      $this->load->library('../controllers/admin/user');
-      $this->user->view_pending();
-    }
-    else if($page =='activate-user') {
-      $this->load->library('../controllers/admin/user');
-      $this->user->activate_user($record);
-    }
-    else if($page == 'create-wo') {
-      $this->load->library('../controllers/admin/work_order');
-      $this->work_order->create_wo();
-    }
-    else if($page == 'modify-wo') {
-      $this->load->library('../controllers/admin/work_order');
-      $this->work_order->modify_wo($record);
-    }
-    else if($page == 'create-client') {
-      $this->load->library('../controllers/admin/client');
-      $this->client->create_client();
-    }
-    else if($page == 'modify-client') {
-      $this->load->library('../controllers/admin/client');
-      $this->client->modify_client($record);
-    }
-    else if($page == 'view-wo') {
-      $this->load->library('../controllers/admin/work_order');
-      $this->work_order->view_wo($record);
-    }
-    else if($page == 'view-user') {
-      $this->load->library('../controllers/admin/user');
-      $this->user->view_user($record);
-    }
-    else if($page == 'view-client') {
-      $this->load->library('../controllers/admin/client');
-      $this->client->view_client($record);
-    }
-    else if($page == 'assigned-wo') {
-      $this->load->library('../controllers/user/assigned_wo');
-      $this->assigned_wo->assigned_wo();
-    }
-    else if($page == 'list-unassigned-wo') {
-      $this->load->library('../controllers/admin/list_wo');
-      $this->list_wo->list_unassigned_wo();
-    }
-    else if($page == 'list-stale-unassigned-wo') {
-      $this->load->library('../controllers/admin/list_wo');
-      $this->list_wo->list_stale_unassigned_wo();
-    }
-    else if($page == 'list-assigned-wo') {
-      $this->load->library('../controllers/admin/list_wo');
-      $this->list_wo->list_assigned_wo();
-    }
-    else if($page == 'list-stale-assigned-wo') {
-      $this->load->library('../controllers/admin/list_wo');
-      $this->list_wo->list_stale_assigned_wo();
-    }
-    else if($page == 'settings') {
-      $this->load->library('../controllers/admin/settings');
-      $this->settings->settings();
-    }
-    else if($page == 'lookup') {
-      $this->load->library('../controllers/admin/lookup');
-      $this->lookup->lookup();
+    if($controller) {
+      $this->load->library('../controllers/admin/'.$controller);
+      $this->$controller->$method($record);
     }
     else {
       $this->load->view('dashboard/map');
     }
+
     $this->load->view('dashboard/footer');
     $this->load->view('templates/footer', $this->data);
   }

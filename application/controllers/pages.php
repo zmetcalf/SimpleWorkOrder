@@ -68,7 +68,7 @@ class Pages extends CI_Controller {
     $this->email->to($email);
     $this->email->subject('Thank you for signing up!');
 
-    $message = $this->load->view('pages/templates/email/signup', '',TRUE);
+    $message = $this->load->view('email/signup', '',TRUE);
 
     $this->email->message($message);
     $this->email->send();

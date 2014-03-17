@@ -24,7 +24,7 @@
             <button class="btn btn-danger" type="button" data-toggle='modal' data-target='#modify-geocode'>
               Change map point
             </button>
-            <a href="<?php echo base_url() . 'dashboard/modify-client/' . $result['UID']; ?>"
+            <a href="<?php echo base_url() . 'dashboard/client/modify_client/' . $result['UID']; ?>"
               class="btn btn-primary">Modify Client</a>
           </div>
         <?php endif ?>

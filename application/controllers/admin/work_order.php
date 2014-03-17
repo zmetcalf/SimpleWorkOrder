@@ -1,5 +1,4 @@
 <?php
-
 class Work_order extends CI_Controller {
 
   public function __construct()
@@ -137,7 +136,7 @@ class Work_order extends CI_Controller {
                      $this->work_order_model->get_assigned_to($UID)));
     $this->email->subject('SimpleWorkOrder - New Work Order Assigned');
 
-    $message = $this->load->view('dashboard/admin/email_templates/assign_wo', $data, TRUE);
+    $message = $this->load->view('email/assign_wo', $data, TRUE);
 
     $this->email->message($message);
     $this->email->send();
