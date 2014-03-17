@@ -1,16 +1,16 @@
 <?php
 class Users_model extends CI_Model {
 
+  // safe_select does not select the md5 password
+  private $safe_select = 'UID, first_name, last_name, user_name, user_type,
+                          email, street_address, city, state, zip_code,
+                          primary_phone, secondary_phone, specialty, active';
+
   public function __construct()
   {
     parent::__construct();
     $this->load->database();
     $this->load->helper('security', 'string');
-
-    // safe_select does not select the md5 password
-    $this->safe_select = 'UID, first_name, last_name, user_name, user_type, ' .
-                         'email, street_address, city, state, zip_code, ' .
-                         'primary_phone, secondary_phone, specialty, active';
   }
 
   public function get_user($UID) {

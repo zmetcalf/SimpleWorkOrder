@@ -59,14 +59,14 @@ class User extends CI_Controller {
     $this->data['submit_button'] = 'Modify User';
     $this->data['record'] = $record;
 
-    if($this->form_validation->run() == FALSE or $password)
+    if($this->form_validation->run() == FALSE)
     {
       $this->load->view('dashboard/admin/change_user', $this->data);
     }
     else
     {
       $this->users_model->update_user($record);
-      $this->load->view('pages/success');
+      $this->view_user($record);
     }
   }
 
@@ -83,7 +83,7 @@ class User extends CI_Controller {
     $this->load->view('dashboard/admin/view_user', $data);
 
     $this->load->library('../controllers/admin/list_wo');
-    $this->list_wo->list_assigned_to_user($record);
+    $this->list_wo->assigned_to_user($record);
   }
 
   public function view_pending() {
@@ -159,7 +159,7 @@ class User extends CI_Controller {
     $this->email->to($data['email']);
     $this->email->subject('Your volunteer account is active!');
 
-    $message = $this->load->view('dashboard/admin/email_templates/activate_user',
+    $message = $this->load->view('email/activate_user',
                                  $data, TRUE);
 
     $this->email->message($message);

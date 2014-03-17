@@ -4,10 +4,10 @@
     <div class="col-sm-5 col-md-5">
       <?php
         if($page_header == 'Create User') {
-          echo form_open('dashboard/create-user');
+          echo form_open('dashboard/user/create_user');
         }
         else if($page_header == 'Modify User') {
-          echo form_open('dashboard/modify-user/' . $record);
+          echo form_open('dashboard/user/modify_user/' . $record);
         }
         echo validation_errors('<div class="alert alert-danger">', '</div>');
       ?>
@@ -50,12 +50,6 @@
         </select>
       </div>
       <input type="submit" class="btn btn-primary" name="submit" value="<?php echo $submit_button; ?>" />
-      <?php
-        if($page_header == 'Modify User') {
-           echo '<a href="' . base_url() . 'dashboard/reset-password/' . $record .
-                '" class="btn btn-danger">Reset Password</a>' ;
-        }
-      ?>
     </div>
 
     <div class="col-sm-5 col-md-5">

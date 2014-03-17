@@ -13,7 +13,7 @@ function searchClients() {
 function searchUsers() {
   clearServerError();
   return $.post(
-    "../ajax/search_users/",
+    "../../ajax/search_users/",
     {
       'csrf_test_name': $('input[name="csrf_test_name"]').val(),
       'last-name': $('input[name="last-name"]').val(),
@@ -27,7 +27,7 @@ function searchUsers() {
 function searchWOs() {
   clearServerError();
   return $.post(
-    "../ajax/search_wos/",
+    "../../ajax/search_wos/",
     {
       'csrf_test_name': $('input[name="csrf_test_name"]').val(),
       'job-type': $('.job-type').val()

@@ -34,13 +34,13 @@
           echo '<p>Secondary Phone: ' . $result['secondary_phone'] . '</p>';
         }
       ?>
-      <a href="<?php echo base_url() . 'dashboard/modify-user/' . $result['UID']; ?>"
+      <a href="<?php echo base_url() . 'dashboard/user/modify_user/' . $result['UID']; ?>"
         class="btn btn-primary">Modify User</a>
       <?php if ($result['active'] == 'Active'): ?>
-      <a href='<?php echo base_url() . 'dashboard/reset-password/' . $result['UID'] ?>'
+      <a href='<?php echo base_url() . 'dashboard/user/reset_password/' . $result['UID'] ?>'
                  class="btn btn-danger">Reset Password</a>
       <?php elseif ($result['active'] == 'Pending'): ?>
-      <a href='<?php echo base_url() . 'dashboard/activate-user/' . $result['UID'] ?>'
+      <a href='<?php echo base_url() . 'dashboard/user/activate_user/' . $result['UID'] ?>'
                  class="btn btn-danger">Activate User</a>
       <?php endif; ?>
     </div>

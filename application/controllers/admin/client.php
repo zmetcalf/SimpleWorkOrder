@@ -76,7 +76,7 @@ class Client extends CI_Controller {
     $this->load->view('dashboard/admin/view_client', $data);
 
     $this->load->library('../controllers/admin/list_wo');
-    $this->list_wo->list_client_wos($record);
+    $this->list_wo->client_wos($record);
     $this->load->view('dashboard/admin/subforms/modify_geocode');
   }
 

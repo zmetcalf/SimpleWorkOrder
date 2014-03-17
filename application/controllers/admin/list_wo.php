@@ -8,31 +8,38 @@ class List_wo extends CI_Controller {
     $this->load->model('work_order_model');
   }
 
+  // This is for the list of work orders on the volunteer page
+
+  public function assigned_wo_user() {
+    $this->load->model('users_model');
+    $data['page_title'] = "Your Assigned Work Orders";
+    $data['result'] = $this->work_order_model->get_wo_assigned(
+                      $this->users_model->get_UID(
+                      $this->session->userdata('username')));
+    $this->load->view('dashboard/admin/view_wo_list', $data);
+  }
+
   // These are for the links on the admin sidebar
 
-  public function list_unassigned_wo()
-  {
+  public function unassigned_wo() {
     $data['page_title'] = "Unassigned Work Orders";
     $data['result'] = $this->work_order_model->get_open_wo();
     $this->load->view('dashboard/admin/view_wo_list', $data);
   }
 
-  public function list_stale_unassigned_wo()
-  {
+  public function stale_unassigned_wo() {
     $data['page_title'] = "Stale Unassigned Work Orders";
     $data['result'] = $this->work_order_model->get_all_stale_open_wo();
     $this->load->view('dashboard/admin/view_wo_list', $data);
   }
 
-  public function list_assigned_wo()
-  {
+  public function assigned_wo() {
     $data['page_title'] = "Assigned Work Orders";
     $data['result'] = $this->work_order_model->get_all_assigned_wo();
     $this->load->view('dashboard/admin/view_wo_list', $data);
   }
 
-  public function list_stale_assigned_wo()
-  {
+  public function stale_assigned_wo() {
     $data['page_title'] = "Stale Assigned Work Orders";
     $data['result'] = $this->work_order_model->get_all_stale_assigned_wo();
     $this->load->view('dashboard/admin/view_wo_list', $data);
@@ -40,15 +47,13 @@ class List_wo extends CI_Controller {
 
   // These are for displaying beside the client or user
 
-  public function list_assigned_to_user($UID)
-  {
+  public function assigned_to_user($UID) {
     $data['open'] = $this->work_order_model->get_wo_assigned($UID);
     $data['closed'] = $this->work_order_model->get_wo_assigned_closed($UID);
     $this->load->view('dashboard/admin/subforms/list_wos', $data);
   }
 
-  public function list_client_wos($UID)
-  {
+  public function client_wos($UID) {
     $data['open'] = $this->work_order_model->get_all_open_client_wos($UID);
     $data['closed'] = $this->work_order_model->get_all_closed_client_wos($UID);
     $this->load->view('dashboard/admin/subforms/list_wos', $data);
