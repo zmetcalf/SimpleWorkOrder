@@ -1,5 +1,6 @@
 if($('#map').length) {
   var map = L.map('map').setView([39.737567,-104.984718], 10);
+  var pointer;
 
   if($('#centerpoint').val()) {
     updateMap($('#centerpoint').val());
@@ -50,5 +51,11 @@ function validateCenterpoint(centerpoint) {
 function updateMap(centerpoint) {
   var geocode = centerpoint.split(",");
   map.setView([geocode[0], geocode[1]], 12);
-  L.marker([geocode[0], geocode[1]]).addTo(map);
+  if(pointer) {
+    pointer.setLatLng([geocode[0], geocode[1]]);
+    pointer.update();
+  } else {
+    pointer = L.marker([geocode[0], geocode[1]])
+    pointer.addTo(map);
+  }
 }
