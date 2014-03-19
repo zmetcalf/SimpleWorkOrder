@@ -4,7 +4,12 @@
   <div class="well">
     <p><a href="<?php echo base_url() ?>dashboard/work_order/view_wo/<?php echo $wo['wo_uid'] ?>">
       <?php echo $wo['last_name'] . ", " . $wo['first_name'] ?></a>
-     - <?php echo $wo['job_type'] . " - " . $wo['city'] . " - " . $wo['wo_additional_info'] ?></p>
+     - <?php echo $wo['job_type'] . " - " . $wo['city'];
+             if ($wo['wo_additional_info']) {
+               echo " - " . $wo['wo_additional_info'];
+             }
+        ?>
+    </p>
   </div>
   <?php endforeach ?>
 </div>

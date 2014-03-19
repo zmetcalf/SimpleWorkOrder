@@ -11,11 +11,16 @@
           </div>
           <div id="collapseOne" class="panel-collapse collapse in">
             <div class="panel-body">
-              <?php foreach($open as $wo): ?>
+              <?php foreach ($open as $wo): ?>
               <div class="well">
                 <p><a href="<?php echo base_url() ?>dashboard/work_order/view_wo/<?php echo $wo['wo_uid'] ?>">
                   <?php echo $wo['last_name'] . ", " . $wo['first_name'] ?></a>
-                 - <?php echo $wo['job_type'] . " - " . $wo['city'] . " - " . $wo['wo_additional_info'] ?></p>
+                 - <?php echo $wo['job_type'] . " - " . $wo['city'];
+                         if ($wo['wo_additional_info']) {
+                           echo " - " . $wo['wo_additional_info'];
+                         }
+                   ?>
+                </p>
               </div>
               <?php endforeach ?>
             </div>
@@ -31,11 +36,16 @@
           </div>
           <div id="collapseTwo" class="panel-collapse collapse">
             <div class="panel-body">
-              <?php foreach($closed as $wo): ?>
+              <?php foreach ($closed as $wo): ?>
               <div class="well">
                 <p><a href="<?php echo base_url() ?>dashboard/work_order/view_wo/<?php echo $wo['wo_uid'] ?>">
                   <?php echo $wo['last_name'] . ", " . $wo['first_name'] ?></a>
-                 - <?php echo $wo['job_type'] . " - " . $wo['city'] . " - " . $wo['wo_additional_info'] ?></p>
+                 - <?php echo $wo['job_type'] . " - " . $wo['city'];
+                         if ($wo['wo_additional_info']) {
+                           echo " - " . $wo['wo_additional_info'];
+                         }
+                   ?>
+                </p>
               </div>
               <?php endforeach ?>
             </div>

@@ -1,6 +1,6 @@
 {{#result}}
 <div class="well">
   <p><a href="../work_order/view_wo/{{wo_uid}}">{{last_name}}, {{first_name}}</a>
-   - {{job_type}} - {{city}} - {{wo_additional_info}}</p>
+   - {{job_type}} - {{city}}{{#wo_additional_info}} - {{wo_additional_info}}{{/wo_additional_info}}</p>
 </div>
 {{/result}}
