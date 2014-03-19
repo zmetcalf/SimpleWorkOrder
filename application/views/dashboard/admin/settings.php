@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-sm-5 col-md-5">
       <?php
-        echo form_open('dashboard/settings');
+        echo form_open('dashboard/settings/settings');
         echo validation_errors('<div class="alert alert-danger">', '</div>');
         if($updated) {
           echo '<div class="alert alert-success">Successfully Update Information.</div>';
