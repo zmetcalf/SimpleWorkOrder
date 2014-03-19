@@ -49,7 +49,7 @@
     <?php endif; ?>
   </div>
   <?php if (!$completed): ?>
-    <?php if ($assigned_to_user): ?>
+    <?php if ($assigned_to_user && !$is_admin): ?>
       <input type="submit" class="btn btn-default" name="unassign" value="Unregister me" />
       <input type="submit" class="btn btn-primary" name="completed" value="Completed Job" />
     <?php elseif ($is_admin): ?>

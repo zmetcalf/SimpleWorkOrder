@@ -16,7 +16,8 @@
   <p><?php echo $result['city'] . ", " . $result['state'] . " " . $result['zip_code']; ?></p>
   <p>Primary Phone: <?php echo $result['primary_phone']; ?></p>
   <p>Secondary Phone: <?php echo $result['secondary_phone']; ?></p>
-  <div id="hidden-uid" name="uid"><?php echo $result['UID'] ?></div>
-  <input type="text" id="hidden-uid" class="form-control" name="uid"
-    value="<?php echo $result['UID'] ?>"/>
+  <div style="display:none">
+    <input type="text" id="hidden-uid" class="form-control" name="uid"
+     value="<?php echo $result['UID'] ?>"/>
+  </div>
 </div>
