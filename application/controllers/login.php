@@ -36,14 +36,13 @@ class Login extends CI_Controller {
     }
     else {
       $session_data = array(
-        'username' => $this->input->post('username'),
+        'user_id' => $this->users_model->get_UID($this->input->post('username')),
         'user_type' => $this->users_model->get_user_type(
                           $this->input->post('username')),
         'logged_in' => TRUE
       );
 
       $this->session->set_userdata($session_data);
-      $this->load->helper('url');
       redirect('/dashboard');
     }
   }

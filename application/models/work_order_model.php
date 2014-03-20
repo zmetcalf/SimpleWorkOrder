@@ -142,12 +142,11 @@ class Work_order_model extends CI_Model {
     return $query->result_array();
   }
 
-  public function set_work_order($user)
+  public function set_work_order($user_id)
   {
-    $this->load->model('users_model');
     $data = array(
-      'created_by' => $this->users_model->get_UID($user),
-      'modified_by' => $this->users_model->get_UID($user),
+      'created_by' => $user_id,
+      'modified_by' => $user_id,
       'client_requesting' => $this->input->post('uid'),
       'job_type' => $this->input->post('job_type'),
       'created_on' => mdate("%Y-%m-%d %H:%i:%s"),
@@ -158,24 +157,19 @@ class Work_order_model extends CI_Model {
     return $this->db->insert_id();
   }
 
-  public function set_assigned_to($wo, $user)
+  public function set_assigned_to($wo, $user_id)
   {
-    $this->load->model('users_model');
-    $user_uid = $this->users_model->get_UID($user);
     $this->db->from('work_order');
     $this->db->where('UID',$wo);
-    $this->db->update('work_order', array('assigned_to' => $user_uid));
+    $this->db->update('work_order', array('assigned_to' => $user_id));
   }
 
-  public function set_completed($wo, $user)
+  public function set_completed($wo, $user_id)
   {
-    $this->load->model('users_model');
-    $user_uid = $this->users_model->get_UID($user);
-
     if(!$this->get_assigned_to($wo)) {
-      $data['assigned_to'] = $user_uid;
+      $data['assigned_to'] = $user_id;
     }
-    $data['completed_by'] = $user_uid;
+    $data['completed_by'] = $user_id;
 
     $this->db->from('work_order');
     $this->db->where('UID',$wo);
@@ -189,10 +183,9 @@ class Work_order_model extends CI_Model {
     $this->db->update('work_order', array('assigned_to' => NULL));
   }
 
-  public function update_wo($wo, $user) {
-    $this->load->model('users_model');
+  public function update_wo($wo, $user_id) {
     $data = array(
-      'modified_by' => $this->users_model->get_UID($user),
+      'modified_by' => $user_id,
       'client_requesting' => $this->input->post('uid'),
       'job_type' => $this->input->post('job_type'),
       'additional_info' => $this->input->post('additional_info')

@@ -11,11 +11,9 @@ class List_wo extends CI_Controller {
   // This is for the list of work orders on the volunteer page
 
   public function assigned_wo_user() {
-    $this->load->model('users_model');
     $data['page_title'] = "Your Assigned Work Orders";
     $data['result'] = $this->work_order_model->get_wo_assigned(
-                      $this->users_model->get_UID(
-                      $this->session->userdata('username')));
+                      $this->session->userdata('user_id'));
     $this->load->view('dashboard/admin/view_wo_list', $data);
   }
 

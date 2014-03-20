@@ -34,8 +34,8 @@ class Work_order extends CI_Controller {
     }
     else
     {
-      $user = $this->session->userdata('username');
-      $this->view_wo($this->work_order_model->set_work_order($user));
+      $this->view_wo($this->work_order_model->set_work_order(
+                     $this->session->userdata('user_id')));
     }
   }
 
@@ -63,8 +63,8 @@ class Work_order extends CI_Controller {
     }
     else
     {
-      $user = $this->session->userdata('username');
-      $this->work_order_model->update_wo($record, $user);
+      $this->work_order_model->update_wo($record,
+        $this->session->userdata('user_id'));
       $this->view_wo($record);
     }
   }
@@ -85,7 +85,7 @@ class Work_order extends CI_Controller {
     // Handles buttons in view
     if ($this->input->post('assign')) {
       $this->work_order_model->set_assigned_to($record,
-        $this->session->userdata('username'));
+        $this->session->userdata('user_id'));
       $this->email_assigned_wo($record);
       $data['update_status'] = 'assigned';
     }
@@ -95,7 +95,7 @@ class Work_order extends CI_Controller {
     }
     else if ($this->input->post('completed')) {
       $this->work_order_model->set_completed($record,
-        $this->session->userdata('username'));
+        $this->session->userdata('user_id'));
       $data['update_status'] = 'completed';
     }
 
@@ -104,14 +104,12 @@ class Work_order extends CI_Controller {
 
     // Logic to set what buttons are showing.
 
-    $user_id = $this->users_model->get_UID(
-      $this->session->userdata('username'));
-
     if ($this->work_order_model->get_completed_by($record)) {
       $data['completed'] = TRUE;
     }
 
-    if ($this->work_order_model->get_assigned_to($record) === $user_id) {
+    if ($this->work_order_model->get_assigned_to($record) ===
+        $this->session->userdata('user_id')) {
       $data['assigned_to_user'] = TRUE;
       $data['assigned_to_another_user'] = TRUE;
     }

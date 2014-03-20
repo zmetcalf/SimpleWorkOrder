@@ -128,8 +128,7 @@ class Dashboard extends CI_Controller {
   private function get_volunteer_sidebar() {
     $this->load->model(array('users_model', 'work_order_model'));
     $data['sidebar_result'] = $this->work_order_model->get_wo_assigned(
-                              $this->users_model->get_UID(
-                              $this->session->userdata('username')));
+                              $this->session->userdata('user_id'));
     $this->load->view('dashboard/sidebar-volunteer', $data);
   }
 }
