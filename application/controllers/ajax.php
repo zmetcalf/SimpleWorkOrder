@@ -14,8 +14,13 @@ class Ajax extends CI_controller
     $result = $this->client_model->get_search_by_name(
                 trim($this->input->post('first-name')),
                 trim($this->input->post('last-name')));
-    $this->output->set_content_type('application/json')
-      ->set_output(json_encode($result));
+    if($result) {
+      $this->output->set_content_type('application/json')
+        ->set_output(json_encode($result));
+    }
+    else {
+      return FALSE;
+    }
   }
 
   public function get_client() {
@@ -40,8 +45,13 @@ class Ajax extends CI_controller
   public function search_wos() {
     $this->load->model('work_order_model');
     $result = $this->work_order_model->search_wos($this->input->post('job-type'));
-    $this->output->set_content_type('application/json')
-      ->set_output(json_encode($result));
+    if($result) {
+      $this->output->set_content_type('application/json')
+        ->set_output(json_encode($result));
+    }
+    else {
+      return FALSE;
+    }
   }
 
   public function search_users() {
@@ -50,7 +60,12 @@ class Ajax extends CI_controller
               trim($this->input->post('last-name')),
               trim($this->input->post('username')),
               trim($this->input->post('email')));
-    $this->output->set_content_type('application/json')
-      ->set_output(json_encode($result));
+    if($result) {
+      $this->output->set_content_type('application/json')
+        ->set_output(json_encode($result));
+    }
+    else {
+      return FALSE;
+    }
   }
 }
