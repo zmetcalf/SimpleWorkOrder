@@ -19,7 +19,7 @@ map_points.on('add', function(marker) {
   }
 });
 
-$.post('ajax/get_open_wo',
+$.post(($('#base-url').val() + 'ajax/get_open_wo'),
   {
     'csrf_test_name': $('input[name="csrf_test_name"]').val()
   }

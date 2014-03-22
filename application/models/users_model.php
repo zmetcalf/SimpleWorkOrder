@@ -110,6 +110,12 @@ class Users_model extends CI_Model {
     $this->db->update('users', array('active' =>'Active'));
   }
 
+  public function inactivate_user($UID) {
+    $this->db->from('users');
+    $this->db->where('UID', $UID);
+    $this->db->update('users', array('active' =>'Inactive'));
+  }
+
   public function reset_password($UID) {
     $password = random_string('alnum', 10);
     $this->db->from('users');

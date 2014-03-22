@@ -35,12 +35,16 @@
         }
       ?>
       <a href="<?php echo base_url() . 'dashboard/user/modify_user/' . $result['UID']; ?>"
-        class="btn btn-primary">Modify User</a>
+        class="btn btn-primary">Update User</a>
       <?php if ($result['active'] == 'Active'): ?>
       <a href='<?php echo base_url() . 'dashboard/user/reset_password/' . $result['UID'] ?>'
                  class="btn btn-danger">Reset Password</a>
-      <?php elseif ($result['active'] == 'Pending'): ?>
+      <?php elseif ($result['active'] == 'Pending' OR $result['active'] == 'Inactive'): ?>
       <a href='<?php echo base_url() . 'dashboard/user/activate_user/' . $result['UID'] ?>'
                  class="btn btn-danger">Activate User</a>
+      <?php endif; ?>
+      <?php if ($result['active'] == 'Active' OR $result['active'] == 'Pending'): ?>
+      <a href='<?php echo base_url() . 'dashboard/user/inactivate_user/' . $result['UID'] ?>'
+                 class="btn btn-danger">Inactivate</a>
       <?php endif; ?>
     </div>
