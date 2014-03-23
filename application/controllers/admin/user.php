@@ -145,7 +145,7 @@ class User extends CI_Controller {
     );
   }
 
- private function email_password($email, $password) {
+  private function email_password($email, $password) {
     $this->config->load('email');
     $this->load->library('email');
     $this->email->from($this->config->item('smtp_email_address'), 'Admin');
@@ -153,7 +153,7 @@ class User extends CI_Controller {
     $this->email->subject('SimpleWorkOrder New Password');
     $this->email->message('Your password is: ' . $password);
     $this->email->send();
- }
+  }
 
   private function email_activate($UID, $password) {
     $data = $this->users_model->get_user($UID);
