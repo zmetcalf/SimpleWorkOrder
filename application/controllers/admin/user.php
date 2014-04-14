@@ -105,6 +105,12 @@ class User extends CI_Controller {
     $this->view_user($UID, $password);
   }
 
+  public function inactivate_user($UID) {
+    $this->users_model->inactivate_user($UID);
+    $this->users_model->reset_password($UID);
+    $this->view_user($UID);
+  }
+
   private function set_rules() {
     $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|xss_clean');
     $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|xss_clean');
@@ -139,7 +145,7 @@ class User extends CI_Controller {
     );
   }
 
- private function email_password($email, $password) {
+  private function email_password($email, $password) {
     $this->config->load('email');
     $this->load->library('email');
     $this->email->from($this->config->item('smtp_email_address'), 'Admin');
@@ -147,7 +153,7 @@ class User extends CI_Controller {
     $this->email->subject('SimpleWorkOrder New Password');
     $this->email->message('Your password is: ' . $password);
     $this->email->send();
- }
+  }
 
   private function email_activate($UID, $password) {
     $data = $this->users_model->get_user($UID);

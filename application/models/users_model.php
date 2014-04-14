@@ -44,7 +44,10 @@ class Users_model extends CI_Model {
   public function get_UID($username) {
     $query = $this->db->get_where('users', array('user_name' => $username));
     $row = $query->row_array();
-    return $row['UID'];
+    if ($row) {
+      return $row['UID'];
+    }
+    return FALSE;
   }
 
   public function get_username_and_password()
@@ -108,6 +111,12 @@ class Users_model extends CI_Model {
     $this->db->from('users');
     $this->db->where('UID', $UID);
     $this->db->update('users', array('active' =>'Active'));
+  }
+
+  public function inactivate_user($UID) {
+    $this->db->from('users');
+    $this->db->where('UID', $UID);
+    $this->db->update('users', array('active' =>'Inactive'));
   }
 
   public function reset_password($UID) {
@@ -184,5 +193,4 @@ class Users_model extends CI_Model {
     }
     return $query->result_array();
   }
-
 }

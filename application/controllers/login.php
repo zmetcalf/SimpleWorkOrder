@@ -26,12 +26,15 @@ class Login extends CI_Controller {
     $data['title'] = 'Login | SimpleWorkOrder';
     $data['stylesheet'] = 'signin';
     $data['additional_css_el'] = '';
-    $data['additional_js_el'] = '';
+    $data['additional_js_el'] = array (
+      '<script src="' . base_url() . 'static/js/login.js"></script>'
+    );
     $data['attributes'] = array('class' => 'form-signin', 'role' => 'form');
 
     if($this->form_validation->run() == FALSE) {
       $this->load->view('templates/header', $data);
       $this->load->view('pages/login', $data);
+      $this->load->view('pages/subforms/forgot_password');
       $this->load->view('templates/footer', $data);
     }
     else {
