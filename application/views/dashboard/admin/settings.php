@@ -5,7 +5,7 @@
       <?php
         echo form_open('dashboard/settings/settings');
         echo validation_errors('<div class="alert alert-danger">', '</div>');
-        if($updated) {
+        if (isset($_GET['updated'])) {
           echo '<div class="alert alert-success">Successfully Update Information.</div>';
         }
       ?>

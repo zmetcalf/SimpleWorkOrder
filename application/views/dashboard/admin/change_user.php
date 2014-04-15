@@ -3,10 +3,10 @@
   <div class="row">
     <div class="col-sm-5 col-md-5">
       <?php
-        if($page_header == 'Create User') {
+        if ($page_header == 'Create User') {
           echo form_open('dashboard/user/create_user');
         }
-        else if($page_header == 'Modify User') {
+        else if ($page_header == 'Modify User') {
           echo form_open('dashboard/user/modify_user/' . $record);
         }
         echo validation_errors('<div class="alert alert-danger">', '</div>');

@@ -21,7 +21,7 @@ class Pages extends CI_Controller {
 
     $this->load->view('templates/header', $this->data);
     $this->load->view('pages/templates/home_header', $this->data);
-    if($pages == 'signup') {
+    if ($pages == 'signup') {
       $this->signup();
     }
     else {
@@ -47,7 +47,7 @@ class Pages extends CI_Controller {
     $this->form_validation->set_rules('specialty', 'Specialty', 'trim|xss_clean');
     $this->form_validation->set_rules('h-o-ney-pot', 'h-o-ney-pot', 'max_length[0]|xss_clean');
 
-    if($this->form_validation->run() == FALSE)
+    if ($this->form_validation->run() == FALSE)
     {
       $this->data['success'] = FALSE;
       $this->load->view('pages/signup', $this->data);
@@ -56,8 +56,7 @@ class Pages extends CI_Controller {
     {
       $this->users_model->set_user_signup();
       $this->email_welcome($this->input->post('email'));
-      $this->data['success'] = TRUE;
-      $this->load->view('pages/signup', $this->data);
+      redirect('page/signup/?success=True');
     }
   }
 

@@ -1,5 +1,5 @@
 <div class="inner cover">
-  <?php if ($success): ?>
+  <?php if (isset($_GET['success'])): ?>
   <p class="lead">Thank you for signing up, a member of our organization will contact you shortly.</p>
   <?php else: ?>
   <h1 class="cover-heading">Sign up today to help your community!</h1>

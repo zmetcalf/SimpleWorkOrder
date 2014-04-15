@@ -34,8 +34,9 @@ class Work_order extends CI_Controller {
     }
     else
     {
-      $this->view_wo($this->work_order_model->set_work_order(
-                     $this->session->userdata('user_id')));
+      redirect('dashboard/work_order/view_wo/' .
+        $this->work_order_model->set_work_order(
+          $this->session->userdata('user_id')));
     }
   }
 
@@ -47,7 +48,7 @@ class Work_order extends CI_Controller {
     $this->set_rules();
 
     $this->data = $this->work_order_model->get_wo($record);
-    if($this->input->post()) {
+    if ($this->input->post()) {
       $this->data['job_type'] = $this->input->post('job_type');
       $this->data['wo_additional_info'] = $this->input->post('additional_info');
       $this->data['UID'] = $this->input->post('uid');
@@ -56,7 +57,7 @@ class Work_order extends CI_Controller {
     $this->data['submit_button'] = 'Modify Work Order';
     $this->data['record'] = $record;
 
-    if($this->form_validation->run() == FALSE)
+    if ($this->form_validation->run() == FALSE)
     {
       $this->load->view('dashboard/admin/change_wo', $this->data);
       $this->load->view('dashboard/admin/subforms/find_client');
@@ -65,7 +66,7 @@ class Work_order extends CI_Controller {
     {
       $this->work_order_model->update_wo($record,
         $this->session->userdata('user_id'));
-      $this->view_wo($record);
+      redirect('dashboard/work_order/view_wo/' . $record);
     }
   }
 

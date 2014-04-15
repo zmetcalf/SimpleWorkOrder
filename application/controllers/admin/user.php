@@ -9,7 +9,7 @@ class User extends CI_Controller {
     $this->load->helper('form');
     $this->load->library('form_validation');
 
-    if(!($this->session->userdata('user_type') == 'Administrator')) {
+    if (!($this->session->userdata('user_type') == 'Administrator')) {
       redirect('/dashboard');
     }
   }
@@ -22,9 +22,9 @@ class User extends CI_Controller {
     $this->form_validation->set_rules('email', 'Email',
       'trim|required|xss_clean|is_unique[users.email]|valid_email');
 
-    if($this->form_validation->run() == FALSE)
+    if ($this->form_validation->run() == FALSE)
     {
-      if($this->input->post()) {
+      if ($this->input->post()) {
         $this->data = $this->input->post();
       }
       else {
@@ -39,7 +39,8 @@ class User extends CI_Controller {
       $UID = $this->users_model->set_user();
       $password = $this->users_model->reset_password($UID);
       $this->email_password($this->input->post('email'), $password);
-      $this->view_user($UID, $password);
+      $this->session->set_userdata('password', $password);
+      redirect('dashboard/user/view_user/' . $UID);
     }
   }
 
@@ -52,26 +53,26 @@ class User extends CI_Controller {
       'trim|required|xss_clean|valid_email');
 
     $this->data = $this->users_model->get_user($record);
-    if($this->input->post()) {
+    if ($this->input->post()) {
       $this->data = $this->input->post();
     }
     $this->data['page_header'] = 'Modify User';
     $this->data['submit_button'] = 'Modify User';
     $this->data['record'] = $record;
 
-    if($this->form_validation->run() == FALSE)
+    if ($this->form_validation->run() == FALSE)
     {
       $this->load->view('dashboard/admin/change_user', $this->data);
     }
     else
     {
       $this->users_model->update_user($record);
-      $this->view_user($record);
+      redirect('dashboard/user/view_user/' . $record);
     }
   }
 
-  public function view_user($record, $password = '') {
-    if($this->session->userdata('user_type') == 'Administrator') {
+  public function view_user($record) {
+    if ($this->session->userdata('user_type') == 'Administrator') {
       $data['admin'] = TRUE;
     }
     else {
@@ -79,7 +80,8 @@ class User extends CI_Controller {
     }
     $data['result'] = $this->users_model->get_user($record);
     $data['record'] = $record;
-    $data['password'] = $password;
+    $data['password'] = $this->session->userdata('password');
+    $this->session->unset_userdata('password');
     $this->load->view('dashboard/admin/view_user', $data);
 
     $this->load->library('../controllers/admin/list_wo');
@@ -95,20 +97,22 @@ class User extends CI_Controller {
   public function reset_password($UID) {
     $password = $this->users_model->reset_password($UID);
     $this->email_password($this->users_model->get_email($UID), $password);
-    $this->view_user($UID, $password);
+    $this->session->set_userdata('password', $password);
+    redirect('dashboard/user/view_user/' . $UID);
   }
 
   public function activate_user($UID) {
     $this->users_model->activate_user($UID);
     $password = $this->users_model->reset_password($UID);
     $this->email_activate($UID, $password);
-    $this->view_user($UID, $password);
+    $this->session->set_userdata('password', $password);
+    redirect('dashboard/user/view_user/' . $UID);
   }
 
   public function inactivate_user($UID) {
     $this->users_model->inactivate_user($UID);
     $this->users_model->reset_password($UID);
-    $this->view_user($UID);
+    redirect('dashboard/user/view_user/' . $UID);
   }
 
   private function set_rules() {

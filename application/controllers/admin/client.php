@@ -10,7 +10,7 @@ class Client extends CI_Controller {
 
   public function create_client()
   {
-    if(!($this->session->userdata('user_type') == 'Administrator')) {
+    if (!($this->session->userdata('user_type') == 'Administrator')) {
       redirect('/dashboard');
     }
     $this->load->helper('form');
@@ -18,9 +18,9 @@ class Client extends CI_Controller {
 
     $this->set_rules();
 
-    if($this->form_validation->run() == FALSE)
+    if ($this->form_validation->run() == FALSE)
     {
-      if($this->input->post()) {
+      if ($this->input->post()) {
         $this->data = $this->input->post();
       }
       else {
@@ -32,13 +32,14 @@ class Client extends CI_Controller {
     }
     else
     {
-      $this->view_client($this->client_model->set_client());
+      redirect('dashboard/client/view_client/' .
+        $this->client_model->set_client());
     }
   }
 
   public function modify_client($record)
   {
-    if(!($this->session->userdata('user_type') == 'Administrator')) {
+    if (!($this->session->userdata('user_type') == 'Administrator')) {
       redirect('/dashboard');
     }
     $this->load->helper('form');
@@ -46,10 +47,10 @@ class Client extends CI_Controller {
 
     $this->set_rules();
 
-    if($this->form_validation->run() == FALSE)
+    if ($this->form_validation->run() == FALSE)
     {
       $this->data = $this->client_model->get_client($record);
-      if($this->input->post()) {
+      if ($this->input->post()) {
         $this->data = $this->input->post();
       }
       $this->data['page_header'] = 'Modify Client';
@@ -60,12 +61,12 @@ class Client extends CI_Controller {
     else
     {
       $this->client_model->update_client($record);
-      $this->view_client($record);
+      redirect('dashboard/client/view_client/' . $record);
     }
   }
 
   public function view_client($record) {
-    if($this->session->userdata('user_type') == 'Administrator') {
+    if ($this->session->userdata('user_type') == 'Administrator') {
       $data['admin'] = TRUE;
     }
     else {

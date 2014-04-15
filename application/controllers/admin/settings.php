@@ -24,19 +24,17 @@ class Settings extends CI_Controller {
     $this->form_validation->set_rules('primary-phone', 'Primary Phone', 'trim|xss_clean');
     $this->form_validation->set_rules('secondary-phone', 'Secondary Phone', 'trim|xss_clean');
 
-    if($this->form_validation->run() == FALSE) {
+    if ($this->form_validation->run() == FALSE) {
       $data['user'] = $this->users_model->get_user($this->session->userdata('user_id'));
       $data['updated'] = FALSE;
       $this->load->view('dashboard/admin/settings', $data);
     }
     else {
-      if($this->input->post('password')) {
+      if ($this->input->post('password')) {
         $this->users_model->update_password($this->session->userdata('user_id'));
       }
       $this->users_model->update_contact_info($this->session->userdata('user_id'));
-      $data['user'] = $this->users_model->get_user($this->session->userdata('user_id'));
-      $data['updated'] = TRUE;
-      $this->load->view('dashboard/admin/settings', $data);
+      redirect('dashboard/settings/settings?updated=True');
     }
   }
 }
