@@ -102,6 +102,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `secondary_phone` varchar(20) DEFAULT NULL,
   `specialty` varchar(128) DEFAULT NULL COMMENT 'electrician, plumber, etc. May turn into a table',
   `active` varchar(20) NOT NULL,
+  `opt_in` tinyint(1) NOT NULL,
   PRIMARY KEY (`UID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
