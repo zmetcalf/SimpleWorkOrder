@@ -93,7 +93,7 @@
             </div>
             <div class="checkbox">
               <label>
-                <input type="checkbox" for="opt_in" <?php if ($opt_in) { echo 'checked'; } ?>>Opt-in to receive emails
+                <input type="checkbox" name="opt_in" <?php if ($opt_in) { echo 'checked'; } ?>>Opt-in to receive emails
               </label>
             </div>
             <div style="display:none">

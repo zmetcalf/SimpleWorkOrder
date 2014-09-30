@@ -86,7 +86,7 @@ class Users_model extends CI_Model {
       'primary_phone' => $this->input->post('primary_phone'),
       'secondary_phone' => $this->input->post('secondary_phone'),
       'active' => 'Active',
-      'opt_in' => $this->input->post('opt_in'),
+      'opt_in' => ($this->input->post('opt_in') === FALSE) ? 0 : 1,
     );
     $this->db->insert('users', $data);
     return $this->db->insert_id();
@@ -103,7 +103,8 @@ class Users_model extends CI_Model {
       'email' => $this->input->post('email'),
       'specialty' => $this->input->post('specialty'),
       'primary_phone' => $this->input->post('primary_phone'),
-      'active' => 'Pending'
+      'active' => 'Pending',
+      'opt_in' => 1 // True
     );
     $this->db->insert('users', $data);
   }
@@ -143,7 +144,7 @@ class Users_model extends CI_Model {
       'primary_phone' => $this->input->post('primary_phone'),
       'secondary_phone' => $this->input->post('secondary_phone'),
       'active' => 'Active',
-      'opt_in' => $this->input->post('opt_in'),
+      'opt_in' => ($this->input->post('opt_in') === FALSE) ? 0 : 1,
     );
 
     $this->db->from('users');
@@ -160,7 +161,7 @@ class Users_model extends CI_Model {
       'zip_code' => $this->input->post('zip-code'),
       'primary_phone' => $this->input->post('primary-phone'),
       'secondary_phone' => $this->input->post('secondary-phone'),
-      'opt_in' => $this->input->post('opt_in'),
+      'opt_in' => ($this->input->post('opt_in') === FALSE) ? 0 : 1,
     );
     $this->db->from('users');
     $this->db->where('UID',  $UID);
