@@ -4,7 +4,7 @@ class Users_model extends CI_Model {
   // safe_select does not select the md5 password
   private $safe_select = 'UID, first_name, last_name, user_name, user_type,
                           email, street_address, city, state, zip_code,
-                          primary_phone, secondary_phone, specialty, active';
+                          primary_phone, secondary_phone, specialty, active, opt_in';
 
   public function __construct()
   {
@@ -85,7 +85,8 @@ class Users_model extends CI_Model {
       'zip_code' => $this->input->post('zip_code'),
       'primary_phone' => $this->input->post('primary_phone'),
       'secondary_phone' => $this->input->post('secondary_phone'),
-      'active' => 'Active'
+      'active' => 'Active',
+      'opt_in' => $this->input->post('opt_in'),
     );
     $this->db->insert('users', $data);
     return $this->db->insert_id();
@@ -141,7 +142,8 @@ class Users_model extends CI_Model {
       'zip_code' => $this->input->post('zip_code'),
       'primary_phone' => $this->input->post('primary_phone'),
       'secondary_phone' => $this->input->post('secondary_phone'),
-      'active' => 'Active'
+      'active' => 'Active',
+      'opt_in' => $this->input->post('opt_in'),
     );
 
     $this->db->from('users');
@@ -158,6 +160,7 @@ class Users_model extends CI_Model {
       'zip_code' => $this->input->post('zip-code'),
       'primary_phone' => $this->input->post('primary-phone'),
       'secondary_phone' => $this->input->post('secondary-phone'),
+      'opt_in' => $this->input->post('opt_in'),
     );
     $this->db->from('users');
     $this->db->where('UID',  $UID);

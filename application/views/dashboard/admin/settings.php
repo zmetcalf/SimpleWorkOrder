@@ -26,6 +26,11 @@
 
     <div class="col-sm-5 col-md-5">
       <div class="page-header"><h1><small>Change contact info:</small></h1></div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" for="opt_in" <?php if ($opt_in) { echo 'checked'; } ?>>Opt-in to receive emails
+        </label>
+      </div>
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email" class="form-control" placeholder="Email" name="email"

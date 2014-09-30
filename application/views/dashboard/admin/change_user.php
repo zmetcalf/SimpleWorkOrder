@@ -91,6 +91,11 @@
               <input type="tel" class="form-control" placeholder="Secondary Phone Number"
                      name="secondary_phone" value="<?php echo $secondary_phone; ?>"/>
             </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" for="opt_in" <?php if ($opt_in) { echo 'checked'; } ?>>Opt-in to receive emails
+              </label>
+            </div>
             <div style="display:none">
               <input type="hidden" class="hidden-specialty" value="<?php echo $specialty; ?>">
               <input type="hidden" class="hidden-user-type" value="<?php echo $user_type; ?>">

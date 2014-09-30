@@ -127,6 +127,7 @@ class User extends CI_Controller {
     $this->form_validation->set_rules('zip_code', 'Zip Code', 'trim|xss_clean');
     $this->form_validation->set_rules('primary_phone', 'Primary Phone', 'trim|xss_clean');
     $this->form_validation->set_rules('secondary_phone', 'Secondary Phone', 'trim|xss_clean');
+    $this->form_validation->set_rules('opt_in', 'Opt In', 'trim|xss_clean');
   }
 
   private function generate_clean_data() {
@@ -146,6 +147,7 @@ class User extends CI_Controller {
       'secondary_phone' => '',
       'specialty' => '',
       'active' => 'Active',
+      'opt_in' => True,
     );
   }
 
