@@ -98,6 +98,7 @@ class Work_order extends CI_Controller {
       $this->work_order_model->set_completed($record,
         $this->session->userdata('user_id'));
       $data['update_status'] = 'completed';
+      $this->email_completed($record);
     }
 
     // TODO add error handling if wo not found
@@ -147,6 +148,23 @@ class Work_order extends CI_Controller {
     $this->email->to($this->users_model->get_admins_email_addresses());
     $this->email->subject('SimpleWorkOrder - Work Order Assigned');
     $message = $this->load->view('email/admin_assign_wo', $data, TRUE);
+    $this->email->message($message);
+    $this->email->send();
+  }
+
+  private function email_completed($UID) {
+    $data = $this->work_order_model->get_wo($UID);
+    $data['assigned_user'] = $this->users_model->get_user(
+      $this->work_order_model->get_assigned_to($UID));
+
+    $this->config->load('email');
+    $this->load->library('email');
+    $this->email->from($this->config->item('smtp_email_address'), 'Admin');
+    $this->email->to($this->users_model->get_admins_email_addresses());
+    $this->email->subject('SimpleWorkOrder - Work Order Completed');
+
+    $message = $this->load->view('email/completed_wo', $data, TRUE);
+
     $this->email->message($message);
     $this->email->send();
   }
