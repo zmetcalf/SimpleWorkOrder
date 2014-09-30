@@ -82,6 +82,18 @@ class Users_model extends CI_Model {
     return $email_list;
   }
 
+  public function get_all_email_addresses() {
+    $this->db->select('email', FALSE);
+    $this->db->from('users');
+    $this->db->where(array('opt_in' => 1));
+    $query = $this->db->get();
+    $email_list = array();
+    foreach ($query->result_array() as $e) {
+      array_push($email_list, $e['email']);
+    }
+    return $email_list;
+  }
+
   public function set_user()
   {
     $data = array(

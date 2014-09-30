@@ -34,9 +34,10 @@ class Work_order extends CI_Controller {
     }
     else
     {
-      redirect('dashboard/work_order/view_wo/' .
-        $this->work_order_model->set_work_order(
-          $this->session->userdata('user_id')));
+      $wo = $this->work_order_model->set_work_order(
+        $this->session->userdata('user_id'));
+      $this->email_new_wo($wo);
+      redirect('dashboard/work_order/view_wo/' . $wo);
     }
   }
 
@@ -164,6 +165,22 @@ class Work_order extends CI_Controller {
     $this->email->subject('SimpleWorkOrder - Work Order Completed');
 
     $message = $this->load->view('email/completed_wo', $data, TRUE);
+
+    $this->email->message($message);
+    $this->email->send();
+  }
+
+  private function email_new_wo($UID) {
+    $this->load->model('users_model');
+    $data = $this->work_order_model->get_wo($UID);
+
+    $this->config->load('email');
+    $this->load->library('email');
+    $this->email->from($this->config->item('smtp_email_address'), 'Admin');
+    $this->email->to($this->users_model->get_all_email_addresses());
+    $this->email->subject('SimpleWorkOrder - New Work Order Available');
+
+    $message = $this->load->view('email/new_wo', $data, TRUE);
 
     $this->email->message($message);
     $this->email->send();
