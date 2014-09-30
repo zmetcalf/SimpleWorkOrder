@@ -70,6 +70,18 @@ class Users_model extends CI_Model {
     return $query->result_array();
   }
 
+  public function get_admins_email_addresses() {
+    $this->db->select('email', FALSE);
+    $this->db->from('users');
+    $this->db->where(array('user_type' => 'Administrator', 'opt_in' => 1));
+    $query = $this->db->get();
+    $email_list = array();
+    foreach ($query->result_array() as $e) {
+      array_push($email_list, $e['email']);
+    }
+    return $email_list;
+  }
+
   public function set_user()
   {
     $data = array(

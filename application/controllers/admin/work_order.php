@@ -127,16 +127,26 @@ class Work_order extends CI_Controller {
 
   private function email_assigned_wo($UID) {
     $data = $this->work_order_model->get_wo($UID);
+    $data['assigned_user'] = $this->users_model->get_user(
+      $this->work_order_model->get_assigned_to($UID));
 
     $this->config->load('email');
     $this->load->library('email');
     $this->email->from($this->config->item('smtp_email_address'), 'Admin');
-    $this->email->to($this->users_model->get_email(
-                     $this->work_order_model->get_assigned_to($UID)));
-    $this->email->subject('SimpleWorkOrder - New Work Order Assigned');
+    $this->email->to($this->users_model->get_email($this->work_order_model->get_assigned_to($UID)));
+    $this->email->subject('SimpleWorkOrder - Work Order Assigned');
 
     $message = $this->load->view('email/assign_wo', $data, TRUE);
 
+    $this->email->message($message);
+    $this->email->send();
+
+    // To Admins
+
+    $this->email->from($this->config->item('smtp_email_address'), 'Admin');
+    $this->email->to($this->users_model->get_admins_email_addresses());
+    $this->email->subject('SimpleWorkOrder - Work Order Assigned');
+    $message = $this->load->view('email/admin_assign_wo', $data, TRUE);
     $this->email->message($message);
     $this->email->send();
   }
