@@ -43,6 +43,12 @@ class List_wo extends CI_Controller {
     $this->load->view('dashboard/admin/view_wo_list', $data);
   }
 
+  public function completed_wo() {
+    $data['page_title'] = "Completed Work Orders";
+    $data['result'] = $this->work_order_model->get_all_completed_wo();
+    $this->load->view('dashboard/admin/view_wo_list', $data);
+  }
+
   // These are for displaying beside the client or user
 
   public function assigned_to_user($UID) {

@@ -37,6 +37,7 @@ class Work_order_model extends CI_Model {
     $this->db->from('work_order');
     $this->db->join('client', 'client.UID = work_order.client_requesting');
     $this->db->where(array('assigned_to' => NULL));
+    $this->db->order_by('modified_on', 'desc');
     $query = $this->db->get();
     return $query->result_array();
   }
@@ -51,6 +52,7 @@ class Work_order_model extends CI_Model {
     $where_string = 'assigned_to IS NULL AND completed_by IS NULL AND created_on < '
                     . mdate("%Y%m%d", (time() - (30 * 24 * 60 * 60)));
     $this->db->where($where_string);
+    $this->db->order_by('modified_on', 'desc');
     $query = $this->db->get();
     return $query->result_array();
   }
@@ -63,6 +65,7 @@ class Work_order_model extends CI_Model {
     $this->db->from('work_order');
     $this->db->join('client', 'client.UID = work_order.client_requesting');
     $this->db->where('assigned_to IS NOT NULL AND completed_by IS NULL');
+    $this->db->order_by('modified_on', 'desc');
     $query = $this->db->get();
     return $query->result_array();
   }
@@ -77,6 +80,23 @@ class Work_order_model extends CI_Model {
     $where_string = 'assigned_to IS NOT NULL AND completed_by IS NULL AND created_on < '
                     . mdate("%Y%m%d", (time() - (30 * 24 * 60 * 60)));
     $this->db->where($where_string);
+    $this->db->order_by('modified_on', 'desc');
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+
+  public function get_all_completed_wo() {
+    // Used by map to get all open work orders that are assigned but older than 30 days
+    $this->db->select('client.*', FALSE);
+    $this->db->select('users.*', FALSE);
+    $this->db->select('work_order.job_type, work_order.additional_info as ' .
+                      'wo_additional_info, work_order.UID as wo_uid', FALSE);
+    $this->db->from('work_order');
+    $this->db->join('client', 'client.UID = work_order.client_requesting');
+    $this->db->join('users', 'users.UID = work_order.completed_by');
+    $where_string = 'completed_by IS NOT NULL';
+    $this->db->where($where_string);
+    $this->db->order_by('modified_on', 'desc');
     $query = $this->db->get();
     return $query->result_array();
   }

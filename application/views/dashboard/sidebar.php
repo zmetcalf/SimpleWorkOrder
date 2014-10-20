@@ -10,6 +10,7 @@
     <li <?php if($slug == 'stale_unassigned_wo') { echo 'class="active"'; } ?>><a href="<?php echo base_url() ?>dashboard/list_wo/stale_unassigned_wo">Stale Unassigned WO's</a></li>
     <li <?php if($slug == 'assigned_wo') { echo 'class="active"'; } ?>><a href="<?php echo base_url() ?>dashboard/list_wo/assigned_wo">Assigned WO's</a></li>
     <li <?php if($slug == 'stale_assigned_wo') { echo 'class="active"'; } ?>><a href="<?php echo base_url() ?>dashboard/list_wo/stale_assigned_wo">Stale Assigned WO's</a></li>
+    <li <?php if($slug == 'completed_wo') { echo 'class="active"'; } ?>><a href="<?php echo base_url() ?>dashboard/list_wo/completed_wo">Completed WO's</a></li>
   </ul>
   <ul class="nav nav-sidebar">
     <li <?php if($slug == 'lookup') { echo 'class="active"'; } ?>><a href="<?php echo base_url() ?>dashboard/lookup/lookup">Record Lookup</a></li>
