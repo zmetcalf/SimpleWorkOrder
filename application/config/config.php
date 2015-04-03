@@ -244,15 +244,11 @@ $config['encryption_key'] = 'you_must_set_encryption_key';
 | 'sess_time_to_update'		= how many seconds between CI refreshing Session Information
 |
 */
+$config['sess_driver'] = 'database';
+$config['sess_save_path'] = 'ci_sessions';
 $config['sess_cookie_name']		= 'ci_session';
 $config['sess_expiration']		= 604800; // One week
-$config['sess_expire_on_close']	= TRUE;
-$config['sess_encrypt_cookie']	= TRUE;
-$config['sess_use_database']	= TRUE;
-$config['sess_table_name']		= 'ci_sessions';
 $config['sess_match_ip']		= TRUE;
-$config['sess_match_useragent']	= TRUE;
-$config['sess_time_to_update']	= 604800;
 
 /*
 |--------------------------------------------------------------------------

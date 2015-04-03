@@ -40,9 +40,9 @@
 
 $route['login'] = "login";
 $route['logout'] = "logout";
-$route['dashboard/(:any)/(:any)'] = "dashboard/index/$1/$2";
-$route['dashboard/(:any)/(:any)/(:any)'] = "dashboard/index/$1/$2/$3";
-$route['page/(:any)'] = "pages/view/$1";
+$route['dashboard/(.+)/(.+)'] = "dashboard/index/$1/$2";
+$route['dashboard/(.+)/(.+)/(.+)'] = "dashboard/index/$1/$2/$3";
+$route['page/(.+)'] = "pages/view/$1";
 $route['default_controller'] = "pages/view";
 $route['404_override'] = '';
 
