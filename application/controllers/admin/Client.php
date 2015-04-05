@@ -1,6 +1,8 @@
 <?php
 
-class Client extends CI_Controller {
+class Client extends MY_Controller {
+
+  protected $controller = 'client';
 
   public function __construct()
   {
@@ -32,7 +34,7 @@ class Client extends CI_Controller {
     }
     else
     {
-      redirect('dashboard/client/view_client/' .
+      redirect('client/view_client/' .
         $this->client_model->set_client());
     }
   }
@@ -61,7 +63,7 @@ class Client extends CI_Controller {
     else
     {
       $this->client_model->update_client($record);
-      redirect('dashboard/client/view_client/' . $record);
+      redirect('client/view_client/' . $record);
     }
   }
 
@@ -76,8 +78,10 @@ class Client extends CI_Controller {
     $data['record'] = $record;
     $this->load->view('dashboard/admin/view_client', $data);
 
-    $this->load->library('../controllers/admin/list_wo');
-    $this->list_wo->client_wos($record);
+    // TODO Create new way to generate this
+    // $this->load->library('../controllers/admin/list_wo');
+    // $this->list_wo->client_wos($record);
+
     $this->load->view('dashboard/admin/subforms/modify_geocode');
   }
 

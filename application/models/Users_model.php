@@ -118,11 +118,12 @@ class Users_model extends CI_Model {
 
   public function set_user_signup()
   {
+    $this->load->helper('string');
     $data = array(
       'first_name' => $this->input->post('first_name'),
       'last_name' => $this->input->post('last_name'),
       'user_name' => $this->input->post('user_name'),
-      'password' => random_string('unique'), // Will reset when activated
+      'password' => random_string(), // Will reset when activated
       'user_type' => 'Volunteer',
       'email' => $this->input->post('email'),
       'specialty' => $this->input->post('specialty'),
@@ -146,6 +147,7 @@ class Users_model extends CI_Model {
   }
 
   public function reset_password($UID) {
+    $this->load->helper('string');
     $password = random_string('alnum', 10);
     $this->db->from('users');
     $this->db->where('UID', $UID);

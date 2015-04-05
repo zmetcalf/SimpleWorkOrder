@@ -2,7 +2,7 @@
 
 class MY_Controller extends CI_Controller {
 
-  private $data = array(
+  protected $data = array(
     'additional_css_el' => '',
     'additional_js_el' => '',
     'stylesheet' => 'dashboard',
@@ -15,22 +15,24 @@ class MY_Controller extends CI_Controller {
     'pending_users' => FALSE
   );
 
+  protected $controller = '';
+
   public function __construct() {
     parent::__construct();
     $this->load->model('users_model');
   }
 
-  public function index($controller = '', $method = '', $record = '') {
+  public function index($method = '', $record = '') {
     $this->session->all_userdata(); // Attempt to expire a session before the next line
     if($this->session->userdata('logged_in') == FALSE) {
       $this->load->helper('url');
       redirect('/login');
     }
-    $this->generate_data($controller, $method);
-    $this->load_page($controller, $method, $record);
+    $this->generate_data($method);
+    $this->load_page($method, $record);
   }
 
-  private function generate_data($controller = '', $method = '')
+  private function generate_data($method = '')
   {
     // Sidebar
     $this->data['slug'] = $method;
@@ -45,7 +47,7 @@ class MY_Controller extends CI_Controller {
       $this->data['pending_users'] = TRUE;
     }
 
-    if ($controller == 'user') {
+    if ($this->controller == 'user') {
       $this->data['additional_css_el'] = array(
         '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/user.css">'
       );
@@ -53,14 +55,14 @@ class MY_Controller extends CI_Controller {
         '<script src="' . base_url() . 'static/js/admin/user.js"></script>'
       );
     }
-    else if ($controller == 'work_order') {
+    else if ($this->controller == 'work_order') {
       $this->data['additional_js_el'] = array(
         '<script src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>',
         '<script src="' . base_url() . 'static/js/admin/ajax/search.js"></script>',
         '<script src="' . base_url() . 'static/js/admin/work-order.js"></script>'
       );
     }
-    else if ($controller == 'client') {
+    else if ($this->controller == 'client') {
       $this->data['additional_css_el'] = array(
         '<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.css">'
       );
@@ -70,10 +72,10 @@ class MY_Controller extends CI_Controller {
         '<script src="' . base_url() . 'static/js/admin/client.js"></script>'
       );
     }
-    else if ($controller == 'list_wo' OR $controller == 'settings') {
+    else if ($this->controller == 'list_wo' OR $this->controller == 'settings') {
       // No additional javascript css loaded
     }
-    else if ($controller == 'lookup') {
+    else if ($this->controller == 'lookup') {
       $this->data['additional_css_el'] = array(
         '<link rel="stylesheet" href="' . base_url() . 'static/css/admin/lookup.css">'
       );
@@ -99,7 +101,7 @@ class MY_Controller extends CI_Controller {
     }
   }
 
-  private function load_page($controller = '', $method, $record = '')
+  private function load_page($method, $record = '')
   {
     $this->load->view('templates/header', $this->data);
     $this->load->view('dashboard/main-nav', $this->data);
@@ -111,7 +113,7 @@ class MY_Controller extends CI_Controller {
       $this->get_volunteer_sidebar();
     }
 
-    if($controller) {
+    if($this->controller) {
       $this->$method($record);
     }
     else {

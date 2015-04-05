@@ -1,6 +1,8 @@
 <?php
 
-class List_wo extends CI_Controller {
+class List_wo extends MY_Controller {
+
+  protected $controller = 'list_wo';
 
   public function __construct()
   {

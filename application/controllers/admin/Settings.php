@@ -1,6 +1,8 @@
 <?php
 
-class Settings extends CI_Controller {
+class Settings extends MY_Controller {
+
+  protected $controller = 'settings';
 
   public function __construct()
   {
@@ -34,7 +36,7 @@ class Settings extends CI_Controller {
         $this->users_model->update_password($this->session->userdata('user_id'));
       }
       $this->users_model->update_contact_info($this->session->userdata('user_id'));
-      redirect('dashboard/settings/settings?updated=True');
+      redirect('settings/settings?updated=True');
     }
   }
 }

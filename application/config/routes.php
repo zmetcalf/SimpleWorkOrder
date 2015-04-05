@@ -40,10 +40,25 @@
 
 $route['login'] = "login";
 $route['logout'] = "logout";
-$route['dashboard/(.+)/(.+)'] = "dashboard/index/$1/$2";
-$route['dashboard/(.+)/(.+)/(.+)'] = "dashboard/index/$1/$2/$3";
+
+$route['dashboard'] = "dashboard/index";
+
+$route['user/(.+)'] = "admin/user/index/$1";
 $route['user/(.+)/(.+)'] = "admin/user/index/$1/$2";
-$route['user/(.+)/(.+)/(.+)'] = "admin/user/index/$1/$2/$3";
+
+$route['client/(.+)'] = "admin/client/index/$1";
+$route['client/(.+)/(.+)'] = "admin/client/index/$1/$2";
+
+$route['list_wo/(.+)'] = "admin/list_wo/index/$1";
+$route['list_wo/(.+)/(.+)'] = "admin/list_wo/index/$1/$2";
+
+$route['settings/(.+)'] = "admin/settings/index/$1";
+
+$route['lookup/(.+)'] = "admin/lookup/index/$1";
+
+$route['work_order/(.+)'] = "admin/work_order/index/$1";
+$route['work_order/(.+)/(.+)'] = "admin/work_order/index/$1/$2";
+
 $route['page/(.+)'] = "pages/view/$1";
 $route['default_controller'] = "pages/view";
 $route['404_override'] = '';

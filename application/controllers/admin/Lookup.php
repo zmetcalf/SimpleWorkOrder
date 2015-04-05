@@ -1,6 +1,8 @@
 <?php
 
-class Lookup extends CI_Controller {
+class Lookup extends MY_Controller {
+
+  protected $controller = 'lookup';
 
   public function __construct()
   {

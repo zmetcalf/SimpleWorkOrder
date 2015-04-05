@@ -1,5 +1,7 @@
 <?php
-class Work_order extends CI_Controller {
+class Work_order extends MY_Controller {
+
+  protected $controller = 'work_order';
 
   public function __construct()
   {
@@ -37,7 +39,7 @@ class Work_order extends CI_Controller {
       $wo = $this->work_order_model->set_work_order(
         $this->session->userdata('user_id'));
       $this->email_new_wo($wo);
-      redirect('dashboard/work_order/view_wo/' . $wo);
+      redirect('work_order/view_wo/' . $wo);
     }
   }
 
@@ -67,7 +69,7 @@ class Work_order extends CI_Controller {
     {
       $this->work_order_model->update_wo($record,
         $this->session->userdata('user_id'));
-      redirect('dashboard/work_order/view_wo/' . $record);
+      redirect('work_order/view_wo/' . $record);
     }
   }
 

@@ -1,11 +1,11 @@
 <div class="well well-sm">
   <?php if(!$result['geocode']): ?>
     <div class="alert alert-danger not-mapped">Client's address is not mapped.
-      <a href="<?php echo base_url(); ?>dashboard/client/view_client/<?=$result['UID']?>"
+      <a href="<?php echo base_url(); ?>client/view_client/<?=$result['UID']?>"
         class="alert-link">Fix now!</a>
     </div>
   <?php endif ?>
-  <p><a href="<?php echo base_url(); ?>dashboard/client/view_client/<?=$result['UID']?>">
+  <p><a href="<?php echo base_url(); ?>client/view_client/<?=$result['UID']?>">
     <?php echo $result['last_name'] . ', ' . $result['first_name']; ?></a></p>
   <p><?php echo $result['street_address']; ?></p>
   <?php
