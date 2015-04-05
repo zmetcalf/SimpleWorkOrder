@@ -34,7 +34,7 @@ class Client extends MY_Controller {
     }
     else
     {
-      redirect('client/view_client/' .
+      redirect('dashboard/client/view_client/' .
         $this->client_model->set_client());
     }
   }
@@ -63,7 +63,7 @@ class Client extends MY_Controller {
     else
     {
       $this->client_model->update_client($record);
-      redirect('client/view_client/' . $record);
+      redirect('dashboard/client/view_client/' . $record);
     }
   }
 

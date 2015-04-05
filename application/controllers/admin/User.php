@@ -42,7 +42,7 @@ class User extends MY_Controller {
       $password = $this->users_model->reset_password($UID);
       $this->email_password($this->input->post('email'), $password);
       $this->session->set_userdata('password', $password);
-      redirect('user/view_user/' . $UID);
+      redirect('dashboard/user/view_user/' . $UID);
     }
   }
 
@@ -69,7 +69,7 @@ class User extends MY_Controller {
     else
     {
       $this->users_model->update_user($record);
-      redirect('user/view_user/' . $record);
+      redirect('dashboard/user/view_user/' . $record);
     }
   }
 
@@ -101,7 +101,7 @@ class User extends MY_Controller {
     $password = $this->users_model->reset_password($UID);
     $this->email_password($this->users_model->get_email($UID), $password);
     $this->session->set_userdata('password', $password);
-    redirect('user/view_user/' . $UID);
+    redirect('dashboard/user/view_user/' . $UID);
   }
 
   public function activate_user($UID) {
@@ -109,13 +109,13 @@ class User extends MY_Controller {
     $password = $this->users_model->reset_password($UID);
     $this->email_activate($UID, $password);
     $this->session->set_userdata('password', $password);
-    redirect('user/view_user/' . $UID);
+    redirect('dashboard/user/view_user/' . $UID);
   }
 
   public function inactivate_user($UID) {
     $this->users_model->inactivate_user($UID);
     $this->users_model->reset_password($UID);
-    redirect('user/view_user/' . $UID);
+    redirect('dashboard/user/view_user/' . $UID);
   }
 
   private function set_rules() {

@@ -2,10 +2,10 @@
   <h1 class="page-header"><?php echo $page_header; ?></h1>
   <?php
     if($page_header == 'Create Client') {
-      echo form_open('client/create_client');
+      echo form_open('dashboard/client/create_client');
     }
     else if($page_header == 'Modify Client') {
-      echo form_open('client/modify_client/' . $record);
+      echo form_open('dashboard/client/modify_client/' . $record);
     }
   ?>
   <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>

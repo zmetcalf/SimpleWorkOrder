@@ -13,7 +13,7 @@
             <div class="panel-body">
               <?php foreach ($open as $wo): ?>
               <div class="well">
-                <p><a href="<?php echo base_url() ?>work_order/view_wo/<?php echo $wo['wo_uid'] ?>">
+                <p><a href="<?php echo base_url() ?>dashboard/work_order/view_wo/<?php echo $wo['wo_uid'] ?>">
                   <?php echo $wo['last_name'] . ", " . $wo['first_name'] ?></a>
                  - <?php echo $wo['job_type'] . " - " . $wo['city'];
                          if ($wo['wo_additional_info']) {
@@ -38,7 +38,7 @@
             <div class="panel-body">
               <?php foreach ($closed as $wo): ?>
               <div class="well">
-                <p><a href="<?php echo base_url() ?>work_order/view_wo/<?php echo $wo['wo_uid'] ?>">
+                <p><a href="<?php echo base_url() ?>dashboard/work_order/view_wo/<?php echo $wo['wo_uid'] ?>">
                   <?php echo $wo['last_name'] . ", " . $wo['first_name'] ?></a>
                  - <?php echo $wo['job_type'] . " - " . $wo['city'];
                          if ($wo['wo_additional_info']) {

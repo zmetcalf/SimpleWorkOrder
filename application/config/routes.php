@@ -43,21 +43,21 @@ $route['logout'] = "logout";
 
 $route['dashboard'] = "dashboard/index";
 
-$route['user/(.+)'] = "admin/user/index/$1";
-$route['user/(.+)/(.+)'] = "admin/user/index/$1/$2";
+$route['dashboard/user/(.+)'] = "admin/user/index/$1";
+$route['dashboard/user/(.+)/(.+)'] = "admin/user/index/$1/$2";
 
-$route['client/(.+)'] = "admin/client/index/$1";
-$route['client/(.+)/(.+)'] = "admin/client/index/$1/$2";
+$route['dashboard/client/(.+)'] = "admin/client/index/$1";
+$route['dashboard/client/(.+)/(.+)'] = "admin/client/index/$1/$2";
 
-$route['list_wo/(.+)'] = "admin/list_wo/index/$1";
-$route['list_wo/(.+)/(.+)'] = "admin/list_wo/index/$1/$2";
+$route['dashboard/work_order/(.+)'] = "admin/work_order/index/$1";
+$route['dashboard/work_order/(.+)/(.+)'] = "admin/work_order/index/$1/$2";
 
-$route['settings/(.+)'] = "admin/settings/index/$1";
+$route['dashboard/list_wo/(.+)'] = "admin/list_wo/index/$1";
+$route['dashboard/list_wo/(.+)/(.+)'] = "admin/list_wo/index/$1/$2";
 
-$route['lookup/(.+)'] = "admin/lookup/index/$1";
+$route['dashboard/settings/(.+)'] = "admin/settings/index/$1";
 
-$route['work_order/(.+)'] = "admin/work_order/index/$1";
-$route['work_order/(.+)/(.+)'] = "admin/work_order/index/$1/$2";
+$route['dashboard/lookup/(.+)'] = "admin/lookup/index/$1";
 
 $route['page/(.+)'] = "pages/view/$1";
 $route['default_controller'] = "pages/view";

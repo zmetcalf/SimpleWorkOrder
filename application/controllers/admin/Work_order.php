@@ -39,7 +39,7 @@ class Work_order extends MY_Controller {
       $wo = $this->work_order_model->set_work_order(
         $this->session->userdata('user_id'));
       $this->email_new_wo($wo);
-      redirect('work_order/view_wo/' . $wo);
+      redirect('dashboard/work_order/view_wo/' . $wo);
     }
   }
 
@@ -69,7 +69,7 @@ class Work_order extends MY_Controller {
     {
       $this->work_order_model->update_wo($record,
         $this->session->userdata('user_id'));
-      redirect('work_order/view_wo/' . $record);
+      redirect('dashboard/work_order/view_wo/' . $record);
     }
   }
 
