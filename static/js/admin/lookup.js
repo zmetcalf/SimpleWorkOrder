@@ -52,7 +52,7 @@ function renderList(list_promise) {
     }
 
     if(list) {
-      $.post(('../../static/templates/admin/' + template), function(mustache_template) {
+      $.get(('../../static/templates/admin/' + template), function(mustache_template) {
         var view = { 'result': list };
         $('.search-results').html(Mustache.render(mustache_template, view));
       });
