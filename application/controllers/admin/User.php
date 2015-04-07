@@ -86,9 +86,8 @@ class User extends MY_Controller {
     $this->session->unset_userdata('password');
     $this->load->view('dashboard/admin/view_user', $data);
 
-    // TODO Find better way to handle listing work orders
-    // $this->load->library('../controllers/admin/list_wo');
-    // $this->list_wo->assigned_to_user($record);
+    // Show list of work orders assigned to user
+    $this->assigned_to_user($record);
   }
 
   public function view_pending() {

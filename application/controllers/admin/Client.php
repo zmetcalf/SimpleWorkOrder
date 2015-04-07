@@ -78,9 +78,8 @@ class Client extends MY_Controller {
     $data['record'] = $record;
     $this->load->view('dashboard/admin/view_client', $data);
 
-    // TODO Create new way to generate this
-    // $this->load->library('../controllers/admin/list_wo');
-    // $this->list_wo->client_wos($record);
+    // Show list of work orders beside client
+    $this->client_wos($record);
 
     $this->load->view('dashboard/admin/subforms/modify_geocode');
   }

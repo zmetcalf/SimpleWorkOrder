@@ -130,4 +130,20 @@ class MY_Controller extends CI_Controller {
                               $this->session->userdata('user_id'));
     $this->load->view('dashboard/sidebar-volunteer', $data);
   }
+
+  // These are for displaying beside the client or user
+
+  protected function assigned_to_user($UID) {
+    $this->load->model('work_order_model');
+    $data['open'] = $this->work_order_model->get_wo_assigned($UID);
+    $data['closed'] = $this->work_order_model->get_wo_assigned_closed($UID);
+    $this->load->view('dashboard/admin/subforms/list_wos', $data);
+  }
+
+  protected function client_wos($UID) {
+    $this->load->model('work_order_model');
+    $data['open'] = $this->work_order_model->get_all_open_client_wos($UID);
+    $data['closed'] = $this->work_order_model->get_all_closed_client_wos($UID);
+    $this->load->view('dashboard/admin/subforms/list_wos', $data);
+  }
 }

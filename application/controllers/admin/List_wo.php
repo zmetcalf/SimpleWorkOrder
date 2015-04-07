@@ -50,18 +50,4 @@ class List_wo extends MY_Controller {
     $data['result'] = $this->work_order_model->get_all_completed_wo();
     $this->load->view('dashboard/admin/view_wo_list', $data);
   }
-
-  // These are for displaying beside the client or user
-
-  public function assigned_to_user($UID) {
-    $data['open'] = $this->work_order_model->get_wo_assigned($UID);
-    $data['closed'] = $this->work_order_model->get_wo_assigned_closed($UID);
-    $this->load->view('dashboard/admin/subforms/list_wos', $data);
-  }
-
-  public function client_wos($UID) {
-    $data['open'] = $this->work_order_model->get_all_open_client_wos($UID);
-    $data['closed'] = $this->work_order_model->get_all_closed_client_wos($UID);
-    $this->load->view('dashboard/admin/subforms/list_wos', $data);
-  }
 }
