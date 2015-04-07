@@ -41,7 +41,7 @@
 $route['login'] = "login";
 $route['logout'] = "logout";
 
-$route['dashboard'] = "dashboard/index";
+$route['dashboard'] = "admin/dashboard/index";
 
 $route['dashboard/user/(.+)'] = "admin/user/index/$1";
 $route['dashboard/user/(.+)/(.+)'] = "admin/user/index/$1/$2";
